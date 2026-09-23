@@ -16,6 +16,9 @@ app/release/
 *.aab
 *.keystore
 *.jks
+keystore.properties
+keystore/
+!keystore/.gitkeep
 
 # Logs
 *.log
