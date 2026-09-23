@@ -9,6 +9,28 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
+# Keep a copy of the pre-bump version so an aborted run rolls the version back
+# instead of leaving version.properties one step ahead (and causing a double
+# bump on the next run).
+VERSION_BAK="${TMPDIR:-/tmp}/version.properties.$$.bak"
+
+restore_version() {
+  if [ -f "$VERSION_BAK" ] && [ "$(cat version.properties)" != "$(cat "$VERSION_BAK")" ]; then
+    cp -f "$VERSION_BAK" version.properties
+    echo
+    echo "==> Release aborted - restored version.properties to the previous version."
+  fi
+}
+
+on_interrupt() {
+  restore_version
+  rm -f "$VERSION_BAK"
+  exit 130
+}
+
+trap 'on_interrupt' INT TERM
+trap 'prev=$?; if [ "$prev" -ne 0 ]; then restore_version; fi; rm -f "$VERSION_BAK"' EXIT
+
 PART="patch"
 PUBLISH=0
 SCAN="ask"
@@ -22,6 +44,7 @@ for arg in "$@"; do
   esac
 done
 
+cp -f version.properties "$VERSION_BAK"
 ./gradlew -q bumpVersion -PversionPart="$PART"
 VERSION=$(./gradlew -q printVersion)
 CODE=$(./gradlew -q printVersionCode)
