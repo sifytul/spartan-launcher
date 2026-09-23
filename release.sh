@@ -30,17 +30,19 @@ echo "  APK: app/build/outputs/apk/release/app-release.apk"
 echo "  AAB: app/build/outputs/bundle/release/app-release.aab"
 
 mkdir -p "releases/v$VERSION"
-cp -f "app/build/outputs/apk/release/app-release.apk" "releases/v$VERSION/"
-cp -f "app/build/outputs/bundle/release/app-release.aab" "releases/v$VERSION/"
+cp -f "app/build/outputs/apk/release/app-release.apk" "releases/v$VERSION/spartan-launcher-v$VERSION.apk"
+cp -f "app/build/outputs/bundle/release/app-release.aab" "releases/v$VERSION/app-release.aab"
 echo
 echo "Artifacts preserved in releases/v$VERSION/"
 
 # Sync the GitHub Pages download page.
 mkdir -p "docs/downloads"
-cp -f "app/build/outputs/apk/release/app-release.apk" "docs/downloads/app-release.apk"
+cp -f "app/build/outputs/apk/release/app-release.apk" "docs/downloads/spartan-launcher-v$VERSION.apk"
 cp -f "PRIVACY_POLICY.md" "docs/PRIVACY_POLICY.md"
 printf '{"versionName":"%s","versionCode":%s,"released":"%s"}\n' "$VERSION" "$CODE" "$(date +%F)" > "docs/version.json"
-echo "Download page synced (docs/downloads/app-release.apk, docs/version.json)"
+# Point every download link in the landing page at the versioned file.
+sed -i "s|downloads/spartan-launcher-v[0-9.]*\\.apk|downloads/spartan-launcher-v$VERSION.apk|g" "docs/index.html"
+echo "Download page synced (docs/downloads/spartan-launcher-v$VERSION.apk, docs/version.json)"
 
 if [ "$PUBLISH" = "1" ]; then
   git add version.properties docs

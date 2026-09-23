@@ -16,7 +16,7 @@ app/release/
 releases/
 *.apk
 *.aab
-!docs/downloads/app-release.apk
+!docs/downloads/spartan-launcher-*.apk
 *.keystore
 *.jks
 keystore.properties

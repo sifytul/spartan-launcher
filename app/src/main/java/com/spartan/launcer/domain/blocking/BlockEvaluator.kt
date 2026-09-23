@@ -12,6 +12,7 @@ object BlockEvaluator {
         packageName: String,
         ownPackageName: String,
         blockedPackages: Set<String>,
+        blockShortVideos: Boolean = false,
         usageMinutes: Int,
         timeLimits: Map<String, Int>,
         activeSchedule: BlockSchedule?,
@@ -25,8 +26,12 @@ object BlockEvaluator {
         // Temporary grace ("Use anyway") window.
         if (nowMs < tempAllowedUntil) return BlockDecision.ALLOW
 
+        val manualBlocked =
+            if (blockShortVideos) blockedPackages + ShortVideoPackages.DISTRACTOR_PACKAGES
+            else blockedPackages
+
         val active = activeSchedule
-        if (active != null && appliesTo(active, packageName, blockedPackages)) {
+        if (active != null && appliesTo(active, packageName, manualBlocked)) {
             return BlockDecision.block(BlockReason.SCHEDULE)
         }
         if (focusActive && packageName !in focusAllowlist) {
@@ -36,7 +41,7 @@ object BlockEvaluator {
         if (limit != null && usageMinutes >= limit) {
             return BlockDecision.block(BlockReason.LIMIT)
         }
-        if (packageName in blockedPackages) {
+        if (packageName in manualBlocked) {
             return BlockDecision.block(BlockReason.MANUAL)
         }
         return BlockDecision.ALLOW

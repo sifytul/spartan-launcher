@@ -146,4 +146,65 @@ class BlockEvaluatorTest {
         )
         assertEquals(BlockReason.SCHEDULE, decision.reason)
     }
+
+    @Test
+    fun shortVideoPresetBlocksKnownShortVideoApp() {
+        val decision = BlockEvaluator.decide(
+            packageName = "com.instagram.android", ownPackageName = own,
+            blockedPackages = emptySet(), blockShortVideos = true,
+            usageMinutes = 0, timeLimits = emptyMap(), activeSchedule = null,
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = 0, nowMs = now
+        )
+        assertEquals(BlockReason.MANUAL, decision.reason)
+    }
+
+    @Test
+    fun shortVideoPresetOffAllowsSameApp() {
+        val decision = BlockEvaluator.decide(
+            packageName = "com.instagram.android", ownPackageName = own,
+            blockedPackages = emptySet(), blockShortVideos = false,
+            usageMinutes = 0, timeLimits = emptyMap(), activeSchedule = null,
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = 0, nowMs = now
+        )
+        assertEquals(BlockDecision.ALLOW, decision)
+    }
+
+    @Test
+    fun shortVideoPresetRespectsNoAppInstalledMatch() {
+        val decision = BlockEvaluator.decide(
+            packageName = "com.example.regular.app", ownPackageName = own,
+            blockedPackages = emptySet(), blockShortVideos = true,
+            usageMinutes = 0, timeLimits = emptyMap(), activeSchedule = null,
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = 0, nowMs = now
+        )
+        assertEquals(BlockDecision.ALLOW, decision)
+    }
+
+    @Test
+    fun shortVideoPresetRespectsTemporaryGrace() {
+        val decision = BlockEvaluator.decide(
+            packageName = "com.google.android.youtube", ownPackageName = own,
+            blockedPackages = emptySet(), blockShortVideos = true,
+            usageMinutes = 0, timeLimits = emptyMap(), activeSchedule = null,
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = now + 60_000, nowMs = now
+        )
+        assertEquals(BlockDecision.ALLOW, decision)
+    }
+
+    @Test
+    fun shortVideoPresetCoversBlockAllSchedule() {
+        val decision = BlockEvaluator.decide(
+            packageName = "com.snapchat.android", ownPackageName = own,
+            blockedPackages = emptySet(), blockShortVideos = true,
+            usageMinutes = 0, timeLimits = emptyMap(),
+            activeSchedule = activeSchedule(emptySet()),
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = 0, nowMs = now
+        )
+        assertEquals(BlockReason.SCHEDULE, decision.reason)
+    }
 }

@@ -41,6 +41,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.spartan.launcer.R
 import com.spartan.launcer.data.model.AppInfo
 import com.spartan.launcer.data.model.LauncherSettings
+import com.spartan.launcer.domain.blocking.ShortVideoPackages
 
 @Composable
 fun AppManageScreen(
@@ -216,6 +217,13 @@ private fun AppManageRow(
                     text = app.label,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            if (app.packageName in ShortVideoPackages.DISTRACTOR_PACKAGES) {
+                Text(
+                    text = "Short videos",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }

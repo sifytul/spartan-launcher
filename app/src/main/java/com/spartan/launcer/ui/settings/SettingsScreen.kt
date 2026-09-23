@@ -255,6 +255,32 @@ fun SettingsScreen(
                     showDivider = true
                 )
                 GroupRow(
+                    title = "Block short videos",
+                    subtitle = if (!canDrawOverlays) {
+                        "Needs display-over-apps permission · TikTok, Shorts, Reels & more"
+                    } else if (settings.blockShortVideos) {
+                        "On · TikTok, Shorts, Reels, Snapchat & more"
+                    } else {
+                        "TikTok, Shorts, Reels, Snapchat & more"
+                    },
+                    leading = { RowStatusIcon(enabled = canDrawOverlays) },
+                    trailing = if (canDrawOverlays) {
+                        {
+                            Switch(
+                                checked = settings.blockShortVideos,
+                                onCheckedChange = viewModel::setBlockShortVideos
+                            )
+                        }
+                    } else {
+                        {
+                            TextButton(onClick = viewModel::openOverlayPermissionSettings) {
+                                Text(text = "Enable")
+                            }
+                        }
+                    },
+                    showDivider = true
+                )
+                GroupRow(
                     title = "Double tap home to lock",
                     subtitle = when {
                         Build.VERSION.SDK_INT < Build.VERSION_CODES.P -> "Requires Android 9+"

@@ -5,6 +5,7 @@ data class LauncherSettings(
     val hiddenPackages: List<String> = emptyList(),
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val blockedPackages: Set<String> = emptySet(),
+    val blockShortVideos: Boolean = false,
     val timeLimits: Map<String, Int> = emptyMap(),
     val schedules: List<BlockSchedule> = emptyList(),
     val mutedNotifications: Set<String> = emptySet(),

@@ -28,6 +28,7 @@ class SettingsDataStore(private val context: Context) {
         val HIDDEN_PACKAGES = stringSetPreferencesKey("hidden_packages")
         val THEME_MODE = stringPreferencesKey("theme_mode")
         val BLOCKED_PACKAGES = stringPreferencesKey("blocked_packages")
+        val BLOCK_SHORT_VIDEOS = booleanPreferencesKey("block_short_videos")
         val TIME_LIMITS = stringPreferencesKey("time_limits")
         val SCHEDULES = stringPreferencesKey("schedules")
         val MUTED_NOTIFICATIONS = stringPreferencesKey("muted_notifications")
@@ -47,6 +48,7 @@ class SettingsDataStore(private val context: Context) {
                 ?.let { name -> ThemeMode.entries.firstOrNull { it.name == name } }
                 ?: ThemeMode.SYSTEM,
             blockedPackages = JsonCodec.decodeStringSet(prefs[Keys.BLOCKED_PACKAGES].orEmpty()),
+            blockShortVideos = prefs[Keys.BLOCK_SHORT_VIDEOS] ?: false,
             timeLimits = JsonCodec.decodeMinutesMap(prefs[Keys.TIME_LIMITS].orEmpty()),
             schedules = JsonCodec.decodeSchedules(prefs[Keys.SCHEDULES].orEmpty()),
             mutedNotifications =
@@ -96,6 +98,12 @@ class SettingsDataStore(private val context: Context) {
             )
             if (blocked) current.add(packageName) else current.remove(packageName)
             prefs[Keys.BLOCKED_PACKAGES] = JsonCodec.encodeStringSet(current)
+        }
+    }
+
+    suspend fun setBlockShortVideos(block: Boolean) {
+        context.launcherDataStore.edit { prefs ->
+            prefs[Keys.BLOCK_SHORT_VIDEOS] = block
         }
     }
 

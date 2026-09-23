@@ -150,6 +150,12 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
         }
     }
 
+    fun setBlockShortVideos(block: Boolean) {
+        viewModelScope.launch {
+            container.settingsDataStore.setBlockShortVideos(block)
+        }
+    }
+
     fun setHidden(packageName: String, hidden: Boolean) {
         viewModelScope.launch {
             container.settingsDataStore.setHidden(packageName, hidden)

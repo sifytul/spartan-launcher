@@ -94,6 +94,7 @@ class AppBlocker(
             packageName = foreground,
             ownPackageName = ownPackageName,
             blockedPackages = settings.blockedPackages,
+            blockShortVideos = settings.blockShortVideos,
             usageMinutes = tracker.minutesUsedToday(foreground),
             timeLimits = settings.timeLimits,
             activeSchedule = ScheduleEvaluator.findActive(LocalDateTime.now(), settings.schedules),
