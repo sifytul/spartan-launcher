@@ -1,10 +1,19 @@
 package com.spartan.launcer.ui.theme
 
+import android.graphics.Color
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import com.spartan.launcer.data.model.FontMode
 import com.spartan.launcer.data.model.ThemeMode
 
@@ -111,9 +120,33 @@ fun SpartanLauncherTheme(
             ThemeMode.AMOLED -> AmoledColors
         }
     }
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        val activity = view.context as? ComponentActivity
+        SideEffect {
+            if (activity != null) {
+                val barStyle = if (dark) {
+                    SystemBarStyle.dark(Color.TRANSPARENT)
+                } else {
+                    SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+                }
+                activity.enableEdgeToEdge(
+                    statusBarStyle = barStyle,
+                    navigationBarStyle = barStyle
+                )
+            }
+        }
+    }
     MaterialTheme(
         colorScheme = colors,
         typography = Typography.withFont(fontFamilyFor(fontMode), fontScale),
-        content = content
+        content = {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = colors.background
+            ) {
+                content()
+            }
+        }
     )
 }
