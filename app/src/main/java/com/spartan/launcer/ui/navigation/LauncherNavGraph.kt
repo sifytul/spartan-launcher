@@ -20,6 +20,7 @@ fun LauncherNavGraph() {
     NavHost(navController = navController, startDestination = Routes.HOME) {
         composable(Routes.HOME) {
             HomeScreen(
+                onOpenDrawer = { navController.navigate(Routes.DRAWER) },
                 onOpenSettings = { navController.navigate(Routes.SETTINGS) }
             )
         }

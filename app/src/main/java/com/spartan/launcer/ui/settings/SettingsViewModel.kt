@@ -14,6 +14,7 @@ import com.spartan.launcer.SpartanLauncherApp
 import com.spartan.launcer.data.model.AppInfo
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
+import com.spartan.launcer.service.NotificationShadeAccessibilityService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -38,12 +39,25 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
     private val _isDefaultHome = MutableStateFlow(false)
     val isDefaultHome: StateFlow<Boolean> = _isDefaultHome.asStateFlow()
 
+    private val _notificationShadeEnabled = MutableStateFlow(false)
+    val notificationShadeEnabled: StateFlow<Boolean> = _notificationShadeEnabled.asStateFlow()
+
     init {
         recheckDefaultHome()
+        refreshNotificationShadeState()
     }
 
     fun recheckDefaultHome() {
         _isDefaultHome.value = isDefaultLauncher(app)
+    }
+
+    fun refreshNotificationShadeState() {
+        _notificationShadeEnabled.value =
+            NotificationShadeAccessibilityService.isServiceEnabled(app)
+    }
+
+    fun openAccessibilitySettings() {
+        startActivityFromApp(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
     }
 
     fun setThemeMode(themeMode: ThemeMode) {

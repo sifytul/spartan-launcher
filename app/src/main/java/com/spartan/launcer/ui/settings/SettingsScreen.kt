@@ -47,9 +47,11 @@ fun SettingsScreen(
     val settings by viewModel.settings.collectAsStateWithLifecycle()
     val allApps by viewModel.allApps.collectAsStateWithLifecycle()
     val isDefaultHome by viewModel.isDefaultHome.collectAsStateWithLifecycle()
+    val notificationShadeEnabled by viewModel.notificationShadeEnabled.collectAsStateWithLifecycle()
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         viewModel.recheckDefaultHome()
+        viewModel.refreshNotificationShadeState()
     }
 
     LazyColumn(
@@ -128,6 +130,41 @@ fun SettingsScreen(
                 if (!isDefaultHome) {
                     TextButton(onClick = { viewModel.openHomeSettings() }) {
                         Text(text = "Set as default")
+                    }
+                }
+            }
+        }
+
+        item {
+            SectionDivider()
+        }
+
+        item {
+            SectionTitle("Notification shade")
+        }
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Swipe down from the home screen",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = if (notificationShadeEnabled) "Accessibility service enabled"
+                        else "Requires the accessibility service",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                if (!notificationShadeEnabled) {
+                    TextButton(onClick = viewModel::openAccessibilitySettings) {
+                        Text(text = "Enable")
                     }
                 }
             }

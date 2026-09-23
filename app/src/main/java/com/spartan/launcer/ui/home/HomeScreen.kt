@@ -2,6 +2,7 @@ package com.spartan.launcer.ui.home
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +24,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -36,6 +39,7 @@ import java.text.DateFormat
 
 @Composable
 fun HomeScreen(
+    onOpenDrawer: () -> Unit,
     onOpenSettings: () -> Unit,
     viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
 ) {
@@ -46,6 +50,7 @@ fun HomeScreen(
     val context = LocalContext.current
     val timeFormatter = remember { SystemDateFormat.getTimeFormat(context) }
     val dateFormatter = remember { DateFormat.getDateInstance(DateFormat.FULL) }
+    val swipeThreshold = with(LocalDensity.current) { 120.dp.toPx() }
 
     BackHandler { }
 
@@ -53,7 +58,25 @@ fun HomeScreen(
         viewModel.recheckDefaultHome()
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                var accumulatedDrag = 0f
+                detectVerticalDragGestures(
+                    onVerticalDrag = { _, dragAmount -> accumulatedDrag += dragAmount },
+                    onDragEnd = {
+                        when {
+                            accumulatedDrag > swipeThreshold ->
+                                viewModel.openNotificationShade()
+                            accumulatedDrag < -swipeThreshold ->
+                                onOpenDrawer()
+                        }
+                        accumulatedDrag = 0f
+                    }
+                )
+            }
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()

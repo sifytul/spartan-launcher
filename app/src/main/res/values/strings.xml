@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Spartan Launcher</string>
+    <string name="accessibility_shade_description">Allows the swipe-down gesture on the home screen to open the notification shade.</string>
 </resources>

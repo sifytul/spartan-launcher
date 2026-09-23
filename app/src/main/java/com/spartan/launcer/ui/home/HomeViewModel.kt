@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.spartan.launcer.SpartanLauncherApp
 import com.spartan.launcer.data.model.AppInfo
+import com.spartan.launcer.service.NotificationShadeAccessibilityService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -67,6 +68,10 @@ class HomeViewModel(private val app: SpartanLauncherApp) : ViewModel() {
 
     fun launchApp(packageName: String) {
         container.launchAppUseCase(packageName)
+    }
+
+    fun openNotificationShade() {
+        NotificationShadeAccessibilityService.openNotificationShadeIfAvailable()
     }
 
     private fun startActivityFromApp(intent: Intent) {
