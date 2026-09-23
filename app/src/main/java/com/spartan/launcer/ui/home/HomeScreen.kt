@@ -36,6 +36,7 @@ import java.text.DateFormat
 
 @Composable
 fun HomeScreen(
+    onOpenSettings: () -> Unit,
     viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
 ) {
     val favorites by viewModel.favorites.collectAsStateWithLifecycle()
@@ -94,6 +95,14 @@ fun HomeScreen(
                 }
             }
             Spacer(Modifier.weight(1.6f))
+            Text(
+                text = "Settings",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier
+                    .padding(bottom = 8.dp)
+                    .clickable(onClick = onOpenSettings)
+            )
         }
 
         if (!isDefaultHome) {
