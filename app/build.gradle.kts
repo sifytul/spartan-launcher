@@ -53,5 +53,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.org.json)
     debugImplementation(libs.compose.ui.tooling)
 }
