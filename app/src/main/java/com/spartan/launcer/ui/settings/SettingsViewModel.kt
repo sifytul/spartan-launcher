@@ -15,6 +15,7 @@ import com.spartan.launcer.SpartanLauncherApp
 import com.spartan.launcer.data.model.AppInfo
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
+import com.spartan.launcer.data.openUsageAccessSettings
 import com.spartan.launcer.service.SpartanAccessibilityService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -46,10 +47,14 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
     private val _canDrawOverlays = MutableStateFlow(false)
     val canDrawOverlays: StateFlow<Boolean> = _canDrawOverlays.asStateFlow()
 
+    private val _hasUsageAccess = MutableStateFlow(false)
+    val hasUsageAccess: StateFlow<Boolean> = _hasUsageAccess.asStateFlow()
+
     init {
         recheckDefaultHome()
         refreshNotificationShadeState()
         refreshOverlayPermissionState()
+        refreshUsageAccessState()
     }
 
     fun recheckDefaultHome() {
@@ -63,6 +68,14 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
 
     fun refreshOverlayPermissionState() {
         _canDrawOverlays.value = Settings.canDrawOverlays(app)
+    }
+
+    fun refreshUsageAccessState() {
+        _hasUsageAccess.value = container.usageStatsRepository.hasUsageAccess()
+    }
+
+    fun openUsageAccessSettings() {
+        app.openUsageAccessSettings()
     }
 
     fun openAccessibilitySettings() {

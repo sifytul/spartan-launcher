@@ -42,6 +42,7 @@ import com.spartan.launcer.data.model.ThemeMode
 @Composable
 fun SettingsScreen(
     onBack: () -> Unit,
+    onOpenScreenTime: () -> Unit,
     viewModel: SettingsViewModel = viewModel(factory = SettingsViewModel.Factory)
 ) {
     val settings by viewModel.settings.collectAsStateWithLifecycle()
@@ -49,11 +50,13 @@ fun SettingsScreen(
     val isDefaultHome by viewModel.isDefaultHome.collectAsStateWithLifecycle()
     val notificationShadeEnabled by viewModel.notificationShadeEnabled.collectAsStateWithLifecycle()
     val canDrawOverlays by viewModel.canDrawOverlays.collectAsStateWithLifecycle()
+    val hasUsageAccess by viewModel.hasUsageAccess.collectAsStateWithLifecycle()
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         viewModel.recheckDefaultHome()
         viewModel.refreshNotificationShadeState()
         viewModel.refreshOverlayPermissionState()
+        viewModel.refreshUsageAccessState()
     }
 
     LazyColumn(
@@ -195,6 +198,36 @@ fun SettingsScreen(
                     TextButton(onClick = viewModel::openOverlayPermissionSettings) {
                         Text(text = "Enable")
                     }
+                }
+            }
+        }
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Screen time & daily limits",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = if (hasUsageAccess) "Usage access granted"
+                        else "Requires usage access",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                if (!hasUsageAccess) {
+                    TextButton(onClick = viewModel::openUsageAccessSettings) {
+                        Text(text = "Enable")
+                    }
+                }
+                TextButton(onClick = onOpenScreenTime) {
+                    Text(text = "View")
                 }
             }
         }
