@@ -16,7 +16,7 @@ app/release/
 releases/
 *.apk
 *.aab
-!site/downloads/app-release.apk
+!docs/downloads/app-release.apk
 *.keystore
 *.jks
 keystore.properties

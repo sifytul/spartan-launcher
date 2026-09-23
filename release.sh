@@ -30,11 +30,11 @@ echo
 echo "Artifacts preserved in releases/v$VERSION/"
 
 # Sync the GitHub Pages download page.
-mkdir -p "site/downloads"
-cp -f "app/build/outputs/apk/release/app-release.apk" "site/downloads/app-release.apk"
-cp -f "PRIVACY_POLICY.md" "site/PRIVACY_POLICY.md"
-printf '{"versionName":"%s","versionCode":%s,"released":"%s"}\n' "$VERSION" "$CODE" "$(date +%F)" > "site/version.json"
-echo "Download page synced (site/downloads/app-release.apk, site/version.json)"
+mkdir -p "docs/downloads"
+cp -f "app/build/outputs/apk/release/app-release.apk" "docs/downloads/app-release.apk"
+cp -f "PRIVACY_POLICY.md" "docs/PRIVACY_POLICY.md"
+printf '{"versionName":"%s","versionCode":%s,"released":"%s"}\n' "$VERSION" "$CODE" "$(date +%F)" > "docs/version.json"
+echo "Download page synced (docs/downloads/app-release.apk, docs/version.json)"
 echo "Remember:"
 echo "  git add version.properties"
 echo "  git commit -m \"chore(release): v$VERSION\""
