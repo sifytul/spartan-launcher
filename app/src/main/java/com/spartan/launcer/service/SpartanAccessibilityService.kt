@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityService
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.provider.Settings
 import android.view.accessibility.AccessibilityEvent
 import com.spartan.launcer.SpartanLauncherApp
@@ -47,6 +48,12 @@ class SpartanAccessibilityService : AccessibilityService() {
         performGlobalAction(AccessibilityService.GLOBAL_ACTION_HOME)
     }
 
+    fun lockScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            performGlobalAction(AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN)
+        }
+    }
+
     companion object {
 
         @Volatile
@@ -55,6 +62,13 @@ class SpartanAccessibilityService : AccessibilityService() {
         fun openNotificationShadeIfAvailable(): Boolean {
             val service = instance ?: return false
             service.performGlobalAction(AccessibilityService.GLOBAL_ACTION_NOTIFICATIONS)
+            return true
+        }
+
+        fun lockScreenIfAvailable(): Boolean {
+            val service = instance ?: return false
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return false
+            runCatching { service.lockScreen() }
             return true
         }
 

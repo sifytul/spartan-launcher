@@ -252,6 +252,21 @@ fun SettingsScreen(
                     onEnable = viewModel::openNotificationAccessSettings,
                     description = "notification access",
                     onClick = onOpenMuteNotifications,
+                    showDivider = true
+                )
+                GroupRow(
+                    title = "Double tap home to lock",
+                    subtitle = when {
+                        Build.VERSION.SDK_INT < Build.VERSION_CODES.P -> "Requires Android 9+"
+                        notificationShadeEnabled -> "Active · double tap the home screen to lock"
+                        else -> "Needs accessibility service"
+                    },
+                    leading = {
+                        RowStatusIcon(
+                            enabled = notificationShadeEnabled &&
+                                Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
+                        )
+                    },
                     showDivider = false
                 )
             }

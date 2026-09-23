@@ -2,6 +2,7 @@ package com.spartan.launcer.ui.home
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -80,6 +81,9 @@ fun HomeScreen(
                         accumulatedDrag = 0f
                     }
                 )
+            }
+            .pointerInput(Unit) {
+                detectTapGestures(onDoubleTap = { viewModel.lockScreen() })
             }
     ) {
         Column(

@@ -78,6 +78,10 @@ class HomeViewModel(private val app: SpartanLauncherApp) : ViewModel() {
         SpartanAccessibilityService.openNotificationShadeIfAvailable()
     }
 
+    fun lockScreen() {
+        SpartanAccessibilityService.lockScreenIfAvailable()
+    }
+
     fun pauseFocus() = container.focusController.pause()
 
     fun resumeFocus() = container.focusController.resume()
