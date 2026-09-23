@@ -101,7 +101,7 @@
       <span class="badge">Data stays on your phone</span>
     </div>
     <div class="actions">
-      <a class="btn" href="downloads/app-release.apk" id="download">Download APK</a>
+      <a class="btn" href="downloads/spartan-launcher-v1.4.0.apk" id="download">Download APK</a>
       <a class="btn secondary" href="#install">How to install</a>
       <p class="version-note">Android 8.0+ · ~1.6 MB</p>
     </div>
@@ -160,12 +160,14 @@
     .then(function (v) {
       var btn = document.getElementById("download");
       btn.textContent = "Download v" + v.versionName;
-      btn.href = "downloads/app-release.apk";
+      btn.href = "downloads/spartan-launcher-v" + v.versionName + ".apk";
       document.getElementById("ver").textContent =
         "Version " + v.versionName + " (build " + v.versionCode + ") \u00b7 released " + v.released;
     })
     .catch(function () {
-      document.getElementById("ver").textContent = "Version " + "1.2.0";
+      var btn = document.getElementById("download");
+      btn.href = "downloads/spartan-launcher-v1.4.0.apk";
+      document.getElementById("ver").textContent = "Version 1.3.0";
     });
 </script>
 </body>
