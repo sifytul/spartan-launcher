@@ -248,8 +248,10 @@ private fun ToggleSwitch(label: String, checked: Boolean, onToggle: () -> Unit) 
             text = label,
             style = MaterialTheme.typography.labelMedium,
             color = if (checked) MaterialTheme.colorScheme.onSurface
-            else MaterialTheme.colorScheme.onSurfaceVariant
+            else MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.width(40.dp)
         )
+        Spacer(Modifier.width(8.dp))
         Switch(
             checked = checked,
             onCheckedChange = { onToggle() }
