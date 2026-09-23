@@ -22,9 +22,9 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
@@ -321,7 +321,7 @@ fun SettingsScreen(
                     subtitle = "Favorites, hidden apps and custom names",
                     leading = {
                         Icon(
-                            imageVector = Icons.Filled.List,
+                            imageVector = Icons.AutoMirrored.Filled.List,
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
