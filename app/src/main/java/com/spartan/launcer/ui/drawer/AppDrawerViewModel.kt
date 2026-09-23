@@ -50,8 +50,8 @@ class AppDrawerViewModel(private val container: AppContainer) : ViewModel() {
         }
     }
 
-    fun launchApp(packageName: String) {
-        container.launchAppUseCase(packageName)
+    fun launchApp(app: AppInfo) {
+        container.launchAppUseCase(app)
     }
 
     companion object {

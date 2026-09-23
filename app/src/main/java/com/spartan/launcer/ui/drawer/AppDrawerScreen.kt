@@ -119,10 +119,10 @@ fun AppDrawerScreen(
                     bottom = 32.dp
                 )
             ) {
-                items(apps, key = { it.packageName }) { app ->
+                items(apps, key = { "${it.packageName}_${it.user?.hashCode() ?: 0}" }) { app ->
                     AppDrawerItem(
                         app = app,
-                        onClick = { viewModel.launchApp(app.packageName) },
+                        onClick = { viewModel.launchApp(app) },
                         onLongClick = { selectedApp = app }
                     )
                 }
@@ -236,7 +236,7 @@ private fun AppDrawerItem(
     onLongClick: () -> Unit
 ) {
     Text(
-        text = app.displayLabel,
+        text = if (app.isWorkProfile) "${app.displayLabel}  (Work)" else app.displayLabel,
         style = MaterialTheme.typography.bodyLarge,
         color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier

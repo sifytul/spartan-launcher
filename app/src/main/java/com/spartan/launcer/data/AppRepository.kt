@@ -2,6 +2,7 @@ package com.spartan.launcer.data
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.LauncherApps
 import com.spartan.launcer.data.model.AppInfo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -47,11 +48,10 @@ class AppRepository(
     }
 
     private suspend fun queryInstalledApps(): List<AppInfo> = withContext(ioDispatcher) {
-        val intent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
         val manager = context.packageManager
         @Suppress("DEPRECATION")
-        val resolveInfos = manager.queryIntentActivities(intent, 0)
-        resolveInfos
+        val resolveInfos = manager.queryIntentActivities(launcherIntent(), 0)
+        val primaryApps = resolveInfos
             .asSequence()
             .distinctBy { it.activityInfo.packageName }
             .map { resolveInfo ->
@@ -64,5 +64,41 @@ class AppRepository(
             }
             .filterNot { it.packageName == context.packageName }
             .toList()
+
+        val workApps = queryWorkProfileApps()
+        (primaryApps + workApps).distinctBy { it.packageName }
     }
+
+    /**
+     * Apps only reachable through a work (managed) profile. Duplicate
+     * package names already present in the primary profile are skipped so the
+     * drawer does not show the same app twice. Launching these uses
+     * [LauncherApps] with the owning user handle.
+     */
+    private fun queryWorkProfileApps(): List<AppInfo> {
+        val launcherApps = context.getSystemService(LauncherApps::class.java)
+            ?: return emptyList()
+        val result = mutableListOf<AppInfo>()
+        launcherApps.profiles.forEach { user ->
+            runCatching { launcherApps.getActivityList(null, user) }
+                .getOrDefault(emptyList())
+                .forEach { activity ->
+                    val packageName = activity.componentName.packageName
+                    if (packageName == context.packageName) return@forEach
+                    if (result.any { it.packageName == packageName }) return@forEach
+                    result.add(
+                        AppInfo(
+                            packageName = packageName,
+                            label = activity.label?.toString() ?: packageName,
+                            user = user,
+                            component = activity.componentName
+                        )
+                    )
+                }
+        }
+        return result
+    }
+
+    private fun launcherIntent(): Intent =
+        Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
 }
