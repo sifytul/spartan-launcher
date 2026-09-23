@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spartan Launcher — a minimalist, distraction-free home screen</title>
+<meta name="description" content="Spartan Launcher: a minimalist Android home screen with app blocking, daily time limits, focus sessions, blocking schedules and notification muting. No ads, no trackers, no accounts.">
+<style>
+  :root {
+    --bg: #0b0b0c;
+    --surface: #151518;
+    --surface-2: #1c1c20;
+    --text: #f4f3ee;
+    --muted: #9a9892;
+    --accent: #e8e5dc;
+    --border: #26262b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; width: 100%; }
+
+  header { padding: 64px 0 24px; text-align: center; }
+  .logo { width: 92px; height: 92px; border-radius: 22px; }
+  h1 { font-size: clamp(2rem, 6vw, 2.75rem); font-weight: 700; letter-spacing: -0.02em; margin-top: 20px; }
+  .tagline { color: var(--muted); font-size: 1.1rem; margin-top: 8px; }
+  .badges { display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .badge {
+    font-size: 0.8rem; color: var(--muted); border: 1px solid var(--border);
+    padding: 4px 12px; border-radius: 999px;
+  }
+  .actions { margin: 32px 0 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .btn {
+    display: inline-block; background: var(--accent); color: #0b0b0c;
+    font-weight: 700; font-size: 1.05rem; text-decoration: none;
+    padding: 16px 40px; border-radius: 14px; border: none; cursor: pointer;
+    transition: transform .08s ease, opacity .15s ease;
+  }
+  .btn:hover { opacity: .9; transform: translateY(-1px); }
+  .btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); font-weight: 600; }
+  .version-note { color: var(--muted); font-size: 0.9rem; }
+  .note { color: var(--muted); font-size: 0.85rem; text-align: center; }
+
+  section { padding: 48px 0; }
+  h2 { font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 20px; }
+  h2 .dim { color: var(--muted); font-weight: 500; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 22px;
+  }
+  .card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .card p { color: var(--muted); font-size: 0.95rem; }
+  .ic { font-size: 1.5rem; margin-bottom: 10px; }
+
+  ol.steps { list-style: none; counter-reset: step; }
+  ol.steps li {
+    counter-increment: step; position: relative; padding: 0 0 18px 56px;
+    color: var(--muted);
+  }
+  ol.steps li::before {
+    content: counter(step); position: absolute; left: 0; top: 0;
+    width: 38px; height: 38px; border-radius: 12px;
+    background: var(--surface-2); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text); font-weight: 700;
+  }
+  ol.steps b { color: var(--text); }
+
+  .perms { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 6px 24px; }
+  .perms li { list-style: none; padding: 14px 0; border-bottom: 1px solid var(--border); color: var(--muted); }
+  .perms li:last-child { border-bottom: none; }
+  .perms b { color: var(--text); }
+
+  code { background: var(--surface-2); border: 1px solid var(--border); padding: 2px 6px; border-radius: 6px; font-size: 0.9em; }
+
+  footer { padding: 40px 0 64px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+  footer #ver { display: inline-block; margin-top: 8px; }
+
+  @media (max-width: 560px) { header { padding: 44px 0 16px; } section { padding: 36px 0; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img class="logo" src="assets/icon.svg" alt="Spartan Launcher icon" width="92" height="92">
+    <h1>Spartan Launcher</h1>
+    <p class="tagline">A minimalist home screen that puts your phone<br>back in your hands — not the other way around.</p>
+    <div class="badges">
+      <span class="badge">No ads</span>
+      <span class="badge">No trackers</span>
+      <span class="badge">No accounts</span>
+      <span class="badge">Data stays on your phone</span>
+    </div>
+    <div class="actions">
+      <a class="btn" href="downloads/app-release.apk" id="download">Download APK</a>
+      <a class="btn secondary" href="#install">How to install</a>
+      <p class="version-note">Android 8.0+ · ~1.6 MB</p>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <h2>Everything you need to<br><span class="dim">distract yourself less.</span></h2>
+    <div class="grid">
+      <div class="card"><div class="ic">&#9200;</div><h3>Focus sessions</h3><p>Pomodoro-style deep-work timer. While it runs, distracting apps are blocked and notifications go quiet.</p></div>
+      <div class="card"><div class="ic">&#128274;</div><h3>App blocking</h3><p>Block apps entirely, or set daily time limits — when the limit is reached, a countdown screen takes over.</p></div>
+      <div class="card"><div class="ic">&#128197;</div><h3>Blocking schedules</h3><p>Auto-block chosen apps in specific time windows, e.g. evenings, meetings or bed time.</p></div>
+      <div class="card"><div class="ic">&#128264;</div><h3>Screen-time report</h3><p>See actual per-app usage for the day, straight from your device usage stats.</p></div>
+      <div class="card"><div class="ic">&#128226;</div><h3>Notification mute</h3><p>Silence only the apps that pull at you — everything else still notifies normally.</p></div>
+      <div class="card"><div class="ic">&#9680;</div><h3>Minimal home</h3><p>A clean clock-and-favorites home. Monochrome mode, custom app names and font options to suit you.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <h2>Install in four steps</h2>
+    <ol class="steps">
+      <li><b>Download the APK</b> with the button above. It is signed with a personal release key.</li>
+      <li><b>Open the download</b>. When Android asks, allow &ldquo;install unknown apps&rdquo; for your browser or Files app.</li>
+      <li><b>Press the home button</b> and choose <b>Spartan Launcher</b> &gt; <b>Always</b>.</li>
+      <li><b>Grant access</b> in <b>Settings &rarr; Focus &amp; blocking</b> (accessibility, display-over-apps, usage stats, notifications) to unlock blocking and screen-time.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="privacy">
+  <div class="wrap">
+    <h2>Permissions, explained</h2>
+    <ul class="perms">
+      <li><b>Accessibility</b> — detects the app you open so limits can be enforced and the notification shade can be opened by swiping down.</li>
+      <li><b>Display over other apps</b> — the full-screen countdown that covers a blocked app.</li>
+      <li><b>Usage access</b> — powers the screen-time report and daily limits.</li>
+      <li><b>Notification access</b> — mutes the apps you choose; notification contents are never read or stored.</li>
+    </ul>
+    <p class="note" style="margin-top:16px">All of this runs on-device. Nothing is uploaded, shared or sold. See the <a href="PRIVACY_POLICY.md" style="color:var(--text)">privacy policy</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Spartan Launcher — a side project, made public.</p>
+    <p id="ver">Loading version&hellip;</p>
+  </div>
+</footer>
+
+<script>
+  fetch("version.json")
+    .then(function (r) { return r.json(); })
+    .then(function (v) {
+      var btn = document.getElementById("download");
+      btn.textContent = "Download v" + v.versionName;
+      btn.href = "downloads/app-release.apk";
+      document.getElementById("ver").textContent =
+        "Version " + v.versionName + " (build " + v.versionCode + ") \u00b7 released " + v.released;
+    })
+    .catch(function () {
+      document.getElementById("ver").textContent = "Version " + "1.2.0";
+    });
+</script>
+</body>
+</html>
