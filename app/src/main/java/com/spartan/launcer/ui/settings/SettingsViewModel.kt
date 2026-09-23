@@ -144,6 +144,12 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
         }
     }
 
+    fun setBlocked(packageName: String, blocked: Boolean) {
+        viewModelScope.launch {
+            container.settingsDataStore.setBlocked(packageName, blocked)
+        }
+    }
+
     fun setHidden(packageName: String, hidden: Boolean) {
         viewModelScope.launch {
             container.settingsDataStore.setHidden(packageName, hidden)

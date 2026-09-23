@@ -110,6 +110,13 @@ fun AppManageScreen(
             singleLine = true
         )
 
+        Text(
+            text = "Blocked apps are covered by the block screen whenever you open them. Favorites always stay usable during Focus.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
+        )
+
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(filtered, key = { "${it.packageName}_${it.user?.hashCode() ?: 0}" }) { app ->
                 AppManageRow(
@@ -117,6 +124,9 @@ fun AppManageScreen(
                     settings = settings,
                     onToggleFavorite = {
                         viewModel.setFavorite(app.packageName, !app.isFavorite)
+                    },
+                    onToggleBlocked = {
+                        viewModel.setBlocked(app.packageName, !settings.blockedPackages.contains(app.packageName))
                     },
                     onToggleHidden = {
                         viewModel.setHidden(app.packageName, !app.isHidden)
@@ -176,6 +186,7 @@ private fun AppManageRow(
     app: AppInfo,
     settings: LauncherSettings,
     onToggleFavorite: () -> Unit,
+    onToggleBlocked: () -> Unit,
     onToggleHidden: () -> Unit,
     onRename: () -> Unit
 ) {
@@ -215,9 +226,33 @@ private fun AppManageRow(
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
+        Column(horizontalAlignment = Alignment.End) {
+            ToggleSwitch(
+                label = "Block",
+                checked = settings.blockedPackages.contains(app.packageName),
+                onToggle = onToggleBlocked
+            )
+            ToggleSwitch(
+                label = "Hide",
+                checked = settings.hiddenPackages.contains(app.packageName),
+                onToggle = onToggleHidden
+            )
+        }
+    }
+}
+
+@Composable
+private fun ToggleSwitch(label: String, checked: Boolean, onToggle: () -> Unit) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelMedium,
+            color = if (checked) MaterialTheme.colorScheme.onSurface
+            else MaterialTheme.colorScheme.onSurfaceVariant
+        )
         Switch(
-            checked = settings.hiddenPackages.contains(app.packageName),
-            onCheckedChange = { onToggleHidden() }
+            checked = checked,
+            onCheckedChange = { onToggle() }
         )
     }
 }
