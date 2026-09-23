@@ -22,6 +22,12 @@ echo
 echo "Released v$VERSION (versionCode $CODE)"
 echo "  APK: app/build/outputs/apk/release/app-release.apk"
 echo "  AAB: app/build/outputs/bundle/release/app-release.aab"
+
+mkdir -p "releases/v$VERSION"
+cp -f "app/build/outputs/apk/release/app-release.apk" "releases/v$VERSION/"
+cp -f "app/build/outputs/bundle/release/app-release.aab" "releases/v$VERSION/"
+echo
+echo "Artifacts preserved in releases/v$VERSION/"
 echo "Remember:"
 echo "  git add version.properties"
 echo "  git commit -m \"chore(release): v$VERSION\""

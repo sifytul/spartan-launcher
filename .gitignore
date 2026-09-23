@@ -1,6 +1,7 @@
 # Gradle
 .gradle/
 build/
+.kotlin/
 local.properties
 captures/
 
@@ -12,6 +13,7 @@ captures/
 # Android
 app/build/
 app/release/
+releases/
 *.apk
 *.aab
 *.keystore
