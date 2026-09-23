@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.spartan.launcer.data.model.LauncherSettings
+import com.spartan.launcer.ui.navigation.LauncherNavGraph
 import com.spartan.launcer.ui.theme.SpartanLauncherTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,17 +15,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val container = (application as SpartanLauncherApp).container
         setContent {
-            SpartanLauncherTheme {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Spartan",
-                        style = MaterialTheme.typography.displayMedium
-                    )
-                }
+            val settings by container.settingsDataStore.settings
+                .collectAsStateWithLifecycle(initialValue = LauncherSettings())
+            SpartanLauncherTheme(themeMode = settings.themeMode) {
+                LauncherNavGraph()
             }
         }
     }
