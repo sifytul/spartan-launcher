@@ -1,5 +1,10 @@
 package com.spartan.launcer.ui.settings
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,6 +21,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,9 +33,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -38,11 +46,15 @@ import com.spartan.launcer.R
 import com.spartan.launcer.data.model.AppInfo
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
+import com.spartan.launcer.domain.focus.FocusPhase
+import com.spartan.launcer.domain.focus.FocusSession
+import java.util.Locale
 
 @Composable
 fun SettingsScreen(
     onBack: () -> Unit,
     onOpenScreenTime: () -> Unit,
+    onOpenSchedules: () -> Unit,
     viewModel: SettingsViewModel = viewModel(factory = SettingsViewModel.Factory)
 ) {
     val settings by viewModel.settings.collectAsStateWithLifecycle()
@@ -51,6 +63,7 @@ fun SettingsScreen(
     val notificationShadeEnabled by viewModel.notificationShadeEnabled.collectAsStateWithLifecycle()
     val canDrawOverlays by viewModel.canDrawOverlays.collectAsStateWithLifecycle()
     val hasUsageAccess by viewModel.hasUsageAccess.collectAsStateWithLifecycle()
+    val focusSession by viewModel.focusSession.collectAsStateWithLifecycle()
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         viewModel.recheckDefaultHome()
@@ -231,6 +244,49 @@ fun SettingsScreen(
                 }
             }
         }
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Blocking schedules",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = "Time windows that auto-block your blocked apps",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                TextButton(onClick = onOpenSchedules) {
+                    Text(text = "Manage")
+                }
+            }
+        }
+
+        item {
+            SectionDivider()
+        }
+
+        item {
+            SectionTitle("Focus session")
+        }
+        item {
+            FocusSection(
+                durationMinutes = settings.focusDurationMinutes,
+                session = focusSession,
+                onDurationChange = viewModel::setFocusDuration,
+                onStart = viewModel::startFocus,
+                onPause = viewModel::pauseFocus,
+                onResume = viewModel::resumeFocus,
+                onStop = viewModel::stopFocus
+            )
+        }
 
         item {
             SectionDivider()
@@ -267,6 +323,75 @@ private fun SectionTitle(text: String) {
         color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 8.dp)
     )
+}
+
+@Composable
+private fun FocusSection(
+    durationMinutes: Int,
+    session: FocusSession,
+    onDurationChange: (Int) -> Unit,
+    onStart: () -> Unit,
+    onPause: () -> Unit,
+    onResume: () -> Unit,
+    onStop: () -> Unit
+) {
+    val context = LocalContext.current
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { onStart() }
+    val durations = listOf(15, 25, 45, 60)
+
+    Column(modifier = Modifier.padding(horizontal = 24.dp)) {
+        if (session.isActive) {
+            Text(
+                text = when (session.phase) {
+                    FocusPhase.FOCUS -> if (session.paused) "Focus paused" else "Focus session running"
+                    FocusPhase.BREAK -> "Break"
+                    FocusPhase.IDLE -> ""
+                } + "  ·  ${formatRemaining(session.remainingMs)} left",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Row {
+                if (session.paused) {
+                    TextButton(onClick = onResume) { Text(text = "Resume") }
+                } else {
+                    TextButton(onClick = onPause) { Text(text = "Pause") }
+                }
+                TextButton(onClick = onStop) { Text(text = "End") }
+            }
+        } else {
+            Text(
+                text = if (durationMinutes == 0) "Select a duration" else "Focus mode blocks everything except your favorites for $durationMinutes minutes.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                durations.forEach { minutes ->
+                    FilterChip(
+                        selected = durationMinutes == minutes,
+                        onClick = { onDurationChange(minutes) },
+                        label = { Text("$minutes") }
+                    )
+                }
+            }
+            TextButton(onClick = {
+                val permission = Manifest.permission.POST_NOTIFICATIONS
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                    ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    permissionLauncher.launch(permission)
+                } else {
+                    onStart()
+                }
+            }) { Text(text = "Start focus") }
+        }
+    }
+}
+
+private fun formatRemaining(ms: Long): String {
+    val totalSeconds = (ms / 1000).coerceAtLeast(0)
+    return String.format(Locale.US, "%02d:%02d", totalSeconds / 60, totalSeconds % 60)
 }
 
 @Composable

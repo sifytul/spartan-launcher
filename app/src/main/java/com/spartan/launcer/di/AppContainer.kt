@@ -6,6 +6,7 @@ import com.spartan.launcer.data.ForegroundUsageTracker
 import com.spartan.launcer.data.SettingsDataStore
 import com.spartan.launcer.data.UsageStatsRepository
 import com.spartan.launcer.domain.blocking.AppBlocker
+import com.spartan.launcer.domain.focus.FocusController
 import com.spartan.launcer.domain.usecases.GetAppListUseCase
 import com.spartan.launcer.domain.usecases.HideAppUseCase
 import com.spartan.launcer.domain.usecases.LaunchAppUseCase
@@ -26,6 +27,8 @@ class AppContainer(context: Context) {
 
     val usageStatsRepository: UsageStatsRepository = UsageStatsRepository(appContext)
 
+    val focusController: FocusController = FocusController(appContext, appScope)
+
     val foregroundUsageTracker: ForegroundUsageTracker =
         ForegroundUsageTracker(appContext.packageName, settingsDataStore, appScope)
 
@@ -33,7 +36,8 @@ class AppContainer(context: Context) {
         appContext,
         appScope,
         foregroundUsageTracker,
-        settingsDataStore
+        settingsDataStore,
+        focusController
     )
 
     val getAppListUseCase: GetAppListUseCase = GetAppListUseCase(appRepository)

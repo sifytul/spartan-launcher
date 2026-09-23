@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.spartan.launcer.SpartanLauncherApp
 import com.spartan.launcer.data.model.AppInfo
+import com.spartan.launcer.domain.focus.FocusSession
 import com.spartan.launcer.service.SpartanAccessibilityService
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,6 +36,9 @@ class HomeViewModel(private val app: SpartanLauncherApp) : ViewModel() {
 
     private val _isDefaultHome = MutableStateFlow(false)
     val isDefaultHome: StateFlow<Boolean> = _isDefaultHome.asStateFlow()
+
+    val focusSession: StateFlow<FocusSession> = container.focusController.session
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FocusSession())
 
     init {
         recheckDefaultHome()
@@ -73,6 +77,12 @@ class HomeViewModel(private val app: SpartanLauncherApp) : ViewModel() {
     fun openNotificationShade() {
         SpartanAccessibilityService.openNotificationShadeIfAvailable()
     }
+
+    fun pauseFocus() = container.focusController.pause()
+
+    fun resumeFocus() = container.focusController.resume()
+
+    fun stopFocus() = container.focusController.stop()
 
     private fun startActivityFromApp(intent: Intent) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

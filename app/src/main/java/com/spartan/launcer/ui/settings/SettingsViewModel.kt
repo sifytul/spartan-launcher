@@ -16,6 +16,7 @@ import com.spartan.launcer.data.model.AppInfo
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
 import com.spartan.launcer.data.openUsageAccessSettings
+import com.spartan.launcer.domain.focus.FocusSession
 import com.spartan.launcer.service.SpartanAccessibilityService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -37,6 +38,9 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
             apps.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.label })
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    val focusSession: StateFlow<FocusSession> = container.focusController.session
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FocusSession())
 
     private val _isDefaultHome = MutableStateFlow(false)
     val isDefaultHome: StateFlow<Boolean> = _isDefaultHome.asStateFlow()
@@ -116,6 +120,22 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
         }
         startActivityFromApp(intent)
     }
+
+    fun setFocusDuration(minutes: Int) {
+        viewModelScope.launch {
+            container.settingsDataStore.setFocusDurationMinutes(minutes)
+        }
+    }
+
+    fun startFocus() {
+        container.focusController.startFocus(settings.value.focusDurationMinutes)
+    }
+
+    fun pauseFocus() = container.focusController.pause()
+
+    fun resumeFocus() = container.focusController.resume()
+
+    fun stopFocus() = container.focusController.stop()
 
     private fun startActivityFromApp(intent: Intent) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

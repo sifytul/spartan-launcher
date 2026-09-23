@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -35,7 +36,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import android.text.format.DateFormat as SystemDateFormat
 import com.spartan.launcer.data.model.AppInfo
+import com.spartan.launcer.domain.focus.FocusPhase
+import com.spartan.launcer.domain.focus.FocusSession
 import java.text.DateFormat
+import java.util.Locale
 
 @Composable
 fun HomeScreen(
@@ -46,6 +50,7 @@ fun HomeScreen(
     val favorites by viewModel.favorites.collectAsStateWithLifecycle()
     val currentTime by viewModel.currentTime.collectAsStateWithLifecycle()
     val isDefaultHome by viewModel.isDefaultHome.collectAsStateWithLifecycle()
+    val focusSession by viewModel.focusSession.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
     val timeFormatter = remember { SystemDateFormat.getTimeFormat(context) }
@@ -117,6 +122,15 @@ fun HomeScreen(
                     }
                 }
             }
+            if (focusSession.isActive) {
+                Spacer(Modifier.height(24.dp))
+                FocusProgressCard(
+                    session = focusSession,
+                    onPause = viewModel::pauseFocus,
+                    onResume = viewModel::resumeFocus,
+                    onStop = viewModel::stopFocus
+                )
+            }
             Spacer(Modifier.weight(1.6f))
             Text(
                 text = "Settings",
@@ -147,6 +161,54 @@ private fun FavoriteItem(app: AppInfo, onClick: () -> Unit) {
         color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.clickable(onClick = onClick)
     )
+}
+
+@Composable
+private fun FocusProgressCard(
+    session: FocusSession,
+    onPause: () -> Unit,
+    onResume: () -> Unit,
+    onStop: () -> Unit
+) {
+    val progress = if (session.totalMs > 0) {
+        (session.remainingMs.toFloat() / session.totalMs.toFloat()).coerceIn(0f, 1f)
+    } else 0f
+    Surface(
+        shape = MaterialTheme.shapes.large,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp)
+    ) {
+        Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
+            Text(
+                text = when (session.phase) {
+                    FocusPhase.FOCUS -> if (session.paused) "Focus paused" else "Focus session"
+                    FocusPhase.BREAK -> "Break"
+                    FocusPhase.IDLE -> "Focus"
+                } + " · ${formatRemaining(session.remainingMs)}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            LinearProgressIndicator(
+                progress = { progress },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp)
+            )
+            Row {
+                if (session.paused) {
+                    TextButton(onClick = onResume) { Text(text = "Resume") }
+                } else {
+                    TextButton(onClick = onPause) { Text(text = "Pause") }
+                }
+                TextButton(onClick = onStop) { Text(text = "End") }
+            }
+        }
+    }
+}
+
+private fun formatRemaining(ms: Long): String {
+    val totalSeconds = (ms / 1000).coerceAtLeast(0)
+    return String.format(Locale.US, "%02d:%02d", totalSeconds / 60, totalSeconds % 60)
 }
 
 @Composable

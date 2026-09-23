@@ -6,7 +6,8 @@ import android.provider.Settings
 import android.util.Log
 import com.spartan.launcer.data.ForegroundUsageTracker
 import com.spartan.launcer.data.SettingsDataStore
-import com.spartan.launcer.data.model.BlockSchedule
+import com.spartan.launcer.data.model.LauncherSettings
+import com.spartan.launcer.domain.focus.FocusController
 import com.spartan.launcer.service.SpartanAccessibilityService
 import com.spartan.launcer.ui.block.BlockOverlayActivity
 import java.time.LocalDateTime
@@ -29,7 +30,8 @@ class AppBlocker(
     private val context: Context,
     private val appScope: CoroutineScope,
     private val tracker: ForegroundUsageTracker,
-    private val settingsDataStore: SettingsDataStore
+    private val settingsDataStore: SettingsDataStore,
+    private val focusController: FocusController
 ) {
 
     private val ownPackageName = context.packageName
@@ -56,7 +58,7 @@ class AppBlocker(
             ) { settings, foreground, tick ->
                 Triple(settings, foreground, tick)
             }.collect { (settings, foreground, _) ->
-                evaluate(settings.blockedPackages, settings.timeLimits, settings.schedules, foreground)
+                evaluate(settings, foreground)
             }
         }
     }
@@ -84,23 +86,19 @@ class AppBlocker(
         onOverlayClosed()
     }
 
-    private fun evaluate(
-        blockedPackages: Set<String>,
-        timeLimits: Map<String, Int>,
-        schedules: List<BlockSchedule>,
-        foreground: String?
-    ) {
+    private fun evaluate(settings: LauncherSettings, foreground: String?) {
         if (foreground == null || foreground == ownPackageName) return
         val nowMs = System.currentTimeMillis()
+        val focusSession = focusController.session.value
         val decision = BlockEvaluator.decide(
             packageName = foreground,
             ownPackageName = ownPackageName,
-            blockedPackages = blockedPackages,
+            blockedPackages = settings.blockedPackages,
             usageMinutes = tracker.minutesUsedToday(foreground),
-            timeLimits = timeLimits,
-            activeSchedule = ScheduleEvaluator.findActive(LocalDateTime.now(), schedules),
-            focusActive = false,
-            focusAllowlist = emptySet(),
+            timeLimits = settings.timeLimits,
+            activeSchedule = ScheduleEvaluator.findActive(LocalDateTime.now(), settings.schedules),
+            focusActive = focusSession.blocking,
+            focusAllowlist = settings.favoritePackages.toSet(),
             tempAllowedUntil = tempAllow[foreground] ?: 0L,
             nowMs = nowMs
         )
