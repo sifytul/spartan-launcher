@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
-# Bump version, run tests + lint, and build the signed release AAB + APK.
-# Usage: ./release.sh [major|minor|patch]   (default: patch)
+# Bump version, run tests + lint, build the signed release AAB + APK, and
+# optionally publish (commit + tag + push) so GitHub Pages goes live.
+# Usage: ./release.sh [major|minor|patch] [--publish]
+#   --publish commits version.properties + docs, tags vX.Y.Z and pushes.
 set -euo pipefail
 cd "$(dirname "$0")"
 
-PART="${1:-patch}"
-case "$PART" in
-  major|minor|patch) ;;
-  *) echo "usage: $0 [major|minor|patch]" >&2; exit 1 ;;
-esac
+PART="patch"
+PUBLISH=0
+for arg in "$@"; do
+  case "$arg" in
+    major|minor|patch) PART="$arg" ;;
+    --publish) PUBLISH=1 ;;
+    *) echo "usage: $0 [major|minor|patch] [--publish]" >&2; exit 1 ;;
+  esac
+done
 
 ./gradlew -q bumpVersion -PversionPart="$PART"
 VERSION=$(./gradlew -q printVersion)
@@ -35,7 +41,19 @@ cp -f "app/build/outputs/apk/release/app-release.apk" "docs/downloads/app-releas
 cp -f "PRIVACY_POLICY.md" "docs/PRIVACY_POLICY.md"
 printf '{"versionName":"%s","versionCode":%s,"released":"%s"}\n' "$VERSION" "$CODE" "$(date +%F)" > "docs/version.json"
 echo "Download page synced (docs/downloads/app-release.apk, docs/version.json)"
-echo "Remember:"
-echo "  git add version.properties"
-echo "  git commit -m \"chore(release): v$VERSION\""
-echo "  git tag -a v$VERSION -m \"v$VERSION\""
+
+if [ "$PUBLISH" = "1" ]; then
+  git add version.properties docs
+  git commit -m "chore(release): v$VERSION" >/dev/null 2>&1 || echo "Nothing new to commit (release already committed)."
+  git tag -a "v$VERSION" -m "v$VERSION" 2>/dev/null || echo "Tag v$VERSION already exists."
+  git push origin main
+  git push --tags
+  echo
+  echo "Published v$VERSION"
+  echo "Live: https://sifytul.github.io/spartan-launcher/"
+else
+  echo "Remember (or re-run with --publish):"
+  echo "  git add version.properties docs && git commit -m \"chore(release): v$VERSION\""
+  echo "  git tag -a v$VERSION -m \"v$VERSION\""
+  echo "  git push origin main && git push --tags"
+fi
