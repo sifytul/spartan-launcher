@@ -1,18 +1,24 @@
 #!/usr/bin/env bash
 # Bump version, run tests + lint, build the signed release AAB + APK, and
 # optionally publish (commit + tag + push) so GitHub Pages goes live.
-# Usage: ./release.sh [major|minor|patch] [--publish]
-#   --publish commits version.properties + docs, tags vX.Y.Z and pushes.
+# Usage: ./release.sh [major|minor|patch] [--publish] [--scan|--skip-scan]
+#   --publish   commits version.properties + docs, tags vX.Y.Z and pushes.
+#   --scan      force-run the OWASP dependency scan (no prompt).
+#   --skip-scan skip the OWASP dependency scan (no prompt).
+# Without --scan/--skip-scan you are asked interactively whether to scan.
 set -euo pipefail
 cd "$(dirname "$0")"
 
 PART="patch"
 PUBLISH=0
+SCAN="ask"
 for arg in "$@"; do
   case "$arg" in
     major|minor|patch) PART="$arg" ;;
     --publish) PUBLISH=1 ;;
-    *) echo "usage: $0 [major|minor|patch] [--publish]" >&2; exit 1 ;;
+    --scan) SCAN="yes" ;;
+    --skip-scan) SCAN="no" ;;
+    *) echo "usage: $0 [major|minor|patch] [--publish] [--scan|--skip-scan]" >&2; exit 1 ;;
   esac
 done
 
@@ -25,14 +31,33 @@ echo "==> Building release v$VERSION (versionCode $CODE)"
 ./gradlew testDebugUnitTest lintDebug bundleRelease assembleRelease
 
 echo
-echo "==> OWASP dependency scan (CVEs in app dependencies)"
-SCAN_LOG="${TMPDIR:-/tmp}/dependency-check-$VERSION.log"
-if ./gradlew dependencyCheckAnalyze --console=plain >"$SCAN_LOG" 2>&1; then
-  echo "  Clean: no known vulnerabilities at or above CVSS 9."
+if [ "$SCAN" = "ask" ]; then
+  if [ ! -t 0 ]; then
+    echo "==> Not a terminal - defaulting to YES for the OWASP dependency scan."
+    echo "    Use --skip-scan to skip, or --scan to force it."
+    SCAN="yes"
+  else
+    printf "==> Run OWASP dependency scan (CVEs in app dependencies)? [Y/n] "
+    read -r ANSWER
+    case "${ANSWER:-y}" in
+      y|Y|yes|YES|"") SCAN="yes" ;;
+      *) SCAN="no" ;;
+    esac
+  fi
+fi
+
+if [ "$SCAN" = "yes" ]; then
+  echo "==> OWASP dependency scan (CVEs in app dependencies)"
+  SCAN_LOG="${TMPDIR:-/tmp}/dependency-check-$VERSION.log"
+  if ./gradlew dependencyCheckAnalyze --console=plain >"$SCAN_LOG" 2>&1; then
+    echo "  Clean: no known vulnerabilities at or above CVSS 9."
+  else
+    echo "  !! Issues found by the scan - see app/build/reports/dependency-check/ (report HTML + XML)."
+    echo "     Scan log: $SCAN_LOG"
+    tail -n 15 "$SCAN_LOG"
+  fi
 else
-  echo "  !! Issues found by the scan - see app/build/reports/dependency-check/ (report HTML + XML)."
-  echo "     Scan log: $SCAN_LOG"
-  tail -n 15 "$SCAN_LOG"
+  echo "==> Skipping OWASP dependency scan (use --scan to run it)."
 fi
 echo
 
