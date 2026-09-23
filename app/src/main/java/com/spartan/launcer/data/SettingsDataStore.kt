@@ -58,6 +58,11 @@ class SettingsDataStore(private val context: Context) {
         )
     }
 
+    val usageMinutes: Flow<Map<String, Map<String, Int>>> =
+        context.launcherDataStore.data.map { prefs ->
+            JsonCodec.decodeUsage(prefs[Keys.USAGE_MINUTES].orEmpty())
+        }
+
     suspend fun setFavorite(packageName: String, favorite: Boolean) {
         context.launcherDataStore.edit { prefs ->
             val current = prefs[Keys.FAVORITE_PACKAGES]?.toMutableSet() ?: mutableSetOf()

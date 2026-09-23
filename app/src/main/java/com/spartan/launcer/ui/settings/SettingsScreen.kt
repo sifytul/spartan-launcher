@@ -48,10 +48,12 @@ fun SettingsScreen(
     val allApps by viewModel.allApps.collectAsStateWithLifecycle()
     val isDefaultHome by viewModel.isDefaultHome.collectAsStateWithLifecycle()
     val notificationShadeEnabled by viewModel.notificationShadeEnabled.collectAsStateWithLifecycle()
+    val canDrawOverlays by viewModel.canDrawOverlays.collectAsStateWithLifecycle()
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         viewModel.recheckDefaultHome()
         viewModel.refreshNotificationShadeState()
+        viewModel.refreshOverlayPermissionState()
     }
 
     LazyColumn(
@@ -140,7 +142,7 @@ fun SettingsScreen(
         }
 
         item {
-            SectionTitle("Notification shade")
+            SectionTitle("Focus & blocking")
         }
         item {
             Row(
@@ -164,6 +166,33 @@ fun SettingsScreen(
                 }
                 if (!notificationShadeEnabled) {
                     TextButton(onClick = viewModel::openAccessibilitySettings) {
+                        Text(text = "Enable")
+                    }
+                }
+            }
+        }
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Blocked app screen",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = if (canDrawOverlays) "Display over other apps granted"
+                        else "Required to cover blocked apps",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                if (!canDrawOverlays) {
+                    TextButton(onClick = viewModel::openOverlayPermissionSettings) {
                         Text(text = "Enable")
                     }
                 }

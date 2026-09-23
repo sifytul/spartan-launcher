@@ -3,6 +3,7 @@ package com.spartan.launcer.ui.settings
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,7 @@ import com.spartan.launcer.SpartanLauncherApp
 import com.spartan.launcer.data.model.AppInfo
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
-import com.spartan.launcer.service.NotificationShadeAccessibilityService
+import com.spartan.launcer.service.SpartanAccessibilityService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -42,9 +43,13 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
     private val _notificationShadeEnabled = MutableStateFlow(false)
     val notificationShadeEnabled: StateFlow<Boolean> = _notificationShadeEnabled.asStateFlow()
 
+    private val _canDrawOverlays = MutableStateFlow(false)
+    val canDrawOverlays: StateFlow<Boolean> = _canDrawOverlays.asStateFlow()
+
     init {
         recheckDefaultHome()
         refreshNotificationShadeState()
+        refreshOverlayPermissionState()
     }
 
     fun recheckDefaultHome() {
@@ -53,11 +58,23 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
 
     fun refreshNotificationShadeState() {
         _notificationShadeEnabled.value =
-            NotificationShadeAccessibilityService.isServiceEnabled(app)
+            SpartanAccessibilityService.isServiceEnabled(app)
+    }
+
+    fun refreshOverlayPermissionState() {
+        _canDrawOverlays.value = Settings.canDrawOverlays(app)
     }
 
     fun openAccessibilitySettings() {
         startActivityFromApp(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+    }
+
+    fun openOverlayPermissionSettings() {
+        val intent = Intent(
+            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+            Uri.parse("package:${app.packageName}")
+        )
+        startActivityFromApp(intent)
     }
 
     fun setThemeMode(themeMode: ThemeMode) {
