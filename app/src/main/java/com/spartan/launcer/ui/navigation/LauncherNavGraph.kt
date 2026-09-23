@@ -18,9 +18,7 @@ fun LauncherNavGraph() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Routes.HOME) {
         composable(Routes.HOME) {
-            HomeScreen(
-                onOpenDrawer = { navController.navigate(Routes.DRAWER) }
-            )
+            HomeScreen()
         }
         composable(Routes.DRAWER) {
             AppDrawerScreen(
