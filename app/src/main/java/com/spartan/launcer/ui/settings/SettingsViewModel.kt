@@ -16,6 +16,7 @@ import com.spartan.launcer.data.model.AppInfo
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
 import com.spartan.launcer.data.openUsageAccessSettings
+import com.spartan.launcer.data.model.FontMode
 import com.spartan.launcer.domain.focus.FocusSession
 import com.spartan.launcer.service.NotificationFilterService
 import com.spartan.launcer.service.SpartanAccessibilityService
@@ -110,6 +111,30 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
     fun setThemeMode(themeMode: ThemeMode) {
         viewModelScope.launch {
             container.settingsDataStore.setThemeMode(themeMode)
+        }
+    }
+
+    fun setMonochrome(monochrome: Boolean) {
+        viewModelScope.launch {
+            container.settingsDataStore.setMonochrome(monochrome)
+        }
+    }
+
+    fun setFontMode(fontMode: FontMode) {
+        viewModelScope.launch {
+            container.settingsDataStore.setFontMode(fontMode)
+        }
+    }
+
+    fun setFontScale(scale: Float) {
+        viewModelScope.launch {
+            container.settingsDataStore.setFontScale(scale)
+        }
+    }
+
+    fun setCustomLabel(packageName: String, label: String?) {
+        viewModelScope.launch {
+            container.settingsDataStore.setCustomLabel(packageName, label)
         }
     }
 

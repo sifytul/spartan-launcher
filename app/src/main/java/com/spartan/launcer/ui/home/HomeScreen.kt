@@ -156,7 +156,7 @@ fun HomeScreen(
 @Composable
 private fun FavoriteItem(app: AppInfo, onClick: () -> Unit) {
     Text(
-        text = app.label,
+        text = app.displayLabel,
         style = MaterialTheme.typography.bodyLarge,
         color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.clickable(onClick = onClick)

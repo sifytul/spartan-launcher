@@ -3,6 +3,7 @@ package com.spartan.launcer.data
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
@@ -33,6 +34,7 @@ class SettingsDataStore(private val context: Context) {
         val CUSTOM_LABELS = stringPreferencesKey("custom_labels")
         val FONT_MODE = stringPreferencesKey("font_mode")
         val FONT_SCALE = floatPreferencesKey("font_scale")
+        val MONOCHROME = booleanPreferencesKey("monochrome")
         val FOCUS_DURATION_MINUTES = intPreferencesKey("focus_duration_minutes")
         val USAGE_MINUTES = stringPreferencesKey("usage_minutes")
     }
@@ -54,6 +56,7 @@ class SettingsDataStore(private val context: Context) {
                 ?.let { name -> FontMode.entries.firstOrNull { it.name == name } }
                 ?: FontMode.SYSTEM,
             fontScale = prefs[Keys.FONT_SCALE] ?: 1.0f,
+            monochrome = prefs[Keys.MONOCHROME] ?: false,
             focusDurationMinutes = prefs[Keys.FOCUS_DURATION_MINUTES] ?: 25
         )
     }
@@ -159,6 +162,12 @@ class SettingsDataStore(private val context: Context) {
     suspend fun setFontScale(scale: Float) {
         context.launcherDataStore.edit { prefs ->
             prefs[Keys.FONT_SCALE] = scale
+        }
+    }
+
+    suspend fun setMonochrome(monochrome: Boolean) {
+        context.launcherDataStore.edit { prefs ->
+            prefs[Keys.MONOCHROME] = monochrome
         }
     }
 

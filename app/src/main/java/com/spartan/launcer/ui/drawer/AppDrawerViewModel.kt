@@ -44,6 +44,12 @@ class AppDrawerViewModel(private val container: AppContainer) : ViewModel() {
         }
     }
 
+    fun setCustomLabel(packageName: String, label: String?) {
+        viewModelScope.launch {
+            container.settingsDataStore.setCustomLabel(packageName, label)
+        }
+    }
+
     fun launchApp(packageName: String) {
         container.launchAppUseCase(packageName)
     }

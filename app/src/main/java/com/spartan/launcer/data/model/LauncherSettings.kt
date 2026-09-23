@@ -11,5 +11,6 @@ data class LauncherSettings(
     val customLabels: Map<String, String> = emptyMap(),
     val fontMode: FontMode = FontMode.SYSTEM,
     val fontScale: Float = 1.0f,
+    val monochrome: Boolean = false,
     val focusDurationMinutes: Int = 25
 )

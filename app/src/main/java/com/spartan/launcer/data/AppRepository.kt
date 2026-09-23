@@ -27,7 +27,8 @@ class AppRepository(
         installed.map { app ->
             app.copy(
                 isFavorite = app.packageName in settings.favoritePackages,
-                isHidden = app.packageName in settings.hiddenPackages
+                isHidden = app.packageName in settings.hiddenPackages,
+                customLabel = settings.customLabels[app.packageName]
             )
         }
     }

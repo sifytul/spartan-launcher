@@ -21,16 +21,23 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -44,6 +51,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.spartan.launcer.R
 import com.spartan.launcer.data.model.AppInfo
+import com.spartan.launcer.data.model.FontMode
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
 import com.spartan.launcer.domain.focus.FocusPhase
@@ -66,6 +74,7 @@ fun SettingsScreen(
     val hasUsageAccess by viewModel.hasUsageAccess.collectAsStateWithLifecycle()
     val hasNotificationAccess by viewModel.hasNotificationAccess.collectAsStateWithLifecycle()
     val focusSession by viewModel.focusSession.collectAsStateWithLifecycle()
+    var renameTarget by remember { mutableStateOf<AppInfo?>(null) }
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         viewModel.recheckDefaultHome()
@@ -124,6 +133,78 @@ fun SettingsScreen(
                 RadioButton(
                     selected = settings.themeMode == mode,
                     onClick = { viewModel.setThemeMode(mode) }
+                )
+            }
+        }
+
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Monochrome (grayscale)",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.weight(1f)
+                )
+                Switch(
+                    checked = settings.monochrome,
+                    onCheckedChange = { viewModel.setMonochrome(it) }
+                )
+            }
+        }
+
+        item {
+            SectionDivider()
+        }
+
+        item {
+            SectionTitle("Text")
+        }
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 4.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                FontMode.entries.forEach { mode ->
+                    FilterChip(
+                        selected = settings.fontMode == mode,
+                        onClick = { viewModel.setFontMode(mode) },
+                        label = { Text(mode.label) }
+                    )
+                }
+            }
+        }
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Text size",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.width(88.dp)
+                )
+                Slider(
+                    value = settings.fontScale,
+                    onValueChange = { viewModel.setFontScale(it) },
+                    valueRange = 0.8f..1.3f,
+                    steps = 4,
+                    modifier = Modifier.weight(1f)
+                )
+                Text(
+                    text = "${(settings.fontScale * 100).toInt()}%",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.width(40.dp)
                 )
             }
         }
@@ -341,9 +422,43 @@ fun SettingsScreen(
                 app = app,
                 settings = settings,
                 onToggleFavorite = { viewModel.setFavorite(app.packageName, !app.isFavorite) },
-                onToggleHidden = { viewModel.setHidden(app.packageName, !app.isHidden) }
+                onToggleHidden = { viewModel.setHidden(app.packageName, !app.isHidden) },
+                onRename = { renameTarget = app }
             )
         }
+    }
+
+    renameTarget?.let { app ->
+        var label by remember(app.packageName) { mutableStateOf(app.customLabel ?: "") }
+        AlertDialog(
+            onDismissRequest = { renameTarget = null },
+            title = { Text("Rename ${app.label}") },
+            text = {
+                Column {
+                    TextField(
+                        value = label,
+                        onValueChange = { label = it },
+                        label = { Text("Custom name") },
+                        singleLine = true
+                    )
+                    Text(
+                        text = "Leave empty to use the original name.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    viewModel.setCustomLabel(app.packageName, label)
+                    renameTarget = null
+                }) { Text(text = "Save") }
+            },
+            dismissButton = {
+                TextButton(onClick = { renameTarget = null }) { Text(text = "Cancel") }
+            }
+        )
     }
 }
 
@@ -440,7 +555,8 @@ private fun AppManageRow(
     app: AppInfo,
     settings: LauncherSettings,
     onToggleFavorite: () -> Unit,
-    onToggleHidden: () -> Unit
+    onToggleHidden: () -> Unit,
+    onRename: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -452,11 +568,18 @@ private fun AppManageRow(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = app.label,
+                text = app.displayLabel,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.weight(1f)
             )
+            TextButton(onClick = onRename) {
+                Text(
+                    text = "Rename",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
             TextButton(onClick = onToggleFavorite) {
                 Text(
                     text = if (settings.favoritePackages.contains(app.packageName)) "Favorited" else "Favorite",

@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -50,6 +51,7 @@ fun AppDrawerScreen(
     val apps by viewModel.apps.collectAsStateWithLifecycle()
     val query by viewModel.query.collectAsStateWithLifecycle()
     var selectedApp by remember { mutableStateOf<AppInfo?>(null) }
+    var renameTarget by remember { mutableStateOf<AppInfo?>(null) }
 
     Column(
         modifier = Modifier
@@ -136,7 +138,7 @@ fun AppDrawerScreen(
                     .padding(horizontal = 24.dp)
             ) {
                 Text(
-                    text = app.label,
+                    text = app.displayLabel,
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -147,6 +149,19 @@ fun AppDrawerScreen(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(Modifier.height(16.dp))
+                TextButton(
+                    onClick = {
+                        selectedApp = null
+                        renameTarget = app
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Rename",
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Start
+                    )
+                }
                 TextButton(
                     onClick = {
                         viewModel.toggleFavorite(app.packageName)
@@ -178,6 +193,39 @@ fun AppDrawerScreen(
             }
         }
     }
+
+    renameTarget?.let { app ->
+        var label by remember(app.packageName) { mutableStateOf(app.customLabel ?: "") }
+        AlertDialog(
+            onDismissRequest = { renameTarget = null },
+            title = { Text("Rename ${app.label}") },
+            text = {
+                Column {
+                    TextField(
+                        value = label,
+                        onValueChange = { label = it },
+                        label = { Text("Custom name") },
+                        singleLine = true
+                    )
+                    Text(
+                        text = "Leave empty to use the original name.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    viewModel.setCustomLabel(app.packageName, label)
+                    renameTarget = null
+                }) { Text(text = "Save") }
+            },
+            dismissButton = {
+                TextButton(onClick = { renameTarget = null }) { Text(text = "Cancel") }
+            }
+        )
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -188,7 +236,7 @@ private fun AppDrawerItem(
     onLongClick: () -> Unit
 ) {
     Text(
-        text = app.label,
+        text = app.displayLabel,
         style = MaterialTheme.typography.bodyLarge,
         color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier

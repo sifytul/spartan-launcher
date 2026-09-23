@@ -19,7 +19,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             val settings by container.settingsDataStore.settings
                 .collectAsStateWithLifecycle(initialValue = LauncherSettings())
-            SpartanLauncherTheme(themeMode = settings.themeMode) {
+            SpartanLauncherTheme(
+                themeMode = settings.themeMode,
+                monochrome = settings.monochrome,
+                fontMode = settings.fontMode,
+                fontScale = settings.fontScale
+            ) {
                 LauncherNavGraph()
             }
         }

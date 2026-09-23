@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import com.spartan.launcer.data.model.FontMode
 import com.spartan.launcer.data.model.ThemeMode
 
 private val LightColors = lightColorScheme(
@@ -52,21 +53,67 @@ private val AmoledColors = darkColorScheme(
     onSecondary = AmoledSurface
 )
 
+private val MonoLightColors = lightColorScheme(
+    primary = MonoLightPrimary,
+    onPrimary = MonoLightOnPrimary,
+    primaryContainer = MonoLightSurfaceVariant,
+    onPrimaryContainer = MonoLightOnSurfaceVariant,
+    surface = MonoLightSurface,
+    onSurface = MonoLightOnSurface,
+    background = MonoLightSurface,
+    onBackground = MonoLightOnSurface,
+    surfaceVariant = MonoLightSurfaceVariant,
+    onSurfaceVariant = MonoLightOnSurfaceVariant,
+    secondary = MonoLightOnSurfaceVariant,
+    onSecondary = MonoLightSurface,
+    error = MonoLightOnSurfaceVariant,
+    onError = MonoLightSurface
+)
+
+private val MonoDarkColors = darkColorScheme(
+    primary = MonoDarkPrimary,
+    onPrimary = MonoDarkOnPrimary,
+    primaryContainer = MonoDarkSurfaceVariant,
+    onPrimaryContainer = MonoDarkOnSurfaceVariant,
+    surface = MonoDarkSurface,
+    onSurface = MonoDarkOnSurface,
+    background = MonoDarkSurface,
+    onBackground = MonoDarkOnSurface,
+    surfaceVariant = MonoDarkSurfaceVariant,
+    onSurfaceVariant = MonoDarkOnSurfaceVariant,
+    secondary = MonoDarkOnSurfaceVariant,
+    onSecondary = MonoDarkSurface,
+    error = MonoDarkOnSurfaceVariant,
+    onError = MonoDarkSurface
+)
+
 @Composable
 fun SpartanLauncherTheme(
     themeMode: ThemeMode = ThemeMode.SYSTEM,
+    monochrome: Boolean = false,
+    fontMode: FontMode = FontMode.SYSTEM,
+    fontScale: Float = 1.0f,
     content: @Composable () -> Unit
 ) {
     val systemInDark = isSystemInDarkTheme()
-    val colors = when (themeMode) {
-        ThemeMode.SYSTEM -> if (systemInDark) DarkColors else LightColors
-        ThemeMode.LIGHT -> LightColors
-        ThemeMode.DARK -> DarkColors
-        ThemeMode.AMOLED -> AmoledColors
+    val dark = when (themeMode) {
+        ThemeMode.SYSTEM -> systemInDark
+        ThemeMode.LIGHT -> false
+        ThemeMode.DARK, ThemeMode.AMOLED -> true
+    }
+    val colors = when {
+        monochrome && dark -> MonoDarkColors
+        monochrome -> MonoLightColors
+        else -> when (themeMode) {
+            ThemeMode.SYSTEM -> if (systemInDark) DarkColors else LightColors
+            ThemeMode.LIGHT -> LightColors
+            ThemeMode.DARK -> DarkColors
+            ThemeMode.AMOLED -> AmoledColors
+        }
     }
     MaterialTheme(
         colorScheme = colors,
-        typography = Typography,
+        typography = Typography.withFont(fontFamilyFor(fontMode), fontScale),
         content = content
     )
 }

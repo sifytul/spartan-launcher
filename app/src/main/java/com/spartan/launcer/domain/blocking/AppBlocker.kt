@@ -106,7 +106,7 @@ class AppBlocker(
         if (overlayVisible.get()) return
 
         if (Settings.canDrawOverlays(context)) {
-            val label = appLabel(foreground)
+            val label = settings.customLabels[foreground] ?: appLabel(foreground)
             overlayVisible.set(true)
             Log.d(TAG, "Blocking $foreground (${decision.reason})")
             val intent = BlockOverlayActivity.newIntent(context, foreground, label, decision.reason!!)
