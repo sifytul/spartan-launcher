@@ -2,6 +2,7 @@
     <string name="app_name">Spartan Launcher</string>
     <string name="accessibility_shade_description">Allows the swipe-down gesture on the home screen to open the notification shade.</string>
     <string name="accessibility_description">Tracks the currently open app to enforce focus and app-blocking limits, opens the notification shade for the swipe-down gesture, and is used as a fallback to return home when a blocked app cannot be covered by an overlay.</string>
+    <string name="notification_listener_description">Allows Spartan Launcher to silence notifications from apps you mute, and to quiet all third-party notifications during a focus session.</string>
     <string name="block_overlay_title">App blocked</string>
     <string name="block_overlay_reason_manual">This app is on your blocked list.</string>
     <string name="block_overlay_reason_limit">You have used up today\'s allowance for this app.</string>

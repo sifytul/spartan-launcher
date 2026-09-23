@@ -60,6 +60,22 @@
                 android:resource="@xml/accessibility_service_config" />
         </service>
 
+        <service
+            android:name=".service.NotificationFilterService"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.notification.default_filter_types"
+                android:value="std1" />
+            <meta-data
+                android:name="android.service.notification"
+                android:resource="@xml/notification_listener_config" />
+        </service>
+
         <activity
             android:name=".ui.block.BlockOverlayActivity"
             android:excludeFromRecents="true"

@@ -55,6 +55,7 @@ fun SettingsScreen(
     onBack: () -> Unit,
     onOpenScreenTime: () -> Unit,
     onOpenSchedules: () -> Unit,
+    onOpenMuteNotifications: () -> Unit,
     viewModel: SettingsViewModel = viewModel(factory = SettingsViewModel.Factory)
 ) {
     val settings by viewModel.settings.collectAsStateWithLifecycle()
@@ -63,6 +64,7 @@ fun SettingsScreen(
     val notificationShadeEnabled by viewModel.notificationShadeEnabled.collectAsStateWithLifecycle()
     val canDrawOverlays by viewModel.canDrawOverlays.collectAsStateWithLifecycle()
     val hasUsageAccess by viewModel.hasUsageAccess.collectAsStateWithLifecycle()
+    val hasNotificationAccess by viewModel.hasNotificationAccess.collectAsStateWithLifecycle()
     val focusSession by viewModel.focusSession.collectAsStateWithLifecycle()
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
@@ -70,6 +72,7 @@ fun SettingsScreen(
         viewModel.refreshNotificationShadeState()
         viewModel.refreshOverlayPermissionState()
         viewModel.refreshUsageAccessState()
+        viewModel.refreshNotificationAccessState()
     }
 
     LazyColumn(
@@ -265,6 +268,36 @@ fun SettingsScreen(
                 }
                 TextButton(onClick = onOpenSchedules) {
                     Text(text = "Manage")
+                }
+            }
+        }
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Mute app notifications",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = if (hasNotificationAccess) "Notification access granted"
+                        else "Requires notification access",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                if (!hasNotificationAccess) {
+                    TextButton(onClick = viewModel::openNotificationAccessSettings) {
+                        Text(text = "Enable")
+                    }
+                }
+                TextButton(onClick = onOpenMuteNotifications) {
+                    Text(text = "Choose")
                 }
             }
         }

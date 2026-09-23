@@ -17,6 +17,7 @@ import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
 import com.spartan.launcer.data.openUsageAccessSettings
 import com.spartan.launcer.domain.focus.FocusSession
+import com.spartan.launcer.service.NotificationFilterService
 import com.spartan.launcer.service.SpartanAccessibilityService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -54,11 +55,15 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
     private val _hasUsageAccess = MutableStateFlow(false)
     val hasUsageAccess: StateFlow<Boolean> = _hasUsageAccess.asStateFlow()
 
+    private val _hasNotificationAccess = MutableStateFlow(false)
+    val hasNotificationAccess: StateFlow<Boolean> = _hasNotificationAccess.asStateFlow()
+
     init {
         recheckDefaultHome()
         refreshNotificationShadeState()
         refreshOverlayPermissionState()
         refreshUsageAccessState()
+        refreshNotificationAccessState()
     }
 
     fun recheckDefaultHome() {
@@ -76,6 +81,14 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
 
     fun refreshUsageAccessState() {
         _hasUsageAccess.value = container.usageStatsRepository.hasUsageAccess()
+    }
+
+    fun refreshNotificationAccessState() {
+        _hasNotificationAccess.value = NotificationFilterService.isEnabled(app)
+    }
+
+    fun openNotificationAccessSettings() {
+        startActivityFromApp(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
     }
 
     fun openUsageAccessSettings() {
