@@ -8,6 +8,7 @@ import com.spartan.launcer.ui.blocking.BlockingSchedulesScreen
 import com.spartan.launcer.ui.drawer.AppDrawerScreen
 import com.spartan.launcer.ui.home.HomeScreen
 import com.spartan.launcer.ui.notifications.NotificationMuteScreen
+import com.spartan.launcer.ui.settings.AppManageScreen
 import com.spartan.launcer.ui.settings.SettingsScreen
 import com.spartan.launcer.ui.usage.ScreenTimeScreen
 
@@ -15,6 +16,7 @@ object Routes {
     const val HOME = "home"
     const val DRAWER = "drawer"
     const val SETTINGS = "settings"
+    const val APP_MANAGE = "app_manage"
     const val SCREEN_TIME = "screen_time"
     const val BLOCKING_SCHEDULES = "blocking_schedules"
     const val NOTIFICATION_MUTE = "notification_mute"
@@ -40,7 +42,13 @@ fun LauncherNavGraph() {
                 onBack = { navController.popBackStack() },
                 onOpenScreenTime = { navController.navigate(Routes.SCREEN_TIME) },
                 onOpenSchedules = { navController.navigate(Routes.BLOCKING_SCHEDULES) },
-                onOpenMuteNotifications = { navController.navigate(Routes.NOTIFICATION_MUTE) }
+                onOpenMuteNotifications = { navController.navigate(Routes.NOTIFICATION_MUTE) },
+                onOpenAppManage = { navController.navigate(Routes.APP_MANAGE) }
+            )
+        }
+        composable(Routes.APP_MANAGE) {
+            AppManageScreen(
+                onBack = { navController.popBackStack() }
             )
         }
         composable(Routes.SCREEN_TIME) {

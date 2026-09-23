@@ -8,20 +8,24 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.AlertDialog
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -29,10 +33,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Slider
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,17 +44,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.spartan.launcer.R
-import com.spartan.launcer.data.model.AppInfo
 import com.spartan.launcer.data.model.FontMode
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
@@ -64,17 +68,16 @@ fun SettingsScreen(
     onOpenScreenTime: () -> Unit,
     onOpenSchedules: () -> Unit,
     onOpenMuteNotifications: () -> Unit,
+    onOpenAppManage: () -> Unit,
     viewModel: SettingsViewModel = viewModel(factory = SettingsViewModel.Factory)
 ) {
     val settings by viewModel.settings.collectAsStateWithLifecycle()
-    val allApps by viewModel.allApps.collectAsStateWithLifecycle()
     val isDefaultHome by viewModel.isDefaultHome.collectAsStateWithLifecycle()
     val notificationShadeEnabled by viewModel.notificationShadeEnabled.collectAsStateWithLifecycle()
     val canDrawOverlays by viewModel.canDrawOverlays.collectAsStateWithLifecycle()
     val hasUsageAccess by viewModel.hasUsageAccess.collectAsStateWithLifecycle()
     val hasNotificationAccess by viewModel.hasNotificationAccess.collectAsStateWithLifecycle()
     val focusSession by viewModel.focusSession.collectAsStateWithLifecycle()
-    var renameTarget by remember { mutableStateOf<AppInfo?>(null) }
 
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         viewModel.recheckDefaultHome()
@@ -114,363 +117,330 @@ fun SettingsScreen(
         }
 
         item {
-            SectionTitle("Theme")
-        }
-        items(ThemeMode.entries.toList()) { mode ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { viewModel.setThemeMode(mode) }
-                    .padding(horizontal = 24.dp, vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = mode.label,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.weight(1f)
-                )
-                RadioButton(
-                    selected = settings.themeMode == mode,
-                    onClick = { viewModel.setThemeMode(mode) }
-                )
-            }
-        }
-
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Monochrome (grayscale)",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.weight(1f)
-                )
-                Switch(
-                    checked = settings.monochrome,
-                    onCheckedChange = { viewModel.setMonochrome(it) }
-                )
-            }
-        }
-
-        item {
-            SectionDivider()
-        }
-
-        item {
-            SectionTitle("Text")
-        }
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 4.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                FontMode.entries.forEach { mode ->
-                    FilterChip(
-                        selected = settings.fontMode == mode,
-                        onClick = { viewModel.setFontMode(mode) },
-                        label = { Text(mode.label) }
+            SettingsBlock(header = "Appearance") {
+                ThemeMode.entries.forEachIndexed { index, mode ->
+                    GroupRow(
+                        title = mode.label,
+                        onClick = { viewModel.setThemeMode(mode) },
+                        trailing = {
+                            RadioButton(
+                                selected = settings.themeMode == mode,
+                                onClick = { viewModel.setThemeMode(mode) }
+                            )
+                        },
+                        showDivider = index != ThemeMode.entries.lastIndex
                     )
                 }
-            }
-        }
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Text size",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.width(88.dp)
-                )
-                Slider(
-                    value = settings.fontScale,
-                    onValueChange = { viewModel.setFontScale(it) },
-                    valueRange = 0.8f..1.3f,
-                    steps = 4,
-                    modifier = Modifier.weight(1f)
-                )
-                Text(
-                    text = "${(settings.fontScale * 100).toInt()}%",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.width(40.dp)
+                GroupRow(
+                    title = "Monochrome (grayscale)",
+                    subtitle = "Renders the launcher in gray tones",
+                    trailing = {
+                        Switch(
+                            checked = settings.monochrome,
+                            onCheckedChange = { viewModel.setMonochrome(it) }
+                        )
+                    },
+                    showDivider = false
                 )
             }
         }
 
         item {
-            SectionDivider()
-        }
-
-        item {
-            SectionTitle("Default launcher")
-        }
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = if (isDefaultHome) "Spartan Launcher is your default" else "Not your default launcher",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.weight(1f)
-                )
-                if (!isDefaultHome) {
-                    TextButton(onClick = { viewModel.openHomeSettings() }) {
-                        Text(text = "Set as default")
+            SettingsBlock(header = "Text") {
+                GroupRow(
+                    title = "Font family",
+                    showDivider = true,
+                    content = {
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            FontMode.entries.forEach { mode ->
+                                FilterChip(
+                                    selected = settings.fontMode == mode,
+                                    onClick = { viewModel.setFontMode(mode) },
+                                    label = { Text(mode.label) }
+                                )
+                            }
+                        }
                     }
-                }
-            }
-        }
-
-        item {
-            SectionDivider()
-        }
-
-        item {
-            SectionTitle("Focus & blocking")
-        }
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = "Swipe down from the home screen",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = if (notificationShadeEnabled) "Accessibility service enabled"
-                        else "Requires the accessibility service",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                if (!notificationShadeEnabled) {
-                    TextButton(onClick = viewModel::openAccessibilitySettings) {
-                        Text(text = "Enable")
+                )
+                GroupRow(
+                    title = "Text size",
+                    showDivider = false,
+                    content = {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Slider(
+                                value = settings.fontScale,
+                                onValueChange = { viewModel.setFontScale(it) },
+                                valueRange = 0.8f..1.3f,
+                                steps = 4,
+                                modifier = Modifier.weight(1f)
+                            )
+                            Spacer(Modifier.width(12.dp))
+                            Text(
+                                text = "${(settings.fontScale * 100).toInt()}%",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
                     }
-                }
+                )
             }
         }
+
         item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = "Blocked app screen",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = if (canDrawOverlays) "Display over other apps granted"
-                        else "Required to cover blocked apps",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                if (!canDrawOverlays) {
-                    TextButton(onClick = viewModel::openOverlayPermissionSettings) {
-                        Text(text = "Enable")
-                    }
-                }
+            SettingsBlock(header = "Launcher") {
+                GroupRow(
+                    title = "Default launcher",
+                    subtitle = if (isDefaultHome) "Spartan is your home app" else "Not set — apps open with another launcher",
+                    leading = {
+                        Icon(
+                            imageVector = Icons.Filled.Home,
+                            contentDescription = null,
+                            tint = if (isDefaultHome) MaterialTheme.colorScheme.primary
+                            else MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    },
+                    trailing = if (isDefaultHome) null else {
+                        {
+                            TextButton(onClick = viewModel::openHomeSettings) {
+                                Text(text = "Set as default")
+                            }
+                        }
+                    },
+                    showDivider = false
+                )
             }
         }
+
         item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = "Screen time & daily limits",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = if (hasUsageAccess) "Usage access granted"
-                        else "Requires usage access",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                if (!hasUsageAccess) {
-                    TextButton(onClick = viewModel::openUsageAccessSettings) {
-                        Text(text = "Enable")
-                    }
-                }
-                TextButton(onClick = onOpenScreenTime) {
-                    Text(text = "View")
-                }
+            SettingsBlock(header = "Focus & blocking") {
+                PermissionRow(
+                    title = "Swipe-down gesture",
+                    subtitle = "Opens the notification shade from the home screen",
+                    enabled = notificationShadeEnabled,
+                    onEnable = viewModel::openAccessibilitySettings,
+                    description = "accessibility service",
+                    showDivider = true
+                )
+                PermissionRow(
+                    title = "Blocked app screen",
+                    subtitle = "Covers blocked apps until the countdown ends",
+                    enabled = canDrawOverlays,
+                    onEnable = viewModel::openOverlayPermissionSettings,
+                    description = "display-over-apps permission",
+                    showDivider = true
+                )
+                NavRow(
+                    title = "Screen time & daily limits",
+                    subtitle = "Per-app usage and time limits",
+                    enabled = hasUsageAccess,
+                    onEnable = viewModel::openUsageAccessSettings,
+                    description = "usage access",
+                    onClick = onOpenScreenTime,
+                    showDivider = true
+                )
+                NavRow(
+                    title = "Blocking schedules",
+                    subtitle = "Time windows that auto-block your apps",
+                    enabled = null,
+                    onClick = onOpenSchedules,
+                    showDivider = true
+                )
+                NavRow(
+                    title = "Mute app notifications",
+                    subtitle = "Silence chosen apps' notifications",
+                    enabled = hasNotificationAccess,
+                    onEnable = viewModel::openNotificationAccessSettings,
+                    description = "notification access",
+                    onClick = onOpenMuteNotifications,
+                    showDivider = false
+                )
             }
         }
+
         item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = "Blocking schedules",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface
+            SettingsBlock(header = "Focus session") {
+                Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
+                    FocusSection(
+                        durationMinutes = settings.focusDurationMinutes,
+                        session = focusSession,
+                        onDurationChange = viewModel::setFocusDuration,
+                        onStart = viewModel::startFocus,
+                        onPause = viewModel::pauseFocus,
+                        onResume = viewModel::resumeFocus,
+                        onStop = viewModel::stopFocus
                     )
-                    Text(
-                        text = "Time windows that auto-block your blocked apps",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                TextButton(onClick = onOpenSchedules) {
-                    Text(text = "Manage")
-                }
-            }
-        }
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = "Mute app notifications",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        text = if (hasNotificationAccess) "Notification access granted"
-                        else "Requires notification access",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                if (!hasNotificationAccess) {
-                    TextButton(onClick = viewModel::openNotificationAccessSettings) {
-                        Text(text = "Enable")
-                    }
-                }
-                TextButton(onClick = onOpenMuteNotifications) {
-                    Text(text = "Choose")
                 }
             }
         }
 
         item {
-            SectionDivider()
-        }
-
-        item {
-            SectionTitle("Focus session")
-        }
-        item {
-            FocusSection(
-                durationMinutes = settings.focusDurationMinutes,
-                session = focusSession,
-                onDurationChange = viewModel::setFocusDuration,
-                onStart = viewModel::startFocus,
-                onPause = viewModel::pauseFocus,
-                onResume = viewModel::resumeFocus,
-                onStop = viewModel::stopFocus
-            )
-        }
-
-        item {
-            SectionDivider()
-        }
-
-        item {
-            SectionTitle("Apps")
-        }
-        item {
-            Text(
-                text = "Favorite apps appear on the home screen. Hidden apps are removed from the drawer.",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
-            )
-        }
-        items(allApps, key = { it.packageName }) { app ->
-            AppManageRow(
-                app = app,
-                settings = settings,
-                onToggleFavorite = { viewModel.setFavorite(app.packageName, !app.isFavorite) },
-                onToggleHidden = { viewModel.setHidden(app.packageName, !app.isHidden) },
-                onRename = { renameTarget = app }
-            )
-        }
-    }
-
-    renameTarget?.let { app ->
-        var label by remember(app.packageName) { mutableStateOf(app.customLabel ?: "") }
-        AlertDialog(
-            onDismissRequest = { renameTarget = null },
-            title = { Text("Rename ${app.label}") },
-            text = {
-                Column {
-                    TextField(
-                        value = label,
-                        onValueChange = { label = it },
-                        label = { Text("Custom name") },
-                        singleLine = true
-                    )
-                    Text(
-                        text = "Leave empty to use the original name.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
-                }
-            },
-            confirmButton = {
-                TextButton(onClick = {
-                    viewModel.setCustomLabel(app.packageName, label)
-                    renameTarget = null
-                }) { Text(text = "Save") }
-            },
-            dismissButton = {
-                TextButton(onClick = { renameTarget = null }) { Text(text = "Cancel") }
+            SettingsBlock(header = "Apps") {
+                GroupRow(
+                    title = "Manage apps",
+                    subtitle = "Favorites, hidden apps and custom names",
+                    leading = {
+                        Icon(
+                            imageVector = Icons.Filled.List,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    },
+                    onClick = onOpenAppManage,
+                    trailing = { RowChevron() },
+                    showDivider = false
+                )
             }
-        )
+        }
     }
 }
 
 @Composable
-private fun SectionTitle(text: String) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.titleLarge,
-        fontWeight = FontWeight.Normal,
-        color = MaterialTheme.colorScheme.onSurface,
-        modifier = Modifier.padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 8.dp)
+private fun PermissionRow(
+    title: String,
+    subtitle: String,
+    enabled: Boolean,
+    onEnable: () -> Unit,
+    description: String,
+    showDivider: Boolean
+) {
+    GroupRow(
+        title = title,
+        subtitle = if (enabled) "Active · $subtitle" else "Needs $description · $subtitle",
+        leading = { RowStatusIcon(enabled = enabled) },
+        trailing = if (enabled) null else {
+            {
+                TextButton(onClick = onEnable) { Text(text = "Enable") }
+            }
+        },
+        showDivider = showDivider
     )
+}
+
+@Composable
+private fun NavRow(
+    title: String,
+    subtitle: String,
+    enabled: Boolean?,
+    onEnable: (() -> Unit)? = null,
+    description: String = "",
+    onClick: () -> Unit,
+    showDivider: Boolean
+) {
+    GroupRow(
+        title = title,
+        subtitle = when {
+            enabled == true -> "Active · $subtitle"
+            enabled == false -> "Needs $description · $subtitle"
+            else -> subtitle
+        },
+        leading = enabled?.let {
+            { RowStatusIcon(enabled = enabled) }
+        },
+        trailing = {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                if (enabled == false && onEnable != null) {
+                    TextButton(onClick = onEnable) { Text(text = "Enable") }
+                }
+                RowChevron()
+            }
+        },
+        onClick = onClick,
+        showDivider = showDivider
+    )
+}
+
+@Composable
+private fun RowStatusIcon(enabled: Boolean) {
+    Icon(
+        imageVector = if (enabled) Icons.Filled.Check else Icons.Filled.Warning,
+        contentDescription = if (enabled) "Active" else "Needs permission",
+        tint = if (enabled) MaterialTheme.colorScheme.primary
+        else MaterialTheme.colorScheme.error
+    )
+}
+
+@Composable
+private fun RowChevron() {
+    Icon(
+        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+        contentDescription = null,
+        tint = MaterialTheme.colorScheme.onSurfaceVariant
+    )
+}
+
+@Composable
+private fun SettingsBlock(
+    header: String,
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    Column(modifier) {
+        Text(
+            text = header.uppercase(Locale.US),
+            style = MaterialTheme.typography.labelMedium,
+            letterSpacing = 0.5.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 24.dp, bottom = 8.dp)
+        )
+        Surface(
+            shape = MaterialTheme.shapes.medium,
+            color = MaterialTheme.colorScheme.surfaceVariant,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column { content() }
+        }
+    }
+}
+
+@Composable
+private fun GroupRow(
+    title: String,
+    subtitle: String? = null,
+    leading: (@Composable () -> Unit)? = null,
+    trailing: (@Composable () -> Unit)? = null,
+    onClick: (() -> Unit)? = null,
+    showDivider: Boolean,
+    content: (@Composable () -> Unit)? = null
+) {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier)
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (leading != null) {
+                leading()
+                Spacer(Modifier.width(16.dp))
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                if (subtitle != null) {
+                    Text(
+                        text = subtitle,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+            if (trailing != null) {
+                Spacer(Modifier.width(8.dp))
+                trailing()
+            }
+        }
+        content?.invoke()
+        if (showDivider) {
+            HorizontalDivider(
+                modifier = Modifier.padding(start = if (leading != null) 52.dp else 16.dp),
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.15f)
+            )
+        }
+    }
 }
 
 @Composable
@@ -489,7 +459,7 @@ private fun FocusSection(
     ) { onStart() }
     val durations = listOf(15, 25, 45, 60)
 
-    Column(modifier = Modifier.padding(horizontal = 24.dp)) {
+    Column {
         if (session.isActive) {
             Text(
                 text = when (session.phase) {
@@ -510,7 +480,8 @@ private fun FocusSection(
             }
         } else {
             Text(
-                text = if (durationMinutes == 0) "Select a duration" else "Focus mode blocks everything except your favorites for $durationMinutes minutes.",
+                text = if (durationMinutes == 0) "Select a duration"
+                else "Focus blocks everything except your favorites for $durationMinutes minutes.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -540,68 +511,4 @@ private fun FocusSection(
 private fun formatRemaining(ms: Long): String {
     val totalSeconds = (ms / 1000).coerceAtLeast(0)
     return String.format(Locale.US, "%02d:%02d", totalSeconds / 60, totalSeconds % 60)
-}
-
-@Composable
-private fun SectionDivider() {
-    HorizontalDivider(
-        modifier = Modifier.padding(top = 24.dp, bottom = 8.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant
-    )
-}
-
-@Composable
-private fun AppManageRow(
-    app: AppInfo,
-    settings: LauncherSettings,
-    onToggleFavorite: () -> Unit,
-    onToggleHidden: () -> Unit,
-    onRename: () -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 24.dp, vertical = 4.dp)
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Text(
-                text = app.displayLabel,
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.weight(1f)
-            )
-            TextButton(onClick = onRename) {
-                Text(
-                    text = "Rename",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-            TextButton(onClick = onToggleFavorite) {
-                Text(
-                    text = if (settings.favoritePackages.contains(app.packageName)) "Favorited" else "Favorite",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = if (settings.favoritePackages.contains(app.packageName)) {
-                        MaterialTheme.colorScheme.primary
-                    } else {
-                        MaterialTheme.colorScheme.onSurfaceVariant
-                    }
-                )
-            }
-            TextButton(onClick = onToggleHidden) {
-                Text(
-                    text = if (settings.hiddenPackages.contains(app.packageName)) "Hidden" else "Hide",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = if (settings.hiddenPackages.contains(app.packageName)) {
-                        MaterialTheme.colorScheme.primary
-                    } else {
-                        MaterialTheme.colorScheme.onSurfaceVariant
-                    }
-                )
-            }
-        }
-    }
 }
