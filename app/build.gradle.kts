@@ -4,6 +4,29 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.dependency.check)
+}
+
+dependencyCheck {
+    // Fail the scan when a known dependency vulnerability has CVSS >= 9 (critical).
+    // Lower to e.g. 7f to also fail on high-severity issues; report lands in
+    // app/build/reports/dependency-check/.
+    failBuildOnCVSS = 9f
+
+    // v12.1+ requires an (anonymous-rate-limited) NVD API key. Provide it via
+    // -PnvdApiKey=KEY or the NVD_API_KEY environment variable; get a free key at
+    // https://nvd.nist.gov/developers/request-an-api-key
+    val nvdKey = providers.gradleProperty("nvdApiKey")
+        .orElse(providers.environmentVariable("NVD_API_KEY"))
+        .orNull
+    if (!nvdKey.isNullOrBlank()) {
+        nvd {
+            apiKey = nvdKey
+        }
+    } else {
+        logger.warn("OWASP dependency-check: NVD_API_KEY / -PnvdApiKey is not set - " +
+            "the scan will fail until a free key is configured.")
+    }
 }
 
 val keystorePropertiesFile = rootProject.file("keystore.properties")

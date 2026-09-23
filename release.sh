@@ -25,6 +25,18 @@ echo "==> Building release v$VERSION (versionCode $CODE)"
 ./gradlew testDebugUnitTest lintDebug bundleRelease assembleRelease
 
 echo
+echo "==> OWASP dependency scan (CVEs in app dependencies)"
+SCAN_LOG="${TMPDIR:-/tmp}/dependency-check-$VERSION.log"
+if ./gradlew dependencyCheckAnalyze --console=plain >"$SCAN_LOG" 2>&1; then
+  echo "  Clean: no known vulnerabilities at or above CVSS 9."
+else
+  echo "  !! Issues found by the scan - see app/build/reports/dependency-check/ (report HTML + XML)."
+  echo "     Scan log: $SCAN_LOG"
+  tail -n 15 "$SCAN_LOG"
+fi
+echo
+
+echo
 echo "Released v$VERSION (versionCode $CODE)"
 echo "  APK: app/build/outputs/apk/release/app-release.apk"
 echo "  AAB: app/build/outputs/bundle/release/app-release.aab"

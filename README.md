@@ -59,6 +59,20 @@ The app requests Accessibility, Usage Access, Notification Access and
 Display-over-apps permissions for its core features. All processing happens
 on-device. See [`docs/PRIVACY_POLICY.md`](docs/PRIVACY_POLICY.md).
 
+## Security
+
+- **Dependency scan (OWASP Dependency-Check)**: `release.sh` runs
+  `dependencyCheckAnalyze`, matching every app dependency against the NVD CVE
+  database. It fails the scan on critical findings (CVSS >= 9); the HTML/XML
+  report lands in `app/build/reports/dependency-check/`. The scan needs a free
+  NVD API key: export `NVD_API_KEY=...` (or pass `-PnvdApiKey=...`) — get one at
+  https://nvd.nist.gov/developers/request-an-api-key
+- **CodeQL**: a GitHub Actions workflow (`.github/workflows/codeql-analysis.yml`)
+  runs static analysis on every push to `main` and weekly. Results appear under
+  **Security → Code scanning**.
+- **Dependabot**: `.github/dependabot.yml` opens weekly PRs for outdated Gradle
+  dependencies and GitHub Actions.
+
 ## License
 
 Copyright 2026 sifytul
