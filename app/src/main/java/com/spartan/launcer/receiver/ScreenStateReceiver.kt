@@ -6,15 +6,15 @@ import android.content.Intent
 import com.spartan.launcer.SpartanLauncherApp
 
 /**
- * Tracks when the screen turns on/off so the launcher can detect that the
- * phone was woken up. Combined with the launcher's own resume, this advances
- * the word-of-the-day per unlock even on devices that drop
- * ACTION_USER_PRESENT.
+ * Arms the unlock fallback when the screen actually turns OFF. On the next
+ * launcher resume the word-of-the-day advances — covering devices that do not
+ * deliver ACTION_USER_PRESENT. KEYGUARD: this is only a screen-off signal; the
+ * resume handler decides whether an unlock happened.
  */
 class ScreenStateReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent?) {
-        if (intent?.action != Intent.ACTION_SCREEN_OFF && intent?.action != Intent.ACTION_SCREEN_ON) return
+        if (intent?.action != Intent.ACTION_SCREEN_OFF) return
         val app = context.applicationContext as? SpartanLauncherApp ?: return
         app.container.screenOffDetected = true
     }

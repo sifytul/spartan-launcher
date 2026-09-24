@@ -3,6 +3,7 @@ package com.spartan.launcer.receiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import com.spartan.launcer.SpartanLauncherApp
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -17,18 +18,22 @@ class UserPresentReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent?) {
         if (intent?.action != Intent.ACTION_USER_PRESENT) return
+        Log.d(TAG, "USER_PRESENT received")
         val app = context.applicationContext as? SpartanLauncherApp ?: return
         val container = app.container
         container.appScope.launch {
             container.appBlocker.clearGracePeriods()
             val enabled = container.settingsDataStore.settings.first().wordOfTheDayEnabled
             if (enabled) {
-                container.wordOfTheDayRepository.advanceWord(skipIfAdvancedWithinMs = RECENT_ADVANCE_MS)
+                val word = container.wordOfTheDayRepository
+                    .advanceWord(skipIfAdvancedWithinMs = RECENT_ADVANCE_MS)
+                Log.d(TAG, "Advanced word to: ${word?.word}")
             }
         }
     }
 
     companion object {
+        private const val TAG = "WordOfTheDay"
         // Prevents a double advance when both this broadcast and the launcher
         // resume detect the same unlock.
         private const val RECENT_ADVANCE_MS = 10_000L

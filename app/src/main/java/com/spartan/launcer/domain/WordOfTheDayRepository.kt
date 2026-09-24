@@ -7,6 +7,8 @@ import com.spartan.launcer.data.model.WordEntry
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 /**
  * Orchestrates the word-of-the-day feature: on each unlock a candidate is
@@ -18,6 +20,8 @@ class WordOfTheDayRepository(
     private val api: DictionaryApi,
     private val store: WordOfTheDayStore
 ) {
+
+    private val advanceMutex = Mutex()
 
     fun currentWord(): Flow<WordEntry?> = store.current.map { it.entry }
 
@@ -34,21 +38,25 @@ class WordOfTheDayRepository(
      * [skipIfAdvancedWithinMs] ignores the call when a word was already picked
      * very recently (e.g. when both the unlock receiver and the home screen
      * detect the same unlock), so a single unlock advances the word exactly
-     * once.
+     * once. Concurrent calls are serialized.
      */
-    suspend fun advanceWord(skipIfAdvancedWithinMs: Long = 0) {
-        if (skipIfAdvancedWithinMs > 0) {
-            val current = store.current.first()
-            if (System.currentTimeMillis() - current.pickedAt < skipIfAdvancedWithinMs) return
+    suspend fun advanceWord(skipIfAdvancedWithinMs: Long = 0): WordEntry? =
+        advanceMutex.withLock {
+            if (skipIfAdvancedWithinMs > 0) {
+                val current = store.current.first()
+                if (System.currentTimeMillis() - current.pickedAt < skipIfAdvancedWithinMs) {
+                    return@withLock current.entry
+                }
+            }
+            val previous = currentStoredEntry()
+            val candidate = dictionary.randomEntry(excluding = previous?.word) ?: return@withLock null
+            store.save(candidate)
+            val enriched = runCatching { api.fetch(candidate.word) }
+                .getOrNull()
+                ?.takeIf { it.meaning.isNotBlank() }
+            if (enriched != null && currentStoredEntry()?.word == candidate.word) {
+                store.save(enriched)
+            }
+            candidate
         }
-        val previous = currentStoredEntry()
-        val candidate = dictionary.randomEntry(excluding = previous?.word) ?: return
-        store.save(candidate)
-        val enriched = runCatching { api.fetch(candidate.word) }
-            .getOrNull()
-            ?.takeIf { it.meaning.isNotBlank() }
-        if (enriched != null && currentStoredEntry()?.word == candidate.word) {
-            store.save(enriched)
-        }
-    }
 }

@@ -1,6 +1,7 @@
 package com.spartan.launcer
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -33,24 +34,29 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        // After the screen was off, coming back to the launcher means the phone
-        // was unlocked: advance the word here in case the unlock broadcast was
-        // not delivered (some OEMs). Dedupe prevents a double advance when
-        // ACTION_USER_PRESENT also fired for the same unlock.
+    override fun onResume() {
+        super.onResume()
+        // When the phone is locked the launcher is paused (often just paused,
+        // not stopped), so the next "unlock back to home" shows up as onResume
+        // rather than onStart. If the screen went off since the last time we
+        // handled this, the phone was locked & re-entered: advance the word —
+        // this covers devices that drop ACTION_USER_PRESENT. The 10s dedupe
+        // prevents a double advance when the broadcast also fired.
         if (container.screenOffDetected) {
             container.screenOffDetected = false
             container.appScope.launch {
                 val enabled = container.settingsDataStore.settings.first().wordOfTheDayEnabled
                 if (enabled) {
-                    container.wordOfTheDayRepository.advanceWord(skipIfAdvancedWithinMs = RECENT_ADVANCE_MS)
+                    val word = container.wordOfTheDayRepository
+                        .advanceWord(skipIfAdvancedWithinMs = RECENT_ADVANCE_MS)
+                    Log.d(TAG, "Unlock fallback advanced word to: ${word?.word}")
                 }
             }
         }
     }
 
     companion object {
+        private const val TAG = "WordOfTheDay"
         private const val RECENT_ADVANCE_MS = 10_000L
     }
 }
