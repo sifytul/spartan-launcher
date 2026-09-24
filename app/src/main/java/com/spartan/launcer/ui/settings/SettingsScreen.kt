@@ -222,13 +222,28 @@ fun SettingsScreen(
                             onCheckedChange = viewModel::setWordOfTheDayEnabled
                         )
                     },
+                    showDivider = true
+                )
+                GroupRow(
+                    title = "Double tap home to lock",
+                    subtitle = when {
+                        Build.VERSION.SDK_INT < Build.VERSION_CODES.P -> "Requires Android 9+"
+                        notificationShadeEnabled -> "Active · double tap the home screen to lock"
+                        else -> "Needs accessibility service"
+                    },
+                    leading = {
+                        RowStatusIcon(
+                            enabled = notificationShadeEnabled &&
+                                Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
+                        )
+                    },
                     showDivider = false
                 )
             }
         }
 
         item {
-            SettingsBlock(header = "Focus & blocking") {
+            SettingsBlock(header = "Permissions & services") {
                 PermissionRow(
                     title = "Swipe-down gesture",
                     subtitle = "Opens the notification shade from the home screen",
@@ -246,6 +261,20 @@ fun SettingsScreen(
                     showDivider = true
                 )
                 NavRow(
+                    title = "Mute app notifications",
+                    subtitle = "Silence chosen apps' notifications",
+                    enabled = hasNotificationAccess,
+                    onEnable = viewModel::openNotificationAccessSettings,
+                    description = "notification access",
+                    onClick = onOpenMuteNotifications,
+                    showDivider = false
+                )
+            }
+        }
+
+        item {
+            SettingsBlock(header = "Blocking") {
+                NavRow(
                     title = "Screen time & daily limits",
                     subtitle = "Per-app usage and time limits",
                     enabled = hasUsageAccess,
@@ -262,15 +291,6 @@ fun SettingsScreen(
                     showDivider = true
                 )
                 NavRow(
-                    title = "Mute app notifications",
-                    subtitle = "Silence chosen apps' notifications",
-                    enabled = hasNotificationAccess,
-                    onEnable = viewModel::openNotificationAccessSettings,
-                    description = "notification access",
-                    onClick = onOpenMuteNotifications,
-                    showDivider = true
-                )
-                NavRow(
                     title = "Block short videos",
                     subtitle = if (!canDrawOverlays) {
                         "Needs display-over-apps permission · TikTok, Shorts, Reels & more"
@@ -283,21 +303,6 @@ fun SettingsScreen(
                     onEnable = viewModel::openOverlayPermissionSettings,
                     description = "display-over-apps permission",
                     onClick = onOpenShortVideoApps,
-                    showDivider = true
-                )
-                GroupRow(
-                    title = "Double tap home to lock",
-                    subtitle = when {
-                        Build.VERSION.SDK_INT < Build.VERSION_CODES.P -> "Requires Android 9+"
-                        notificationShadeEnabled -> "Active · double tap the home screen to lock"
-                        else -> "Needs accessibility service"
-                    },
-                    leading = {
-                        RowStatusIcon(
-                            enabled = notificationShadeEnabled &&
-                                Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
-                        )
-                    },
                     showDivider = false
                 )
             }
@@ -426,7 +431,7 @@ private fun SettingsBlock(
             style = MaterialTheme.typography.labelMedium,
             letterSpacing = 0.5.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 24.dp, bottom = 8.dp)
+            modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 28.dp, bottom = 8.dp)
         )
         Surface(
             shape = MaterialTheme.shapes.medium,
