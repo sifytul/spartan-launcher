@@ -6,6 +6,10 @@ data class LauncherSettings(
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val blockedPackages: Set<String> = emptySet(),
     val blockShortVideos: Boolean = false,
+    val shortVideoPackages: Set<String> = emptySet(),
+    val youtubeShortsOnly: Boolean = false,
+    val shortVideoGraceMode: GraceMode = GraceMode.UNLOCK,
+    val shortVideoGraceMinutes: Int = 2,
     val timeLimits: Map<String, Int> = emptyMap(),
     val schedules: List<BlockSchedule> = emptyList(),
     val mutedNotifications: Set<String> = emptySet(),
@@ -13,5 +17,6 @@ data class LauncherSettings(
     val fontMode: FontMode = FontMode.SYSTEM,
     val fontScale: Float = 1.0f,
     val monochrome: Boolean = false,
+    val wordOfTheDayEnabled: Boolean = true,
     val focusDurationMinutes: Int = 25
 )

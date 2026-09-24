@@ -20,17 +20,23 @@ class SpartanAccessibilityService : AccessibilityService() {
     private val foregroundEvents =
         AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED or AccessibilityEvent.TYPE_WINDOWS_CHANGED
 
+    @Volatile
+    private var shortsDetector: ShortsDetector? = null
+
     override fun onServiceConnected() {
         super.onServiceConnected()
         instance = this
         tracker?.onForegroundPackage(null)
-        (application as? SpartanLauncherApp)?.container?.appBlocker?.connectAccessibility(this)
+        val appBlocker = (application as? SpartanLauncherApp)?.container?.appBlocker
+        appBlocker?.connectAccessibility(this)
+        shortsDetector = appBlocker?.let { ShortsDetector(it) }
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         val e = event ?: return
         if (e.eventType and foregroundEvents == 0) return
         tracker?.onForegroundPackage(e.packageName?.toString())
+        shortsDetector?.onAccessibilityEvent(e, rootInActiveWindow)
     }
 
     override fun onInterrupt() = Unit

@@ -12,6 +12,7 @@ import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.spartan.launcer.data.model.BlockSchedule
 import com.spartan.launcer.data.model.FontMode
+import com.spartan.launcer.data.model.GraceMode
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
 import kotlinx.coroutines.flow.Flow
@@ -29,6 +30,10 @@ class SettingsDataStore(private val context: Context) {
         val THEME_MODE = stringPreferencesKey("theme_mode")
         val BLOCKED_PACKAGES = stringPreferencesKey("blocked_packages")
         val BLOCK_SHORT_VIDEOS = booleanPreferencesKey("block_short_videos")
+        val SHORT_VIDEO_PACKAGES = stringSetPreferencesKey("short_video_packages")
+        val YOUTUBE_SHORTS_ONLY = booleanPreferencesKey("youtube_shorts_only")
+        val SHORT_VIDEO_GRACE_MODE = stringPreferencesKey("short_video_grace_mode")
+        val SHORT_VIDEO_GRACE_MINUTES = intPreferencesKey("short_video_grace_minutes")
         val TIME_LIMITS = stringPreferencesKey("time_limits")
         val SCHEDULES = stringPreferencesKey("schedules")
         val MUTED_NOTIFICATIONS = stringPreferencesKey("muted_notifications")
@@ -36,6 +41,7 @@ class SettingsDataStore(private val context: Context) {
         val FONT_MODE = stringPreferencesKey("font_mode")
         val FONT_SCALE = floatPreferencesKey("font_scale")
         val MONOCHROME = booleanPreferencesKey("monochrome")
+        val WORD_OF_THE_DAY_ENABLED = booleanPreferencesKey("word_of_the_day_enabled")
         val FOCUS_DURATION_MINUTES = intPreferencesKey("focus_duration_minutes")
         val USAGE_MINUTES = stringPreferencesKey("usage_minutes")
     }
@@ -49,6 +55,15 @@ class SettingsDataStore(private val context: Context) {
                 ?: ThemeMode.SYSTEM,
             blockedPackages = JsonCodec.decodeStringSet(prefs[Keys.BLOCKED_PACKAGES].orEmpty()),
             blockShortVideos = prefs[Keys.BLOCK_SHORT_VIDEOS] ?: false,
+            shortVideoPackages = prefs[Keys.SHORT_VIDEO_PACKAGES]
+                ?.takeIf { it.isNotEmpty() }
+                ?.toSet()
+                ?: ShortVideoPackages.DEFAULT_DISTRACTOR_PACKAGES,
+            youtubeShortsOnly = prefs[Keys.YOUTUBE_SHORTS_ONLY] ?: false,
+            shortVideoGraceMode = prefs[Keys.SHORT_VIDEO_GRACE_MODE]
+                ?.let { name -> GraceMode.entries.firstOrNull { it.name == name } }
+                ?: GraceMode.UNLOCK,
+            shortVideoGraceMinutes = prefs[Keys.SHORT_VIDEO_GRACE_MINUTES] ?: 2,
             timeLimits = JsonCodec.decodeMinutesMap(prefs[Keys.TIME_LIMITS].orEmpty()),
             schedules = JsonCodec.decodeSchedules(prefs[Keys.SCHEDULES].orEmpty()),
             mutedNotifications =
@@ -59,6 +74,7 @@ class SettingsDataStore(private val context: Context) {
                 ?: FontMode.SYSTEM,
             fontScale = prefs[Keys.FONT_SCALE] ?: 1.0f,
             monochrome = prefs[Keys.MONOCHROME] ?: false,
+            wordOfTheDayEnabled = prefs[Keys.WORD_OF_THE_DAY_ENABLED] ?: true,
             focusDurationMinutes = prefs[Keys.FOCUS_DURATION_MINUTES] ?: 25
         )
     }
@@ -104,6 +120,33 @@ class SettingsDataStore(private val context: Context) {
     suspend fun setBlockShortVideos(block: Boolean) {
         context.launcherDataStore.edit { prefs ->
             prefs[Keys.BLOCK_SHORT_VIDEOS] = block
+        }
+    }
+
+    suspend fun setShortVideoPackage(packageName: String, included: Boolean) {
+        context.launcherDataStore.edit { prefs ->
+            val stored = prefs[Keys.SHORT_VIDEO_PACKAGES]?.toMutableSet()
+                ?: ShortVideoPackages.DEFAULT_DISTRACTOR_PACKAGES.toMutableSet()
+            if (included) stored.add(packageName) else stored.remove(packageName)
+            prefs[Keys.SHORT_VIDEO_PACKAGES] = stored
+        }
+    }
+
+    suspend fun setYouTubeShortsOnly(enabled: Boolean) {
+        context.launcherDataStore.edit { prefs ->
+            prefs[Keys.YOUTUBE_SHORTS_ONLY] = enabled
+        }
+    }
+
+    suspend fun setShortVideoGraceMode(mode: GraceMode) {
+        context.launcherDataStore.edit { prefs ->
+            prefs[Keys.SHORT_VIDEO_GRACE_MODE] = mode.name
+        }
+    }
+
+    suspend fun setShortVideoGraceMinutes(minutes: Int) {
+        context.launcherDataStore.edit { prefs ->
+            prefs[Keys.SHORT_VIDEO_GRACE_MINUTES] = minutes.coerceIn(1, 60)
         }
     }
 
@@ -176,6 +219,12 @@ class SettingsDataStore(private val context: Context) {
     suspend fun setMonochrome(monochrome: Boolean) {
         context.launcherDataStore.edit { prefs ->
             prefs[Keys.MONOCHROME] = monochrome
+        }
+    }
+
+    suspend fun setWordOfTheDayEnabled(enabled: Boolean) {
+        context.launcherDataStore.edit { prefs ->
+            prefs[Keys.WORD_OF_THE_DAY_ENABLED] = enabled
         }
     }
 

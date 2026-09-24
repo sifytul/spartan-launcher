@@ -46,12 +46,14 @@ import java.util.Locale
 fun HomeScreen(
     onOpenDrawer: () -> Unit,
     onOpenSettings: () -> Unit,
+    onOpenWord: (String) -> Unit,
     viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
 ) {
     val favorites by viewModel.favorites.collectAsStateWithLifecycle()
     val currentTime by viewModel.currentTime.collectAsStateWithLifecycle()
     val isDefaultHome by viewModel.isDefaultHome.collectAsStateWithLifecycle()
     val focusSession by viewModel.focusSession.collectAsStateWithLifecycle()
+    val currentWord by viewModel.currentWord.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
     val timeFormatter = remember { SystemDateFormat.getTimeFormat(context) }
@@ -105,6 +107,25 @@ fun HomeScreen(
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
+            currentWord?.let { word ->
+                Spacer(Modifier.height(20.dp))
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = word.word,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier
+                            .clickable { onOpenWord(word.word) }
+                            .padding(horizontal = 24.dp, vertical = 4.dp)
+                    )
+                    Text(
+                        text = "tap for meaning",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.clickable { onOpenWord(word.word) }
+                    )
+                }
+            }
             Spacer(Modifier.weight(1f))
             if (favorites.isEmpty()) {
                 Text(

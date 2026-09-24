@@ -69,6 +69,7 @@ fun SettingsScreen(
     onOpenSchedules: () -> Unit,
     onOpenMuteNotifications: () -> Unit,
     onOpenAppManage: () -> Unit,
+    onOpenShortVideoApps: () -> Unit,
     viewModel: SettingsViewModel = viewModel(factory = SettingsViewModel.Factory)
 ) {
     val settings by viewModel.settings.collectAsStateWithLifecycle()
@@ -206,6 +207,21 @@ fun SettingsScreen(
                             }
                         }
                     },
+                    showDivider = true
+                )
+                GroupRow(
+                    title = "Word of the day",
+                    subtitle = if (settings.wordOfTheDayEnabled) {
+                        "Shows a new word after every unlock"
+                    } else {
+                        "Off · tap a word to open its details"
+                    },
+                    trailing = {
+                        Switch(
+                            checked = settings.wordOfTheDayEnabled,
+                            onCheckedChange = viewModel::setWordOfTheDayEnabled
+                        )
+                    },
                     showDivider = false
                 )
             }
@@ -254,7 +270,7 @@ fun SettingsScreen(
                     onClick = onOpenMuteNotifications,
                     showDivider = true
                 )
-                GroupRow(
+                NavRow(
                     title = "Block short videos",
                     subtitle = if (!canDrawOverlays) {
                         "Needs display-over-apps permission · TikTok, Shorts, Reels & more"
@@ -263,21 +279,10 @@ fun SettingsScreen(
                     } else {
                         "TikTok, Shorts, Reels, Snapchat & more"
                     },
-                    leading = { RowStatusIcon(enabled = canDrawOverlays) },
-                    trailing = if (canDrawOverlays) {
-                        {
-                            Switch(
-                                checked = settings.blockShortVideos,
-                                onCheckedChange = viewModel::setBlockShortVideos
-                            )
-                        }
-                    } else {
-                        {
-                            TextButton(onClick = viewModel::openOverlayPermissionSettings) {
-                                Text(text = "Enable")
-                            }
-                        }
-                    },
+                    enabled = canDrawOverlays,
+                    onEnable = viewModel::openOverlayPermissionSettings,
+                    description = "display-over-apps permission",
+                    onClick = onOpenShortVideoApps,
                     showDivider = true
                 )
                 GroupRow(

@@ -1,6 +1,6 @@
 package com.spartan.launcer.domain.blocking
 
-enum class BlockReason { MANUAL, LIMIT, SCHEDULE, FOCUS }
+enum class BlockReason { MANUAL, LIMIT, SCHEDULE, FOCUS, SHORTS }
 
 data class BlockDecision(
     val shouldBlock: Boolean,

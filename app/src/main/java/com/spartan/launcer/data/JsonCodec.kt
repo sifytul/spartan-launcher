@@ -1,6 +1,7 @@
 package com.spartan.launcer.data
 
 import com.spartan.launcer.data.model.BlockSchedule
+import com.spartan.launcer.data.model.WordEntry
 import java.time.DayOfWeek
 import org.json.JSONArray
 import org.json.JSONObject
@@ -43,6 +44,30 @@ object JsonCodec {
         for (key in obj.keys()) result[key] = obj.getInt(key)
         return result
     }
+
+    fun encodeWord(entry: WordEntry): String =
+        JSONObject()
+            .put("word", entry.word)
+            .put("meaning", entry.meaning)
+            .put("examples", JSONArray(entry.examples))
+            .put("synonyms", JSONArray(entry.synonyms))
+            .put("antonyms", JSONArray(entry.antonyms))
+            .toString()
+
+    fun decodeWord(raw: String): WordEntry? {
+        if (raw.isBlank() || raw == "null") return null
+        val obj = JSONObject(raw)
+        return WordEntry(
+            word = obj.getString("word"),
+            meaning = obj.getString("meaning"),
+            examples = obj.optJSONArray("examples")?.toList() ?: emptyList(),
+            synonyms = obj.optJSONArray("synonyms")?.toList() ?: emptyList(),
+            antonyms = obj.optJSONArray("antonyms")?.toList() ?: emptyList()
+        )
+    }
+
+    private fun org.json.JSONArray.toList(): List<String> =
+        (0 until length()).map { getString(it) }
 
     fun encodeUsage(values: Map<String, Map<String, Int>>): String {
         val root = JSONObject()

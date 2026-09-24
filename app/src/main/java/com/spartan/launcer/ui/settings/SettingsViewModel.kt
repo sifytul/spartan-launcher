@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.spartan.launcer.SpartanLauncherApp
 import com.spartan.launcer.data.model.AppInfo
+import com.spartan.launcer.data.model.GraceMode
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.data.model.ThemeMode
 import com.spartan.launcer.data.openUsageAccessSettings
@@ -120,6 +121,12 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
         }
     }
 
+    fun setWordOfTheDayEnabled(enabled: Boolean) {
+        viewModelScope.launch {
+            container.settingsDataStore.setWordOfTheDayEnabled(enabled)
+        }
+    }
+
     fun setFontMode(fontMode: FontMode) {
         viewModelScope.launch {
             container.settingsDataStore.setFontMode(fontMode)
@@ -153,6 +160,30 @@ class SettingsViewModel(private val app: SpartanLauncherApp) : ViewModel() {
     fun setBlockShortVideos(block: Boolean) {
         viewModelScope.launch {
             container.settingsDataStore.setBlockShortVideos(block)
+        }
+    }
+
+    fun setShortVideoPackage(packageName: String, included: Boolean) {
+        viewModelScope.launch {
+            container.settingsDataStore.setShortVideoPackage(packageName, included)
+        }
+    }
+
+    fun setYouTubeShortsOnly(enabled: Boolean) {
+        viewModelScope.launch {
+            container.settingsDataStore.setYouTubeShortsOnly(enabled)
+        }
+    }
+
+    fun setShortVideoGraceMode(mode: GraceMode) {
+        viewModelScope.launch {
+            container.settingsDataStore.setShortVideoGraceMode(mode)
+        }
+    }
+
+    fun setShortVideoGraceMinutes(minutes: Int) {
+        viewModelScope.launch {
+            container.settingsDataStore.setShortVideoGraceMinutes(minutes)
         }
     }
 

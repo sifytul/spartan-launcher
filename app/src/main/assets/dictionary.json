@@ -1,0 +1,2235 @@
+[
+  {
+    "word": "abate",
+    "meaning": "to become less intense or widespread",
+    "examples": ["The storm finally began to abate as the night wore on.", "Her anger failed to abate even after a long apology."],
+    "synonyms": ["subside", "diminish", "lessen", "ease"],
+    "antonyms": ["intensify", "increase", "surge"]
+  },
+  {
+    "word": "abbreviate",
+    "meaning": "to shorten a word, phrase or text",
+    "examples": ["Please abbreviate the department name to 'Dept.' on the form.", "Long titles are usually abbreviated in the bibliography."],
+    "synonyms": ["shorten", "condense", "truncate", "compress"],
+    "antonyms": ["expand", "lengthen", "amplify"]
+  },
+  {
+    "word": "abhor",
+    "meaning": "to hate or detest intensely",
+    "examples": ["She abhors any form of cruelty towards animals.", "He abhorred the idea of lying to his friends."],
+    "synonyms": ["detest", "loathe", "despise", "execrate"],
+    "antonyms": ["admire", "cherish", "love"]
+  },
+  {
+    "word": "abundant",
+    "meaning": "existing in large quantities",
+    "examples": ["The valley is abundant in wildflowers during spring.", "There was abundant evidence to support the claim."],
+    "synonyms": ["plentiful", "ample", "copious", "profuse"],
+    "antonyms": ["scarce", "meager", "sparse"]
+  },
+  {
+    "word": "accessible",
+    "meaning": "able to be reached, entered or used easily",
+    "examples": ["The building has ramps that make it accessible to everyone.", "The museum keeps its archives accessible to the public."],
+    "synonyms": ["reachable", "available", "approachable", "attainable"],
+    "antonyms": ["inaccessible", "unreachable", "remote"]
+  },
+  {
+    "word": "acknowledge",
+    "meaning": "to accept or admit the existence or truth of something",
+    "examples": ["She acknowledged her mistake without hesitation.", "He refused to acknowledge the presence of the new manager."],
+    "synonyms": ["admit", "recognize", "concede", "accept"],
+    "antonyms": ["deny", "reject", "disregard"]
+  },
+  {
+    "word": "acquire",
+    "meaning": "to gain possession of something through effort or purchase",
+    "examples": ["The company acquired a small startup last month.", "She acquired fluency in Spanish after years of practice."],
+    "synonyms": ["obtain", "gain", "secure", "attain"],
+    "antonyms": ["lose", "relinquish", "forfeit"]
+  },
+  {
+    "word": "adapt",
+    "meaning": "to change so as to fit a new situation",
+    "examples": ["Wildlife must adapt quickly to changes in habitat.", "He adapted his cooking style to the new kitchen."],
+    "synonyms": ["adjust", "modify", "acclimatize", "tailor"],
+    "antonyms": ["resist", "remain", "persist"]
+  },
+  {
+    "word": "adequate",
+    "meaning": "sufficient or satisfactory for a purpose",
+    "examples": ["The tent provides adequate shelter for summer camping.", "A short nap proved adequate to refresh her."],
+    "synonyms": ["sufficient", "enough", "suitable", "satisfactory"],
+    "antonyms": ["inadequate", "insufficient", "deficient"]
+  },
+  {
+    "word": "adjacent",
+    "meaning": "next to or adjoining something else",
+    "examples": ["Our hotel was adjacent to the railway station.", "The garden is adjacent to the main road."],
+    "synonyms": ["neighboring", "adjoining", "bordering", "abutting"],
+    "antonyms": ["distant", "remote", "far"]
+  },
+  {
+    "word": "admire",
+    "meaning": "to regard with respect or warm approval",
+    "examples": ["I admire the way she stays calm under pressure.", "Visitors admire the old bridge from the riverside."],
+    "synonyms": ["respect", "esteem", "appreciate", "revere"],
+    "antonyms": ["despise", "scorn", "disdain"]
+  },
+  {
+    "word": "adverse",
+    "meaning": "harmful or unfavorable",
+    "examples": ["The drug can cause adverse effects in some patients.", "Adverse weather forced the match to be postponed."],
+    "synonyms": ["harmful", "unfavorable", "detrimental", "hostile"],
+    "antonyms": ["favorable", "beneficial", "advantageous"]
+  },
+  {
+    "word": "advocate",
+    "meaning": "to publicly support or recommend a cause",
+    "examples": ["She advocates for better mental health services in schools.", "The report advocates stricter rules on plastic waste."],
+    "synonyms": ["support", "champion", "endorse", "back"],
+    "antonyms": ["oppose", "discourage", "condemn"]
+  },
+  {
+    "word": "aesthetic",
+    "meaning": "concerned with beauty or the appreciation of beauty",
+    "examples": ["The room has a clean, aesthetic appeal that feels calm.", "Her choices are guided more by aesthetic taste than cost."],
+    "synonyms": ["artistic", "beautiful", "stylish", "visual"],
+    "antonyms": ["ugly", "unattractive", "garish"]
+  },
+  {
+    "word": "aggregate",
+    "meaning": "a total formed by combining several separate items",
+    "examples": ["The aggregate of all donations reached two million.", "Analysts study the aggregate data rather than single cases."],
+    "synonyms": ["total", "sum", "whole", "collection"],
+    "antonyms": ["individual", "single", "part"]
+  },
+  {
+    "word": "allocate",
+    "meaning": "to distribute resources or duties for a specific purpose",
+    "examples": ["The committee will allocate funds to the most urgent projects.", "Each team member was allocated a specific set of tasks."],
+    "synonyms": ["assign", "allot", "distribute", "apportion"],
+    "antonyms": ["withhold", "retain", "keep"]
+  },
+  {
+    "word": "ambiguous",
+    "meaning": "open to more than one interpretation",
+    "examples": ["The ending of the film is deliberately ambiguous.", "His answer was too ambiguous to guide the team."],
+    "synonyms": ["unclear", "vague", "equivocal", "uncertain"],
+    "antonyms": ["clear", "explicit", "unambiguous"]
+  },
+  {
+    "word": "amend",
+    "meaning": "to make a change or improvement to a document or plan",
+    "examples": ["Parliament voted to amend the outdated law.", "She amended the draft before sending it to the editor."],
+    "synonyms": ["revise", "modify", "alter", "correct"],
+    "antonyms": ["keep", "retain", "preserve"]
+  },
+  {
+    "word": "ample",
+    "meaning": "enough or more than enough; plentiful",
+    "examples": ["There is ample parking space behind the store.", "You have ample time to finish the exam."],
+    "synonyms": ["abundant", "plentiful", "generous", "copious"],
+    "antonyms": ["insufficient", "scant", "meager"]
+  },
+  {
+    "word": "ancient",
+    "meaning": "belonging to the very distant past",
+    "examples": ["The hikers explored the remains of an ancient city.", "These trees are ancient, older than the village itself."],
+    "synonyms": ["old", "antique", "primitive", "archaic"],
+    "antonyms": ["modern", "new", "contemporary"]
+  },
+  {
+    "word": "announce",
+    "meaning": "to make something known publicly or officially",
+    "examples": ["The airline announced a delay of two hours.", "They announced their engagement to the whole family."],
+    "synonyms": ["declare", "proclaim", "reveal", "publicize"],
+    "antonyms": ["conceal", "hide", "suppress"]
+  },
+  {
+    "word": "anticipate",
+    "meaning": "to expect or predict something before it happens",
+    "examples": ["We anticipate heavy traffic on the way home.", "The school anticipated the rise in enrollments."],
+    "synonyms": ["expect", "foresee", "predict", "envisage"],
+    "antonyms": ["doubt", "be surprised", "overlook"]
+  },
+  {
+    "word": "anxious",
+    "meaning": "feeling worry or nervousness about an outcome",
+    "examples": ["She felt anxious before the interview.", "He was anxious to hear the test results."],
+    "synonyms": ["worried", "nervous", "uneasy", "concerned"],
+    "antonyms": ["calm", "relaxed", "confident"]
+  },
+  {
+    "word": "apparent",
+    "meaning": "clearly visible or understood; obvious",
+    "examples": ["It was apparent that she had not slept well.", "His enthusiasm for the project was apparent to everyone."],
+    "synonyms": ["evident", "obvious", "clear", "visible"],
+    "antonyms": ["obscure", "hidden", "unclear"]
+  },
+  {
+    "word": "appeal",
+    "meaning": "to be attractive or interesting",
+    "examples": ["The new design appeals to younger customers.", "The idea of a quiet weekend appealed to her."],
+    "synonyms": ["attract", "interest", "charm", "engage"],
+    "antonyms": ["repel", "repulse", "bore"]
+  },
+  {
+    "word": "appreciate",
+    "meaning": "to recognize the full worth or value of something",
+    "examples": ["I appreciate all the help you have given me.", "The property has appreciated in value over the years."],
+    "synonyms": ["value", "treasure", "understand", "respect"],
+    "antonyms": ["undervalue", "disregard", "ignore"]
+  },
+  {
+    "word": "appropriate",
+    "meaning": "suitable or proper for a particular situation",
+    "examples": ["Jeans are not appropriate for a formal ceremony.", "The teacher chose an appropriate book for each level."],
+    "synonyms": ["suitable", "fitting", "proper", "apt"],
+    "antonyms": ["inappropriate", "unsuitable", "improper"]
+  },
+  {
+    "word": "arbitrary",
+    "meaning": "based on random choice or personal whim",
+    "examples": ["The decision seemed arbitrary and hard to defend.", "He set an arbitrary deadline with no reason behind it."],
+    "synonyms": ["random", "capricious", "whimsical", "unfounded"],
+    "antonyms": ["reasoned", "justified", "systematic"]
+  },
+  {
+    "word": "articulate",
+    "meaning": "able to express thoughts clearly and effectively",
+    "examples": ["She is an articulate speaker who holds attention well.", "He struggled to articulate his feelings in words."],
+    "synonyms": ["eloquent", "expressive", "fluent", "clear"],
+    "antonyms": ["inarticulate", "mumbled", "incoherent"]
+  },
+  {
+    "word": "ascribe",
+    "meaning": "to attribute something to a cause or source",
+    "examples": ["Doctors ascribe the symptom to stress rather than illness.", "She ascribes her success to careful daily practice."],
+    "synonyms": ["attribute", "credit", "assign", "impute"],
+    "antonyms": ["deny", "withdraw", "disown"]
+  },
+  {
+    "word": "assemble",
+    "meaning": "to gather together or fit parts together",
+    "examples": ["The crowd assembled in front of the town hall.", "He assembled the bookshelf in under an hour."],
+    "synonyms": ["gather", "collect", "build", "construct"],
+    "antonyms": ["scatter", "disperse", "dismantle"]
+  },
+  {
+    "word": "assert",
+    "meaning": "to state a fact or belief confidently",
+    "examples": ["She asserted that the report was accurate.", "He asserted his right to speak at the meeting."],
+    "synonyms": ["declare", "affirm", "state", "maintain"],
+    "antonyms": ["deny", "dispute", "question"]
+  },
+  {
+    "word": "astonish",
+    "meaning": "to surprise someone greatly",
+    "examples": ["The magician's trick astonished the whole audience.", "It astonished us how quickly she learned the language."],
+    "synonyms": ["amaze", "astound", "stun", "surprise"],
+    "antonyms": ["bore", "unimpress", "dull"]
+  },
+  {
+    "word": "attain",
+    "meaning": "to succeed in reaching a goal or level",
+    "examples": ["She attained the rank of captain at a young age.", "Few athletes attain such a level of excellence."],
+    "synonyms": ["achieve", "reach", "obtain", "accomplish"],
+    "antonyms": ["fail", "lose", "miss"]
+  },
+  {
+    "word": "attentive",
+    "meaning": "paying close attention to something or someone",
+    "examples": ["The attentive waiter refilled our water without asking.", "She was attentive to every detail in the contract."],
+    "synonyms": ["observant", "alert", "watchful", "mindful"],
+    "antonyms": ["inattentive", "distracted", "careless"]
+  },
+  {
+    "word": "attorney",
+    "meaning": "a person legally appointed to act for another, especially a lawyer",
+    "examples": ["Her attorney reviewed the contract line by line.", "You should consult an attorney before signing anything."],
+    "synonyms": ["lawyer", "counsel", "advocate", "solicitor"],
+    "antonyms": ["client", "defendant"]
+  },
+  {
+    "word": "autonomous",
+    "meaning": "able to act or function independently",
+    "examples": ["The team now works in an autonomous, self-managed way.", "Some cars are fully autonomous on highways."],
+    "synonyms": ["independent", "self-governing", "self-sufficient", "sovereign"],
+    "antonyms": ["dependent", "controlled", "subordinate"]
+  },
+  {
+    "word": "avail",
+    "meaning": "to help or benefit someone",
+    "examples": ["All his training did not avail him in the final.", "Words alone will not avail against the crisis."],
+    "synonyms": ["help", "benefit", "serve", "aid"],
+    "antonyms": ["hinder", "hurt", "harm"]
+  },
+  {
+    "word": "baffle",
+    "meaning": "to be unable to understand or explain something",
+    "examples": ["The sudden change in direction baffled the investors.", "Her decision to resign baffled everyone at the office."],
+    "synonyms": ["confuse", "puzzle", "perplex", "bewilder"],
+    "antonyms": ["clarify", "enlighten", "explain"]
+  },
+  {
+    "word": "benevolent",
+    "meaning": "kind and generous in spirit",
+    "examples": ["The benevolent owner donated half his profits to charity.", "She gave a benevolent smile as she handed out the blankets."],
+    "synonyms": ["kind", "generous", "charitable", "compassionate"],
+    "antonyms": ["cruel", "mean", "malevolent"]
+  },
+  {
+    "word": "benign",
+    "meaning": "gentle, kind, and not harmful",
+    "examples": ["The doctor confirmed the tumor was benign.", "Their intentions were benign, not threatening."],
+    "synonyms": ["harmless", "kind", "mild", "gentle"],
+    "antonyms": ["malignant", "harmful", "dangerous"]
+  },
+  {
+    "word": "bias",
+    "meaning": "an unfair preference for or against something",
+    "examples": ["The study was criticized for its clear bias.", "He tried to judge the case without personal bias."],
+    "synonyms": ["prejudice", "partiality", "inclination", "favoritism"],
+    "antonyms": ["objectivity", "fairness", "impartiality"]
+  },
+  {
+    "word": "bleak",
+    "meaning": "cold, miserable, and offering little hope",
+    "examples": ["The outlook for the season looked bleak.", "They crossed a bleak, windswept plain at dawn."],
+    "synonyms": ["grim", "dismal", "dreary", "hopeless"],
+    "antonyms": ["bright", "hopeful", "cheerful"]
+  },
+  {
+    "word": "brittle",
+    "meaning": "hard but easily broken or snapped",
+    "examples": ["The old plastic had become brittle with age.", "Her temper was brittle after days without sleep."],
+    "synonyms": ["fragile", "breakable", "frail", "delicate"],
+    "antonyms": ["flexible", "tough", "durable"]
+  },
+  {
+    "word": "cease",
+    "meaning": "to bring or come to an end",
+    "examples": ["The rain ceased just as the parade began.", "They were ordered to cease all operations immediately."],
+    "synonyms": ["stop", "end", "halt", "conclude"],
+    "antonyms": ["continue", "persist", "resume"]
+  },
+  {
+    "word": "chaos",
+    "meaning": "complete disorder and confusion",
+    "examples": ["The power cut threw the whole office into chaos.", "Without a schedule, the trip descended into chaos."],
+    "synonyms": ["disorder", "mayhem", "tumult", "confusion"],
+    "antonyms": ["order", "calm", "harmony"]
+  },
+  {
+    "word": "chronic",
+    "meaning": "persisting for a long time or constantly recurring",
+    "examples": ["She manages a chronic back condition with exercise.", "Chronic delays have frustrated commuters for years."],
+    "synonyms": ["persistent", "long-lasting", "recurring", "constant"],
+    "antonyms": ["acute", "temporary", "brief"]
+  },
+  {
+    "word": "coherent",
+    "meaning": "logical and consistent; able to speak clearly",
+    "examples": ["Her argument was clear, coherent and convincing.", "He was too tired to form a coherent sentence."],
+    "synonyms": ["logical", "consistent", "unified", "clear"],
+    "antonyms": ["incoherent", "confused", "rambling"]
+  },
+  {
+    "word": "coincide",
+    "meaning": "to happen at the same time or correspond exactly",
+    "examples": ["Our vacation dates coincide this summer.", "His interests coincide closely with hers."],
+    "synonyms": ["overlap", "concur", "correspond", "align"],
+    "antonyms": ["differ", "conflict", "diverge"]
+  },
+  {
+    "word": "collaborate",
+    "meaning": "to work jointly on an activity or project",
+    "examples": ["The two schools collaborated on a science fair.", "Engineers collaborated with designers on the new model."],
+    "synonyms": ["cooperate", "team up", "partner", "work together"],
+    "antonyms": ["compete", "oppose", "work alone"]
+  },
+  {
+    "word": "commence",
+    "meaning": "to begin or start",
+    "examples": ["The ceremony will commence at midday.", "Construction commences once the permits arrive."],
+    "synonyms": ["begin", "start", "initiate", "open"],
+    "antonyms": ["end", "conclude", "finish"]
+  },
+  {
+    "word": "compel",
+    "meaning": "to force or oblige someone to do something",
+    "examples": ["Illness compelled her to rest for a full week.", "The evidence compelled the jury to change its verdict."],
+    "synonyms": ["force", "oblige", "urge", "drive"],
+    "antonyms": ["dissuade", "deter", "discourage"]
+  },
+  {
+    "word": "compensate",
+    "meaning": "to make up for a loss or shortcoming",
+    "examples": ["The insurance company compensated him for the damage.", "Her quick humor compensated for her lack of experience."],
+    "synonyms": ["reimburse", "offset", "repay", "balance"],
+    "antonyms": ["penalize", "withhold", "deprive"]
+  },
+  {
+    "word": "competent",
+    "meaning": "having the skill or knowledge to do something well",
+    "examples": ["She is a competent and reliable manager.", "The mechanic did a competent job on the repair."],
+    "synonyms": ["capable", "skilled", "qualified", "proficient"],
+    "antonyms": ["incompetent", "unskilled", "unqualified"]
+  },
+  {
+    "word": "compile",
+    "meaning": "to collect information from various sources into one list or book",
+    "examples": ["The editors compiled a guide of local restaurants.", "She compiled the survey results into a single report."],
+    "synonyms": ["assemble", "collect", "gather", "accumulate"],
+    "antonyms": ["scatter", "disperse", "distribute"]
+  },
+  {
+    "word": "comply",
+    "meaning": "to act in accordance with a rule, wish or command",
+    "examples": ["All tenants must comply with the building rules.", "He complied with the doctor's advice and rested."],
+    "synonyms": ["obey", "conform", "follow", "abide"],
+    "antonyms": ["defy", "disobey", "ignore"]
+  },
+  {
+    "word": "comprehend",
+    "meaning": "to understand something fully",
+    "examples": ["It took her a moment to comprehend the news.", "Young children may not comprehend abstract ideas."],
+    "synonyms": ["understand", "grasp", "realize", "fathom"],
+    "antonyms": ["misunderstand", "misread", "confuse"]
+  },
+  {
+    "word": "comprehensive",
+    "meaning": "complete and including nearly all relevant parts",
+    "examples": ["The new book offers a comprehensive overview of the subject.", "A comprehensive health check covers every major system."],
+    "synonyms": ["complete", "thorough", "extensive", "full"],
+    "antonyms": ["partial", "incomplete", "narrow"]
+  },
+  {
+    "word": "conceal",
+    "meaning": "to keep something secret or hidden",
+    "examples": ["She could not conceal her disappointment.", "The thief concealed the package inside his coat."],
+    "synonyms": ["hide", "mask", "cover", "secrete"],
+    "antonyms": ["reveal", "expose", "disclose"]
+  },
+  {
+    "word": "concede",
+    "meaning": "to admit that something is true after first resisting",
+    "examples": ["He finally conceded that the plan was flawed.", "The losing candidate conceded the election gracefully."],
+    "synonyms": ["admit", "acknowledge", "grant", "yield"],
+    "antonyms": ["deny", "refute", "contest"]
+  },
+  {
+    "word": "conceive",
+    "meaning": "to form an idea or plan in the mind",
+    "examples": ["She conceived a bold plan to redesign the website.", "It is hard to conceive of life without phones now."],
+    "synonyms": ["imagine", "devise", "invent", "formulate"],
+    "antonyms": ["misunderstand", "reject", "dismiss"]
+  },
+  {
+    "word": "concise",
+    "meaning": "giving information clearly in few words",
+    "examples": ["Please keep your answer concise and to the point.", "The manual is concise but covers all the essentials."],
+    "synonyms": ["brief", "succinct", "short", "compact"],
+    "antonyms": ["wordy", "verbose", "lengthy"]
+  },
+  {
+    "word": "condemn",
+    "meaning": "to express complete disapproval of someone or something",
+    "examples": ["World leaders condemned the violent attack.", "The court condemned him to a long sentence."],
+    "synonyms": ["denounce", "criticize", "blame", "censure"],
+    "antonyms": ["praise", "approve", "commend"]
+  },
+  {
+    "word": "confine",
+    "meaning": "to restrict within limits or boundaries",
+    "examples": ["The dog was confined to the yard for the day.", "Please confine your comments to the agenda."],
+    "synonyms": ["restrict", "limit", "restrain", "bound"],
+    "antonyms": ["free", "release", "expand"]
+  },
+  {
+    "word": "conform",
+    "meaning": "to follow rules or fit in with expectations",
+    "examples": ["The design must conform to safety standards.", "Students are expected to conform to the dress code."],
+    "synonyms": ["comply", "adapt", "follow", "obey"],
+    "antonyms": ["deviate", "rebel", "defy"]
+  },
+  {
+    "word": "confront",
+    "meaning": "to face someone or something boldly or directly",
+    "examples": ["She confronted her colleague about the error.", "The team had to confront the budget shortfall head-on."],
+    "synonyms": ["face", "challenge", "encounter", "tackle"],
+    "antonyms": ["avoid", "evade", "shun"]
+  },
+  {
+    "word": "conserve",
+    "meaning": "to protect from harm or wasteful use",
+    "examples": ["Turn off lights to conserve energy.", "The park works to conserve its rare birds."],
+    "synonyms": ["preserve", "protect", "save", "safeguard"],
+    "antonyms": ["waste", "squander", "consume"]
+  },
+  {
+    "word": "considerable",
+    "meaning": "notably large in amount, degree or size",
+    "examples": ["The project required a considerable amount of time.", "She has considerable influence in the industry."],
+    "synonyms": ["substantial", "significant", "notable", "large"],
+    "antonyms": ["slight", "insignificant", "trivial"]
+  },
+  {
+    "word": "consistent",
+    "meaning": "always behaving or happening in the same way",
+    "examples": ["Her results have been consistent all season.", "The story is consistent with the evidence."],
+    "synonyms": ["steady", "uniform", "constant", "reliable"],
+    "antonyms": ["inconsistent", "variable", "erratic"]
+  },
+  {
+    "word": "constitute",
+    "meaning": "to make up or form something",
+    "examples": ["Women constitute more than half of the workforce.", "A quorum constitutes the authority to vote."],
+    "synonyms": ["compose", "form", "make up", "comprise"],
+    "antonyms": ["dissolve", "dismantle", "divide"]
+  },
+  {
+    "word": "constrain",
+    "meaning": "to restrict or limit the freedom of something",
+    "examples": ["Tight deadlines constrained the team's creativity.", "Her budget constrained what she could buy."],
+    "synonyms": ["restrict", "limit", "restrain", "bound"],
+    "antonyms": ["free", "liberate", "unleash"]
+  },
+  {
+    "word": "contemplate",
+    "meaning": "to think deeply or long about something",
+    "examples": ["She sat quietly and contemplated her next move.", "He contemplated moving abroad for a year."],
+    "synonyms": ["ponder", "reflect", "consider", "meditate"],
+    "antonyms": ["ignore", "overlook", "disregard"]
+  },
+  {
+    "word": "contradict",
+    "meaning": "to state the opposite of what has been said",
+    "examples": ["The second witness contradicted the first.", "His actions contradict his strong words."],
+    "synonyms": ["oppose", "refute", "dispute", "deny"],
+    "antonyms": ["confirm", "support", "agree"]
+  },
+  {
+    "word": "contribute",
+    "meaning": "to give something toward a common purpose",
+    "examples": ["Everyone was asked to contribute ideas.", "Regular exercise contributes to better sleep."],
+    "synonyms": ["donate", "provide", "add", "supply"],
+    "antonyms": ["withhold", "take", "subtract"]
+  },
+  {
+    "word": "convenient",
+    "meaning": "well-suited to one's needs or easy to use",
+    "examples": ["The store is at a convenient location near my house.", "Sending money by app is quick and convenient."],
+    "synonyms": ["handy", "accessible", "practical", "helpful"],
+    "antonyms": ["inconvenient", "awkward", "difficult"]
+  },
+  {
+    "word": "conventional",
+    "meaning": "following accepted customs and standards",
+    "examples": ["They chose a conventional wedding at the church.", "Black is still the conventional choice for interviews."],
+    "synonyms": ["traditional", "standard", "typical", "orthodox"],
+    "antonyms": ["unconventional", "innovative", "unusual"]
+  },
+  {
+    "word": "convert",
+    "meaning": "to change from one form, use or belief to another",
+    "examples": ["They converted the garage into a workshop.", "She converted the video to a smaller file format."],
+    "synonyms": ["transform", "change", "adapt", "alter"],
+    "antonyms": ["retain", "keep", "preserve"]
+  },
+  {
+    "word": "convince",
+    "meaning": "to cause someone to believe or do something",
+    "examples": ["He convinced her to try the new route.", "The data convinced the board to change strategy."],
+    "synonyms": ["persuade", "assure", "sway", "reassure"],
+    "antonyms": ["dissuade", "deter", "discourage"]
+  },
+  {
+    "word": "courteous",
+    "meaning": "polite, respectful and considerate in manner",
+    "examples": ["The staff were courteous even during the rush.", "A courteous reply goes a long way in business."],
+    "synonyms": ["polite", "gracious", "well-mannered", "civil"],
+    "antonyms": ["rude", "impolite", "discourteous"]
+  },
+  {
+    "word": "criterion",
+    "meaning": "a standard by which something may be judged",
+    "examples": ["Price is not the only criterion for choosing a car.", "Each essay is graded against a clear criterion."],
+    "synonyms": ["standard", "benchmark", "measure", "yardstick"],
+    "antonyms": ["exception", "anomaly"]
+  },
+  {
+    "word": "crucial",
+    "meaning": "of decisive importance; critical",
+    "examples": ["Timing is crucial in this exam.", "The last point proved crucial to the team's victory."],
+    "synonyms": ["critical", "vital", "essential", "pivotal"],
+    "antonyms": ["unimportant", "trivial", "minor"]
+  },
+  {
+    "word": "cultivate",
+    "meaning": "to prepare land to grow crops, or develop a skill or quality",
+    "examples": ["They cultivate rice on the terraced fields.", "She cultivated a calm voice through years of practice."],
+    "synonyms": ["grow", "develop", "foster", "nurture"],
+    "antonyms": ["neglect", "abandon", "wither"]
+  },
+  {
+    "word": "cunning",
+    "meaning": "clever at achieving one's aims, often through deception",
+    "examples": ["The fox is often portrayed as a cunning creature.", "He devised a cunning plan to win the race."],
+    "synonyms": ["crafty", "sly", "shrewd", "deceptive"],
+    "antonyms": ["honest", "naive", "straightforward"]
+  },
+  {
+    "word": "dedicated",
+    "meaning": "wholly committed to a purpose or task",
+    "examples": ["She is a dedicated volunteer at the shelter.", "He keeps a dedicated notebook for his ideas."],
+    "synonyms": ["devoted", "committed", "loyal", "faithful"],
+    "antonyms": ["indifferent", "disloyal", "uncommitted"]
+  },
+  {
+    "word": "defeat",
+    "meaning": "to win against someone in a contest or struggle",
+    "examples": ["The home team defeated their rivals by two goals.", "She defeated the champion in the final round."],
+    "synonyms": ["beat", "overcome", "conquer", "triumph"],
+    "antonyms": ["lose", "surrender", "yield"]
+  },
+  {
+    "word": "deficient",
+    "meaning": "lacking an essential part or quality",
+    "examples": ["The diet was deficient in iron.", "The plan was deficient in detail and timing."],
+    "synonyms": ["lacking", "insufficient", "inadequate", "incomplete"],
+    "antonyms": ["sufficient", "adequate", "complete"]
+  },
+  {
+    "word": "defy",
+    "meaning": "to openly resist or refuse to obey",
+    "examples": ["The workers defied the order to return.", "Her calm defiance in the crisis was impressive."],
+    "synonyms": ["resist", "challenge", "oppose", "disobey"],
+    "antonyms": ["obey", "submit", "comply"]
+  },
+  {
+    "word": "deliberate",
+    "meaning": "done consciously and intentionally",
+    "examples": ["It was a deliberate attempt to mislead them.", "She made a deliberate choice to walk to work."],
+    "synonyms": ["intentional", "careful", "planned", "calculated"],
+    "antonyms": ["accidental", "impulsive", "unplanned"]
+  },
+  {
+    "word": "delicate",
+    "meaning": "fine, fragile or easily damaged",
+    "examples": ["Handle the delicate glass with care.", "The garden needs delicate attention in winter."],
+    "synonyms": ["fragile", "fine", "dainty", "gentle"],
+    "antonyms": ["strong", "rugged", "tough"]
+  },
+  {
+    "word": "demonstrate",
+    "meaning": "to show clearly or prove by example",
+    "examples": ["The results demonstrate the theory in action.", "She demonstrated how to fold the paper crane."],
+    "synonyms": ["show", "prove", "display", "illustrate"],
+    "antonyms": ["conceal", "disprove", "hide"]
+  },
+  {
+    "word": "denote",
+    "meaning": "to be a sign of or indicate something",
+    "examples": ["A red circle denotes the meeting point on the map.", "In code, 'null' denotes the absence of a value."],
+    "synonyms": ["indicate", "signify", "mean", "represent"],
+    "antonyms": ["infer", "imply", "suggest"]
+  },
+  {
+    "word": "deplete",
+    "meaning": "to use up the supply or resources of something",
+    "examples": ["Overfishing has depleted the local supply.", "The long journey depleted their energy."],
+    "synonyms": ["exhaust", "drain", "use up", "consume"],
+    "antonyms": ["replenish", "restore", "refill"]
+  },
+  {
+    "word": "derive",
+    "meaning": "to obtain something from a source",
+    "examples": ["The word derives from an old Latin term.", "She derives great satisfaction from teaching."],
+    "synonyms": ["obtain", "gain", "receive", "originate"],
+    "antonyms": ["lose", "forfeit", "abandon"]
+  },
+  {
+    "word": "deteriorate",
+    "meaning": "to become progressively worse in quality",
+    "examples": ["The road has deteriorated since the floods.", "His health deteriorated rapidly over winter."],
+    "synonyms": ["worsen", "decline", "degrade", "decay"],
+    "antonyms": ["improve", "recover", "strengthen"]
+  },
+  {
+    "word": "devastate",
+    "meaning": "to destroy or lay waste to something completely",
+    "examples": ["The hurricane devastated the coastal town.", "The news of the loss devastated the family."],
+    "synonyms": ["destroy", "wreck", "ravage", "ruin"],
+    "antonyms": ["restore", "preserve", "build"]
+  },
+  {
+    "word": "devise",
+    "meaning": "to plan or invent something by careful thought",
+    "examples": ["They devised a clever solution to the problem.", "She devised a schedule that actually works."],
+    "synonyms": ["create", "invent", "design", "formulate"],
+    "antonyms": ["copy", "borrow", "imitate"]
+  },
+  {
+    "word": "dictate",
+    "meaning": "to lay down rules or give commands authoritatively",
+    "examples": ["Culture should not dictate what we wear.", "He dictated a letter to his assistant."],
+    "synonyms": ["command", "instruct", "order", "determine"],
+    "antonyms": ["suggest", "request", "obey"]
+  },
+  {
+    "word": "diminish",
+    "meaning": "to make or become smaller or less",
+    "examples": ["The pain diminished after a rest.", "Nothing could diminish her enthusiasm."],
+    "synonyms": ["reduce", "decrease", "lessen", "decline"],
+    "antonyms": ["increase", "expand", "magnify"]
+  },
+  {
+    "word": "disclose",
+    "meaning": "to make secret information known",
+    "examples": ["The company must disclose all risks to investors.", "She refused to disclose the source of the leak."],
+    "synonyms": ["reveal", "expose", "divulge", "uncover"],
+    "antonyms": ["conceal", "hide", "withhold"]
+  },
+  {
+    "word": "disperse",
+    "meaning": "to scatter or spread over a wide area",
+    "examples": ["The crowd dispersed after the concert ended.", "The fog dispersed as the sun rose."],
+    "synonyms": ["scatter", "spread", "disperse", "dissipate"],
+    "antonyms": ["gather", "assemble", "collect"]
+  },
+  {
+    "word": "disrupt",
+    "meaning": "to disturb or interrupt something, stopping it from continuing normally",
+    "examples": ["The roadworks disrupted traffic for weeks.", "Loud noise can disrupt your concentration."],
+    "synonyms": ["interrupt", "disturb", "upset", "break"],
+    "antonyms": ["continue", "maintain", "sustain"]
+  },
+  {
+    "word": "distinct",
+    "meaning": "clearly different or separate",
+    "examples": ["The two species are distinct in size and color.", "There is a distinct smell of smoke in the air."],
+    "synonyms": ["separate", "different", "clear", "unmistakable"],
+    "antonyms": ["similar", "indistinct", "identical"]
+  },
+  {
+    "word": "distinguish",
+    "meaning": "to recognize or point out a difference",
+    "examples": ["Can you distinguish the twins apart?", "It is hard to distinguish fact from rumor online."],
+    "synonyms": ["differentiate", "discern", "tell apart", "separate"],
+    "antonyms": ["confuse", "mix up", "mistake"]
+  },
+  {
+    "word": "diverse",
+    "meaning": "showing a great deal of variety",
+    "examples": ["The city has a diverse population.", "The club offers a diverse range of activities."],
+    "synonyms": ["varied", "mixed", "multifaceted", "assorted"],
+    "antonyms": ["uniform", "homogeneous", "same"]
+  },
+  {
+    "word": "dominant",
+    "meaning": "more powerful, important or influential than others",
+    "examples": ["She plays a dominant role in the committee.", "Blue is the dominant color in his paintings."],
+    "synonyms": ["leading", "primary", "prevailing", "chief"],
+    "antonyms": ["subordinate", "weak", "minor"]
+  },
+  {
+    "word": "drab",
+    "meaning": "lacking brightness or interest; dull",
+    "examples": ["The office walls were a drab gray.", "He led a drab routine of work and sleep."],
+    "synonyms": ["dull", "dreary", "bland", "colorless"],
+    "antonyms": ["bright", "colorful", "vivid"]
+  },
+  {
+    "word": "durable",
+    "meaning": "able to last or withstand wear and use",
+    "examples": ["These boots are durable enough for hiking.", "The bridge was built with durable concrete."],
+    "synonyms": ["sturdy", "long-lasting", "tough", "resilient"],
+    "antonyms": ["fragile", "flimsy", "temporary"]
+  },
+  {
+    "word": "eager",
+    "meaning": "keen and enthusiastic about something",
+    "examples": ["The children were eager to open their gifts.", "She is eager to learn new skills."],
+    "synonyms": ["keen", "enthusiastic", "excited", "anxious"],
+    "antonyms": ["reluctant", "unwilling", "indifferent"]
+  },
+  {
+    "word": "eccentric",
+    "meaning": "unconventional and slightly strange",
+    "examples": ["The eccentric inventor kept pigeons in his office.", "Her eccentric habits made her memorable."],
+    "synonyms": ["odd", "unusual", "quirky", "peculiar"],
+    "antonyms": ["normal", "ordinary", "conventional"]
+  },
+  {
+    "word": "elaborate",
+    "meaning": "involving many carefully arranged parts or details",
+    "examples": ["They prepared an elaborate feast for the guests.", "The witness gave an elaborate account of the night."],
+    "synonyms": ["detailed", "complex", "intricate", "ornate"],
+    "antonyms": ["simple", "plain", "basic"]
+  },
+  {
+    "word": "elevate",
+    "meaning": "to raise to a higher level or position",
+    "examples": ["The platform elevates the stage by a foot.", "Good design can elevate an ordinary product."],
+    "synonyms": ["raise", "lift", "boost", "heighten"],
+    "antonyms": ["lower", "reduce", "demote"]
+  },
+  {
+    "word": "eligible",
+    "meaning": "having the right to do or receive something",
+    "examples": ["Graduates are eligible for the scholarship.", "Only members are eligible to vote."],
+    "synonyms": ["qualified", "entitled", "fit", "permitted"],
+    "antonyms": ["ineligible", "unqualified", "barred"]
+  },
+  {
+    "word": "eliminate",
+    "meaning": "to completely remove or get rid of something",
+    "examples": ["The new filter eliminates almost all impurities.", "She eliminated sugar from her morning coffee."],
+    "synonyms": ["remove", "eradicate", "abolish", "erase"],
+    "antonyms": ["add", "include", "retain"]
+  },
+  {
+    "word": "eloquent",
+    "meaning": "fluent or persuasive in speaking or writing",
+    "examples": ["She gave an eloquent speech at the ceremony.", "His silence was more eloquent than any apology."],
+    "synonyms": ["articulate", "persuasive", "fluent", "expressive"],
+    "antonyms": ["inarticulate", "halting", "tongue-tied"]
+  },
+  {
+    "word": "embrace",
+    "meaning": "to accept or support willingly",
+    "examples": ["The city embraced the idea of bike lanes.", "She embraced the challenge with open arms."],
+    "synonyms": ["accept", "adopt", "welcome", "support"],
+    "antonyms": ["reject", "refuse", "oppose"]
+  },
+  {
+    "word": "emphasize",
+    "meaning": "to give special importance to something",
+    "examples": ["The coach emphasized the value of teamwork.", "She emphasized the last word in her reply."],
+    "synonyms": ["stress", "highlight", "underline", "accentuate"],
+    "antonyms": ["de-emphasize", "downplay", "minimize"]
+  },
+  {
+    "word": "empirical",
+    "meaning": "based on observation or experience rather than theory",
+    "examples": ["The claim lacks any empirical evidence.", "Their findings rest on years of empirical research."],
+    "synonyms": ["experimental", "observational", "factual", "practical"],
+    "antonyms": ["theoretical", "speculative", "untested"]
+  },
+  {
+    "word": "endeavor",
+    "meaning": "to try hard to achieve something",
+    "examples": ["She endeavors to finish on time every week.", "They will endeavor to answer all questions."],
+    "synonyms": ["strive", "attempt", "try", "labor"],
+    "antonyms": ["neglect", "quit", "abandon"]
+  },
+  {
+    "word": "endorse",
+    "meaning": "to publicly declare support for someone or something",
+    "examples": ["The mayor endorsed the new recycling plan.", "Several athletes endorse the brand."],
+    "synonyms": ["support", "approve", "back", "recommend"],
+    "antonyms": ["oppose", "reject", "condemn"]
+  },
+  {
+    "word": "enhance",
+    "meaning": "to improve or increase the value, quality or appeal of something",
+    "examples": ["A coat of paint will enhance the front room.", "The app enhances photo colors automatically."],
+    "synonyms": ["improve", "boost", "augment", "strengthen"],
+    "antonyms": ["diminish", "reduce", "weaken"]
+  },
+  {
+    "word": "enlighten",
+    "meaning": "to give someone greater knowledge or understanding",
+    "examples": ["The lecture enlightened us about local history.", "Travelling often enlightens a person's worldview."],
+    "synonyms": ["inform", "educate", "illuminate", "clarify"],
+    "antonyms": ["confuse", "mislead", "bewilder"]
+  },
+  {
+    "word": "ensure",
+    "meaning": "to make certain that something will happen",
+    "examples": ["Seat belts ensure the safety of passengers.", "Please ensure the doors are locked before leaving."],
+    "synonyms": ["guarantee", "secure", "make certain", "assure"],
+    "antonyms": ["risk", "endanger", "jeopardize"]
+  },
+  {
+    "word": "enterprise",
+    "meaning": "a project, business or undertaking, especially a bold one",
+    "examples": ["The new enterprise created dozens of jobs.", "Her enterprise in launching the shop paid off."],
+    "synonyms": ["business", "venture", "undertaking", "initiative"],
+    "antonyms": ["idle", "inactivity", "stagnation"]
+  },
+  {
+    "word": "enthusiasm",
+    "meaning": "intense and eager enjoyment or interest",
+    "examples": ["Her enthusiasm inspired the whole team.", "They accepted the plan with great enthusiasm."],
+    "synonyms": ["eagerness", "passion", "zeal", "excitement"],
+    "antonyms": ["apathy", "indifference", "boredom"]
+  },
+  {
+    "word": "equivalent",
+    "meaning": "equal in value, amount, meaning or importance",
+    "examples": ["One dollar is roughly equivalent to several yuan.", "Silence was his equivalent of an apology."],
+    "synonyms": ["equal", "comparable", "similar", "matching"],
+    "antonyms": ["different", "unequal", "dissimilar"]
+  },
+  {
+    "word": "establish",
+    "meaning": "to set up on a firm or permanent basis",
+    "examples": ["They established the club in 2001.", "The study established a clear link between sleep and focus."],
+    "synonyms": ["found", "set up", "create", "institute"],
+    "antonyms": ["abolish", "dissolve", "uproot"]
+  },
+  {
+    "word": "estimate",
+    "meaning": "to roughly calculate or judge the value or amount of something",
+    "examples": ["We estimate the journey will take three hours.", "The cost was estimated at nearly a million."],
+    "synonyms": ["approximate", "gauge", "judge", "reckon"],
+    "antonyms": ["measure", "verify", "confirm"]
+  },
+  {
+    "word": "evaluate",
+    "meaning": "to form an idea of the amount, value or quality of something",
+    "examples": ["The panel will evaluate every submission.", "Prices are evaluated against last year's data."],
+    "synonyms": ["assess", "judge", "appraise", "rate"],
+    "antonyms": ["ignore", "overlook", "neglect"]
+  },
+  {
+    "word": "evident",
+    "meaning": "plain or obvious; clearly seen or understood",
+    "examples": ["It was evident that she had practiced hard.", "The strain on the bridge was evident to engineers."],
+    "synonyms": ["obvious", "apparent", "clear", "visible"],
+    "antonyms": ["hidden", "unclear", "obscure"]
+  },
+  {
+    "word": "exaggerate",
+    "meaning": "to represent something as larger or better than it really is",
+    "examples": ["He tends to exaggerate his achievements.", "Do not exaggerate the risks of the trip."],
+    "synonyms": ["overstate", "embellish", "inflate", "amplify"],
+    "antonyms": ["understate", "minimize", "downplay"]
+  },
+  {
+    "word": "exceed",
+    "meaning": "to go beyond a limit, amount or expectation",
+    "examples": ["Sales exceeded all our forecasts.", "The delay exceeded an hour."],
+    "synonyms": ["surpass", "outstrip", "beat", "top"],
+    "antonyms": ["fall short", "underperform", "trail"]
+  },
+  {
+    "word": "exclude",
+    "meaning": "to deliberately prevent something from being included",
+    "examples": ["The rent excludes utilities and parking.", "She was excluded from the final team."],
+    "synonyms": ["omit", "ban", "expel", "bar"],
+    "antonyms": ["include", "admit", "accept"]
+  },
+  {
+    "word": "exhibit",
+    "meaning": "to show or display something publicly or visibly",
+    "examples": ["The museum exhibits rare dinosaur fossils.", "He exhibited great patience with the students."],
+    "synonyms": ["display", "show", "demonstrate", "present"],
+    "antonyms": ["hide", "conceal", "suppress"]
+  },
+  {
+    "word": "explicit",
+    "meaning": "stated clearly and in detail, leaving nothing implied",
+    "examples": ["The instructions are explicit about the deadline.", "She gave explicit permission for the change."],
+    "synonyms": ["clear", "definite", "unambiguous", "direct"],
+    "antonyms": ["vague", "ambiguous", "implicit"]
+  },
+  {
+    "word": "exploit",
+    "meaning": "to use something to the best advantage, or treat unfairly",
+    "examples": ["Writers often exploit irony for effect.", "The boss was accused of exploiting junior staff."],
+    "synonyms": ["use", "leverage", "utilize", "take advantage"],
+    "antonyms": ["protect", "safeguard", "underuse"]
+  },
+  {
+    "word": "extensive",
+    "meaning": "covering a large area or large amount",
+    "examples": ["The region suffered extensive damage in the storm.", "Her extensive experience makes her a natural fit."],
+    "synonyms": ["vast", "wide", "broad", "comprehensive"],
+    "antonyms": ["narrow", "limited", "restricted"]
+  },
+  {
+    "word": "external",
+    "meaning": "belonging to or coming from the outside",
+    "examples": ["The external walls need repainting.", "External factors drove most of the growth."],
+    "synonyms": ["outer", "outside", "exterior", "outward"],
+    "antonyms": ["internal", "inner", "inside"]
+  },
+  {
+    "word": "facilitate",
+    "meaning": "to make an action or process easier",
+    "examples": ["The new lane will facilitate traffic flow.", "A short agenda facilitates quicker meetings."],
+    "synonyms": ["ease", "assist", "simplify", "expedite"],
+    "antonyms": ["hinder", "impede", "complicate"]
+  },
+  {
+    "word": "feasible",
+    "meaning": "possible to do easily or conveniently",
+    "examples": ["It is feasible to finish the build this week.", "The plan is only feasible with extra funding."],
+    "synonyms": ["possible", "achievable", "viable", "workable"],
+    "antonyms": ["impossible", "impractical", "unviable"]
+  },
+  {
+    "word": "flexible",
+    "meaning": "able to bend easily or adapt to change",
+    "examples": ["The working hours are flexible.", "Bamboo is a remarkably flexible material."],
+    "synonyms": ["adaptable", "pliable", "bendable", "versatile"],
+    "antonyms": ["rigid", "stiff", "inflexible"]
+  },
+  {
+    "word": "flourish",
+    "meaning": "to grow or develop in a healthy or vigorous way",
+    "examples": ["The garden flourished after the rains.", "Her career flourished once she moved abroad."],
+    "synonyms": ["thrive", "prosper", "bloom", "succeed"],
+    "antonyms": ["decline", "wither", "fail"]
+  },
+  {
+    "word": "forthcoming",
+    "meaning": "about to happen or appear; ready to be given",
+    "examples": ["Their forthcoming album drops next month.", "The promised data was not forthcoming."],
+    "synonyms": ["upcoming", "impending", "approaching", "available"],
+    "antonyms": ["past", "previous", "unavailable"]
+  },
+  {
+    "word": "foster",
+    "meaning": "to encourage the development of something",
+    "examples": ["The program fosters creativity in children.", "Regular meetings foster better teamwork."],
+    "synonyms": ["encourage", "promote", "nurture", "cultivate"],
+    "antonyms": ["discourage", "suppress", "hinder"]
+  },
+  {
+    "word": "foundation",
+    "meaning": "the lowest load-bearing part of a building; a basis",
+    "examples": ["The house rests on a solid concrete foundation.", "Trust is the foundation of any friendship."],
+    "synonyms": ["base", "basis", "footing", "underpinning"],
+    "antonyms": ["superstructure", "top", "peak"]
+  },
+  {
+    "word": "fraud",
+    "meaning": "wrongful deception intended to result in financial or personal gain",
+    "examples": ["The accountant was fired for fraud.", "He was convicted of credit card fraud."],
+    "synonyms": ["deception", "scam", "dishonesty", "swindle"],
+    "antonyms": ["honesty", "integrity", "fairness"]
+  },
+  {
+    "word": "frequent",
+    "meaning": "occurring or appearing often",
+    "examples": ["He made frequent trips to the hospital.", "Frequent breaks improve concentration."],
+    "synonyms": ["regular", "recurrent", "common", "habitual"],
+    "antonyms": ["rare", "occasional", "infrequent"]
+  },
+  {
+    "word": "fundamental",
+    "meaning": "forming a necessary base or core; central",
+    "examples": ["Understanding numbers is fundamental to math.", "There is a fundamental difference between the two views."],
+    "synonyms": ["basic", "essential", "primary", "core"],
+    "antonyms": ["superficial", "secondary", "peripheral"]
+  },
+  {
+    "word": "generate",
+    "meaning": "to produce or create something",
+    "examples": ["Wind turbines generate clean electricity.", "The campaign generated a lot of interest."],
+    "synonyms": ["produce", "create", "yield", "generate"],
+    "antonyms": ["destroy", "consume", "eliminate"]
+  },
+  {
+    "word": "genuine",
+    "meaning": "truly what it is said to be; authentic and sincere",
+    "examples": ["She showed genuine interest in his story.", "The signature turned out to be genuine."],
+    "synonyms": ["authentic", "real", "sincere", "honest"],
+    "antonyms": ["fake", "artificial", "insincere"]
+  },
+  {
+    "word": "glorious",
+    "meaning": "magnificent and beautiful, or deserving great praise",
+    "examples": ["We watched a glorious sunset over the sea.", "It was a glorious victory for the underdogs."],
+    "synonyms": ["magnificent", "splendid", "superb", "wonderful"],
+    "antonyms": ["dismal", "terrible", "mediocre"]
+  },
+  {
+    "word": "gradual",
+    "meaning": "taking place slowly and in small stages",
+    "examples": ["There was a gradual rise in temperature.", "She made a gradual return to full training."],
+    "synonyms": ["slow", "progressive", "steady", "phased"],
+    "antonyms": ["sudden", "abrupt", "instant"]
+  },
+  {
+    "word": "gratitude",
+    "meaning": "the quality of being thankful; readiness to show appreciation",
+    "examples": ["She expressed deep gratitude to her teachers.", "He felt immense gratitude for their help."],
+    "synonyms": ["thankfulness", "appreciation", "recognition", "thanks"],
+    "antonyms": ["ingratitude", "ungratefulness", "resentment"]
+  },
+  {
+    "word": "hardship",
+    "meaning": "severe suffering or difficulty",
+    "examples": ["They endured great hardship during the war.", "The family faced hardship after losing the farm."],
+    "synonyms": ["difficulty", "adversity", "suffering", "trouble"],
+    "antonyms": ["ease", "comfort", "prosperity"]
+  },
+  {
+    "word": "hazard",
+    "meaning": "a danger or risk",
+    "examples": ["Icy roads are a serious hazard in winter.", "Smoking is a known health hazard."],
+    "synonyms": ["danger", "risk", "threat", "peril"],
+    "antonyms": ["safety", "security", "protection"]
+  },
+  {
+    "word": "hesitate",
+    "meaning": "to pause before acting because of uncertainty",
+    "examples": ["Do not hesitate to call if you need help.", "She hesitated before signing the contract."],
+    "synonyms": ["waver", "pause", "vacillate", "dither"],
+    "antonyms": ["decide", "proceed", "dash"]
+  },
+  {
+    "word": "hierarchy",
+    "meaning": "a system that ranks people or things by level of importance",
+    "examples": ["She climbed the corporate hierarchy quickly.", "The school has a clear hierarchy of roles."],
+    "synonyms": ["ranking", "order", "pecking order", "structure"],
+    "antonyms": ["equality", "flatness", "equivalence"]
+  },
+  {
+    "word": "hostile",
+    "meaning": "unfriendly, aggressive or antagonistic",
+    "examples": ["They faced a hostile crowd at the meeting.", "The plant survived in a hostile climate."],
+    "synonyms": ["unfriendly", "aggressive", "antagonistic", "belligerent"],
+    "antonyms": ["friendly", "welcoming", "warm"]
+  },
+  {
+    "word": "identical",
+    "meaning": "exactly the same in every respect",
+    "examples": ["The two rooms are identical in size.", "He wore an identical shirt to mine."],
+    "synonyms": ["same", "exact", "twin", "matching"],
+    "antonyms": ["different", "distinct", "dissimilar"]
+  },
+  {
+    "word": "illuminate",
+    "meaning": "to light up or make something clear",
+    "examples": ["Lamps illuminate the path at night.", "The diagram illuminates how the pump works."],
+    "synonyms": ["light", "brighten", "clarify", "explain"],
+    "antonyms": ["darken", "obscure", "conceal"]
+  },
+  {
+    "word": "imitate",
+    "meaning": "to copy the manner, speech or style of someone or something",
+    "examples": ["The child imitates her older brother constantly.", "Some films imitate an older director's style."],
+    "synonyms": ["copy", "mimic", "impersonate", "mirror"],
+    "antonyms": ["originate", "invent", "create"]
+  },
+  {
+    "word": "immense",
+    "meaning": "extremely large or great",
+    "examples": ["The task required immense effort.", "The ocean stretched out in immense silence."],
+    "synonyms": ["huge", "vast", "enormous", "massive"],
+    "antonyms": ["tiny", "minute", "small"]
+  },
+  {
+    "word": "implement",
+    "meaning": "to put a decision or plan into effect",
+    "examples": ["The school will implement the new policy soon.", "It took months to implement the software update."],
+    "synonyms": ["execute", "apply", "enforce", "carry out"],
+    "antonyms": ["cancel", "abandon", "neglect"]
+  },
+  {
+    "word": "imply",
+    "meaning": "to suggest something without stating it directly",
+    "examples": ["His tone implied he was not convinced.", "The report implies a need for faster action."],
+    "synonyms": ["suggest", "hint", "insinuate", "indicate"],
+    "antonyms": ["state", "declare", "announce"]
+  },
+  {
+    "word": "impose",
+    "meaning": "to force something on someone or establish by authority",
+    "examples": ["The town imposed a new parking fee.", "Do not impose your views on others."],
+    "synonyms": ["enforce", "apply", "levy", "demand"],
+    "antonyms": ["remove", "lift", "withdraw"]
+  },
+  {
+    "word": "incentive",
+    "meaning": "something that motivates or encourages a person to act",
+    "examples": ["A bonus is a strong incentive to finish early.", "Lower taxes gave farmers an incentive to expand."],
+    "synonyms": ["motivation", "encouragement", "stimulus", "inducement"],
+    "antonyms": ["deterrent", "disincentive", "penalty"]
+  },
+  {
+    "word": "incident",
+    "meaning": "an event or occurrence, often an unwelcome one",
+    "examples": ["The theft was an isolated incident.", "No one was hurt in the minor incident."],
+    "synonyms": ["event", "occurrence", "episode", "happening"],
+    "antonyms": ["non-event", "peace", "calm"]
+  },
+  {
+    "word": "inclined",
+    "meaning": "tending to want or behave in a particular way",
+    "examples": ["She is inclined to trust people quickly.", "I am inclined to agree with your plan."],
+    "synonyms": ["likely", "prone", "disposed", "tending"],
+    "antonyms": ["unlikely", "reluctant", "averse"]
+  },
+  {
+    "word": "inevitable",
+    "meaning": "certain to happen; unavoidable",
+    "examples": ["Change is inevitable in any industry.", "The outage seemed inevitable after weeks of warnings."],
+    "synonyms": ["unavoidable", "certain", "inescapable", "sure"],
+    "antonyms": ["avoidable", "uncertain", "preventable"]
+  },
+  {
+    "word": "infer",
+    "meaning": "to deduce or conclude from evidence and reasoning",
+    "examples": ["We infer from the data that demand is rising.", "What can you infer from her silence?"],
+    "synonyms": ["deduce", "conclude", "gather", "reason"],
+    "antonyms": ["guess", "assume", "surmise"]
+  },
+  {
+    "word": "influence",
+    "meaning": "the capacity to affect the character or course of someone or something",
+    "examples": ["Her words have a great influence on him.", "The moon exerts a strong influence on tides."],
+    "synonyms": ["effect", "impact", "sway", "control"],
+    "antonyms": ["insignificance", "powerlessness", "weakness"]
+  },
+  {
+    "word": "inherent",
+    "meaning": "existing as a natural or basic part of something",
+    "examples": ["Risk is inherent in mountain climbing.", "There are inherent flaws in the design."],
+    "synonyms": ["intrinsic", "innate", "built-in", "natural"],
+    "antonyms": ["external", "acquired", "added"]
+  },
+  {
+    "word": "initiate",
+    "meaning": "to cause a process or action to begin",
+    "examples": ["She initiated the conversation about raises.", "The company initiated a full investigation."],
+    "synonyms": ["begin", "start", "launch", "originate"],
+    "antonyms": ["end", "conclude", "terminate"]
+  },
+  {
+    "word": "innovation",
+    "meaning": "a new method, idea or product",
+    "examples": ["The app is a real innovation in language learning.", "Innovation drives growth at the company."],
+    "synonyms": ["invention", "novelty", "breakthrough", "improvement"],
+    "antonyms": ["imitation", "tradition", "stagnation"]
+  },
+  {
+    "word": "insight",
+    "meaning": "the capacity to gain an accurate and deep understanding",
+    "examples": ["Her book offers real insight into city life.", "He showed great insight into the client's needs."],
+    "synonyms": ["understanding", "awareness", "perception", "wisdom"],
+    "antonyms": ["ignorance", "confusion", "blindness"]
+  },
+  {
+    "word": "insist",
+    "meaning": "to demand or state something forcefully",
+    "examples": ["She insisted on paying for the meal.", "He insisted that the report was accurate."],
+    "synonyms": ["demand", "maintain", "assert", "stress"],
+    "antonyms": ["yield", "concede", "withdraw"]
+  },
+  {
+    "word": "instinct",
+    "meaning": "an innate, typically fixed pattern of behavior",
+    "examples": ["Birds migrate by instinct at the same season.", "His first instinct was to call for help."],
+    "synonyms": ["impulse", "urge", "intuition", "nature"],
+    "antonyms": ["reason", "logic", "deliberation"]
+  },
+  {
+    "word": "integrate",
+    "meaning": "to combine one thing with another so they work together",
+    "examples": ["We integrated the new tools into our workflow.", "The magazine integrates text and images beautifully."],
+    "synonyms": ["combine", "merge", "unify", "mix"],
+    "antonyms": ["separate", "divide", "segregate"]
+  },
+  {
+    "word": "integrity",
+    "meaning": "the quality of being honest and having strong moral principles",
+    "examples": ["She is trusted for her integrity and fairness.", "The test confirms the data's integrity."],
+    "synonyms": ["honesty", "probity", "uprightness", "honor"],
+    "antonyms": ["dishonesty", "corruption", "deceit"]
+  },
+  {
+    "word": "intervene",
+    "meaning": "to come between two things, or to step in to try to change a situation",
+    "examples": ["The referee intervened to stop the fight.", "We had to intervene before costs spiraled."],
+    "synonyms": ["intercede", "step in", "mediate", "interrupt"],
+    "antonyms": ["ignore", "overlook", "stay out"]
+  },
+  {
+    "word": "intricate",
+    "meaning": "very complicated or detailed",
+    "examples": ["The carpet has an intricate floral pattern.", "She solved the intricate puzzle in an hour."],
+    "synonyms": ["complex", "detailed", "elaborate", "convoluted"],
+    "antonyms": ["simple", "plain", "straightforward"]
+  },
+  {
+    "word": "intuition",
+    "meaning": "the ability to understand something immediately without reasoning",
+    "examples": ["Her intuition told her the deal was wrong.", "Trust your intuition on this decision."],
+    "synonyms": ["instinct", "insight", "hunch", "sixth sense"],
+    "antonyms": ["reason", "logic", "analysis"]
+  },
+  {
+    "word": "jeopardize",
+    "meaning": "to put into danger or at risk",
+    "examples": ["Lying could jeopardize the whole project.", "The illness jeopardized his chances of playing."],
+    "synonyms": ["endanger", "threaten", "imperil", "risk"],
+    "antonyms": ["protect", "safeguard", "secure"]
+  },
+  {
+    "word": "justify",
+    "meaning": "to show or prove that something is right or reasonable",
+    "examples": ["Nothing can justify violence.", "The results justify the extra investment."],
+    "synonyms": ["explain", "vindicate", "defend", "warrant"],
+    "antonyms": ["condemn", "criticize", "disprove"]
+  },
+  {
+    "word": "keen",
+    "meaning": "eager or enthusiastic; also sharp or acute",
+    "examples": ["She is keen to start the new course.", "He has a keen eye for detail."],
+    "synonyms": ["eager", "enthusiastic", "sharp", "acute"],
+    "antonyms": ["apathetic", "indifferent", "dull"]
+  },
+  {
+    "word": "legitimate",
+    "meaning": "conforming to the law or rules; reasonable",
+    "examples": ["They have a legitimate claim to the property.", "That is a legitimate question to ask."],
+    "synonyms": ["lawful", "valid", "justifiable", "genuine"],
+    "antonyms": ["illegal", "invalid", "unlawful"]
+  },
+  {
+    "word": "leisure",
+    "meaning": "time free from work or duties",
+    "examples": ["She spends her leisure reading by the lake.", "He has little leisure during the harvest."],
+    "synonyms": ["free time", "spare time", "rest", "recreation"],
+    "antonyms": ["work", "labour", "toil"]
+  },
+  {
+    "word": "lenient",
+    "meaning": "more merciful or tolerant than expected",
+    "examples": ["The judge was lenient with the first-time offender.", "Her teacher was lenient about the late homework."],
+    "synonyms": ["merciful", "forgiving", "tolerant", "mild"],
+    "antonyms": ["strict", "harsh", "severe"]
+  },
+  {
+    "word": "liable",
+    "meaning": "legally responsible, or likely to experience something",
+    "examples": ["Drivers are liable for damage they cause.", "Old pipes are liable to burst in winter."],
+    "synonyms": ["responsible", "accountable", "prone", "likely"],
+    "antonyms": ["immune", "exempt", "safe"]
+  },
+  {
+    "word": "liberal",
+    "meaning": "open to new behavior or opinions; generous in quantity",
+    "examples": ["She holds liberal views on most issues.", "The recipe calls for a liberal amount of garlic."],
+    "synonyms": ["open-minded", "generous", "broad", "progressive"],
+    "antonyms": ["conservative", "strict", "narrow"]
+  },
+  {
+    "word": "lucrative",
+    "meaning": "producing a great deal of profit",
+    "examples": ["He signed a lucrative contract with the studio.", "Selling coffee is a surprisingly lucrative trade."],
+    "synonyms": ["profitable", "rewarding", "well-paid", "fruitful"],
+    "antonyms": ["unprofitable", "loss-making", "dwindling"]
+  },
+  {
+    "word": "magnify",
+    "meaning": "to make something appear larger, greater or more intense",
+    "examples": ["The lens magnifies tiny details.", "Media attention can magnify small issues."],
+    "synonyms": ["enlarge", "amplify", "intensify", "augment"],
+    "antonyms": ["reduce", "minimize", "shrink"]
+  },
+  {
+    "word": "maintain",
+    "meaning": "to keep something in good condition or continue a state",
+    "examples": ["He maintains the garden every weekend.", "She maintained her calm throughout the crisis."],
+    "synonyms": ["preserve", "keep", "sustain", "uphold"],
+    "antonyms": ["neglect", "abandon", "relinquish"]
+  },
+  {
+    "word": "mandatory",
+    "meaning": "required by law or rules; compulsory",
+    "examples": ["Helmets are mandatory for cyclists here.", "The training session is mandatory for all staff."],
+    "synonyms": ["compulsory", "required", "obligatory", "binding"],
+    "antonyms": ["optional", "voluntary", "discretionary"]
+  },
+  {
+    "word": "manipulate",
+    "meaning": "to control or influence something skillfully or unfairly",
+    "examples": ["He manipulated the numbers to hide the loss.", "The film manipulates emotions with loud music."],
+    "synonyms": ["control", "exploit", "sway", "manage"],
+    "antonyms": ["respect", "honor", "leave alone"]
+  },
+  {
+    "word": "mature",
+    "meaning": "fully grown or fully developed in mind or behavior",
+    "examples": ["She is very mature for her age.", "The wine needs time to mature before drinking."],
+    "synonyms": ["adult", "grown", "ripened", "seasoned"],
+    "antonyms": ["immature", "juvenile", "undeveloped"]
+  },
+  {
+    "word": "mediate",
+    "meaning": "to intervene between people to help settle a dispute",
+    "examples": ["A third party mediated the talks.", "She mediated between the two departments."],
+    "synonyms": ["negotiate", "arbitrate", "intercede", "reconcile"],
+    "antonyms": ["agitate", "inflame", "provoke"]
+  },
+  {
+    "word": "merit",
+    "meaning": "the quality of being particularly good or worthy",
+    "examples": ["The plan has real merit despite the risks.", "Scholarships here are awarded on merit."],
+    "synonyms": ["worth", "value", "excellence", "virtue"],
+    "antonyms": ["fault", "weakness", "defect"]
+  },
+  {
+    "word": "meticulous",
+    "meaning": "showing great attention to detail; very careful",
+    "examples": ["She kept meticulous records of every order.", "He is meticulous about cleaning his lenses."],
+    "synonyms": ["careful", "thorough", "precise", "scrupulous"],
+    "antonyms": ["careless", "sloppy", "hasty"]
+  },
+  {
+    "word": "moderate",
+    "meaning": "neither too much nor too little; average",
+    "examples": ["She takes a moderate approach to exercise.", "Prices rose by a moderate amount this year."],
+    "synonyms": ["reasonable", "mild", "temperate", "average"],
+    "antonyms": ["extreme", "excessive", "radical"]
+  },
+  {
+    "word": "modify",
+    "meaning": "to make partial or minor changes to something",
+    "examples": ["We modified the design to fit the budget.", "The engine was modified for better fuel economy."],
+    "synonyms": ["change", "alter", "adjust", "adapt"],
+    "antonyms": ["keep", "preserve", "retain"]
+  },
+  {
+    "word": "momentum",
+    "meaning": "the quantity of motion of a moving body; ongoing force or speed",
+    "examples": ["The campaign gained momentum after the rally.", "The ball lost momentum on the wet grass."],
+    "synonyms": ["impetus", "drive", "force", "momentum"],
+    "antonyms": ["drag", "stagnation", "stillness"]
+  },
+  {
+    "word": "monitor",
+    "meaning": "to observe and check the progress or quality of something",
+    "examples": ["Nurses monitor the patient's heart closely.", "Sensors monitor air quality in the factory."],
+    "synonyms": ["observe", "watch", "track", "oversee"],
+    "antonyms": ["ignore", "neglect", "overlook"]
+  },
+  {
+    "word": "mutual",
+    "meaning": "shared or experienced by two or more parties equally",
+    "examples": ["Their respect is mutual and hard-won.", "It was a mutual decision to end the contract."],
+    "synonyms": ["shared", "reciprocal", "joint", "common"],
+    "antonyms": ["one-sided", "unilateral", "unshared"]
+  },
+  {
+    "word": "negligent",
+    "meaning": "failing to take proper care of something",
+    "examples": ["The owner was negligent about locking the gate.", "A negligent driver caused the collision."],
+    "synonyms": ["careless", "neglectful", "reckless", "remiss"],
+    "antonyms": ["careful", "attentive", "responsible"]
+  },
+  {
+    "word": "negotiate",
+    "meaning": "to try to reach an agreement through discussion",
+    "examples": ["The union negotiated a better pay deal.", "She negotiated the price down to half."],
+    "synonyms": ["bargain", "discuss", "arbitrate", "settle"],
+    "antonyms": ["refuse", "disagree", "break off"]
+  },
+  {
+    "word": "notion",
+    "meaning": "a belief or idea about something",
+    "examples": ["He rejected the notion that money buys happiness.", "She has a romantic notion of country life."],
+    "synonyms": ["idea", "concept", "belief", "impression"],
+    "antonyms": ["fact", "certainty", "reality"]
+  },
+  {
+    "word": "objective",
+    "meaning": "based on facts rather than feelings; an aim or goal",
+    "examples": ["Journalists must stay objective in reporting.", "Our objective is to cut costs by ten percent."],
+    "synonyms": ["fair", "impartial", "neutral", "goal"],
+    "antonyms": ["biased", "subjective", "partial"]
+  },
+  {
+    "word": "obligation",
+    "meaning": "a duty or commitment that one must fulfill",
+    "examples": ["You have an obligation to repay the loan.", "She felt an obligation to attend the ceremony."],
+    "synonyms": ["duty", "commitment", "responsibility", "requirement"],
+    "antonyms": ["choice", "freedom", "option"]
+  },
+  {
+    "word": "obscure",
+    "meaning": "not discovered or known about; unclear or hard to understand",
+    "examples": ["He cited an obscure poem in the essay.", "The origins of the custom are obscure."],
+    "synonyms": ["unknown", "unclear", "vague", "hidden"],
+    "antonyms": ["famous", "obvious", "clear"]
+  },
+  {
+    "word": "obtain",
+    "meaning": "to get, acquire or secure something",
+    "examples": ["You must obtain a permit before entering.", "She obtained the visa without any trouble."],
+    "synonyms": ["get", "acquire", "secure", "gain"],
+    "antonyms": ["lose", "relinquish", "give up"]
+  },
+  {
+    "word": "obvious",
+    "meaning": "easily perceived or understood",
+    "examples": ["It was obvious that she had been crying.", "There is no obvious answer to the puzzle."],
+    "synonyms": ["clear", "evident", "plain", "apparent"],
+    "antonyms": ["obscure", "subtle", "hidden"]
+  },
+  {
+    "word": "occupy",
+    "meaning": "to fill, live in or take control of a space or time",
+    "examples": ["Reading occupies most of her evenings.", "The room is occupied until noon."],
+    "synonyms": ["fill", "inhabit", "seize", "take up"],
+    "antonyms": ["vacate", "empty", "abandon"]
+  },
+  {
+    "word": "optimum",
+    "meaning": "the best or most favorable point or amount",
+    "examples": ["Two hours is the optimum nap length for me.", "The dial lets you set the optimum temperature."],
+    "synonyms": ["best", "ideal", "optimal", "perfect"],
+    "antonyms": ["worst", "worst-case", "suboptimal"]
+  },
+  {
+    "word": "orient",
+    "meaning": "to align or position in a particular direction, or make familiar",
+    "examples": ["Orient the map toward the north.", "The program helps new staff orient quickly."],
+    "synonyms": ["align", "position", "adjust", "familiarize"],
+    "antonyms": ["misalign", "confuse", "disorient"]
+  },
+  {
+    "word": "overcome",
+    "meaning": "to succeed in dealing with a problem or difficulty",
+    "examples": ["She overcame her fear of public speaking.", "The team overcame a slow start to win."],
+    "synonyms": ["conquer", "beat", "surmount", "defeat"],
+    "antonyms": ["surrender", "yield", "succumb"]
+  },
+  {
+    "word": "overlook",
+    "meaning": "to fail to notice, or to ignore or excuse something",
+    "examples": ["It is easy to overlook small errors at night.", "The window overlooks the garden."],
+    "synonyms": ["miss", "ignore", "neglect", "disregard"],
+    "antonyms": ["notice", "spot", "consider"]
+  },
+  {
+    "word": "overseas",
+    "meaning": "in or to a foreign country, especially across the sea",
+    "examples": ["He spent a year studying overseas.", "The firm has several overseas branches."],
+    "synonyms": ["abroad", "foreign", "international", "transnational"],
+    "antonyms": ["domestic", "local", "home"]
+  },
+  {
+    "word": "participate",
+    "meaning": "to take part in an activity or event",
+    "examples": ["All students are encouraged to participate.", "She participated in the cleanup drive."],
+    "synonyms": ["join", "take part", "engage", "partake"],
+    "antonyms": ["withdraw", "abstain", "sit out"]
+  },
+  {
+    "word": "passion",
+    "meaning": "a strong and barely controllable feeling or enthusiasm",
+    "examples": ["He spoke about music with great passion.", "Her passion for justice never faded."],
+    "synonyms": ["enthusiasm", "zeal", "fervor", "devotion"],
+    "antonyms": ["apathy", "indifference", "coolness"]
+  },
+  {
+    "word": "peculiar",
+    "meaning": "strange or unusual, or particular to a person or place",
+    "examples": ["The soup has a peculiar aftertaste.", "This custom is peculiar to the northern region."],
+    "synonyms": ["odd", "strange", "unusual", "distinctive"],
+    "antonyms": ["normal", "ordinary", "common"]
+  },
+  {
+    "word": "penetrate",
+    "meaning": "to make a way into or through something",
+    "examples": ["The nails did not penetrate the hard wood.", "Cold air penetrated the thin walls."],
+    "synonyms": ["pierce", "enter", "puncture", "permeate"],
+    "antonyms": ["seal", "block", "bounce off"]
+  },
+  {
+    "word": "perceive",
+    "meaning": "to become aware of something through the senses or the mind",
+    "examples": ["She perceived a change in his tone.", "Animals perceive sounds we cannot hear."],
+    "synonyms": ["notice", "observe", "sense", "detect"],
+    "antonyms": ["miss", "ignore", "overlook"]
+  },
+  {
+    "word": "persist",
+    "meaning": "to continue firmly in an action despite difficulty",
+    "examples": ["She persists in practicing every single day.", "The rain persisted through the weekend."],
+    "synonyms": ["continue", "endure", "persevere", "carry on"],
+    "antonyms": ["stop", "cease", "quit"]
+  },
+  {
+    "word": "perspective",
+    "meaning": "a particular attitude or point of view",
+    "examples": ["Travel gives you a fresh perspective on life.", "From her perspective, the decision was obvious."],
+    "synonyms": ["viewpoint", "outlook", "standpoint", "angle"],
+    "antonyms": ["myopia", "narrow-mindedness"]
+  },
+  {
+    "word": "persuade",
+    "meaning": "to cause someone to do or believe something through reasoning",
+    "examples": ["She persuaded him to join the hike.", "The graphs persuaded the board to wait."],
+    "synonyms": ["convince", "influence", "coax", "sway"],
+    "antonyms": ["dissuade", "deter", "discourage"]
+  },
+  {
+    "word": "portion",
+    "meaning": "a part or share of something",
+    "examples": ["He ate only a small portion of the meal.", "A large portion of the budget goes to staff."],
+    "synonyms": ["part", "share", "segment", "piece"],
+    "antonyms": ["whole", "entirety", "all"]
+  },
+  {
+    "word": "practical",
+    "meaning": "concerned with real situations rather than theory",
+    "examples": ["She gave practical advice on managing money.", "The course is highly practical and hands-on."],
+    "synonyms": ["realistic", "useful", "functional", "sensible"],
+    "antonyms": ["theoretical", "impractical", "idealistic"]
+  },
+  {
+    "word": "precise",
+    "meaning": "exact, accurate and clearly expressed",
+    "examples": ["The recipe requires precise measurements.", "Please give the precise address of the venue."],
+    "synonyms": ["exact", "accurate", "specific", "explicit"],
+    "antonyms": ["vague", "imprecise", "approximate"]
+  },
+  {
+    "word": "predict",
+    "meaning": "to say what will happen before it does",
+    "examples": ["Meteorologists predict rain by Friday.", "No one could predict the outcome."],
+    "synonyms": ["forecast", "foresee", "anticipate", "foretell"],
+    "antonyms": ["doubt", "guess wrong", "misjudge"]
+  },
+  {
+    "word": "predominant",
+    "meaning": "present as the strongest or main element",
+    "examples": ["Oak is the predominant tree in this forest.", "Her predominant worry was the flight delay."],
+    "synonyms": ["main", "chief", "principal", "dominant"],
+    "antonyms": ["minor", "secondary", "marginal"]
+  },
+  {
+    "word": "preliminary",
+    "meaning": "coming before a main event or action; preparatory",
+    "examples": ["Early polls are only preliminary.", "The team passed the preliminary round easily."],
+    "synonyms": ["initial", "introductory", "first", "preparatory"],
+    "antonyms": ["final", "conclusive", "main"]
+  },
+  {
+    "word": "preserve",
+    "meaning": "to keep something safe or in its original state",
+    "examples": ["Salting helps preserve the fish for months.", "The building was preserved as a museum."],
+    "synonyms": ["protect", "conserve", "maintain", "safeguard"],
+    "antonyms": ["destroy", "damage", "abandon"]
+  },
+  {
+    "word": "prevail",
+    "meaning": "to prove more powerful than opponents or to be widespread",
+    "examples": ["Common sense must prevail over panic.", "Calm prevailed after the storm passed."],
+    "synonyms": ["win", "triumph", "dominate", "persist"],
+    "antonyms": ["lose", "succumb", "yield"]
+  },
+  {
+    "word": "previous",
+    "meaning": "existing or occurring before something else",
+    "examples": ["She improved on her previous record.", "The previous owner left the key."],
+    "synonyms": ["prior", "earlier", "former", "preceding"],
+    "antonyms": ["next", "following", "later"]
+  },
+  {
+    "word": "priority",
+    "meaning": "the fact of being more important than other things",
+    "examples": ["Safety is our top priority.", "Give priority to the tasks due today."],
+    "synonyms": ["precedence", "importance", "urgency", "emphasis"],
+    "antonyms": ["afterthought", "secondary", "triviality"]
+  },
+  {
+    "word": "proceed",
+    "meaning": "to begin or continue a course of action",
+    "examples": ["We may now proceed with the plan.", "The meeting proceeded without interruptions."],
+    "synonyms": ["continue", "advance", "progress", "carry on"],
+    "antonyms": ["stop", "pause", "cease"]
+  },
+  {
+    "word": "proficient",
+    "meaning": "competent or skilled in doing something",
+    "examples": ["She is proficient in three languages.", "Proficient typists can reach seventy words a minute."],
+    "synonyms": ["skilled", "capable", "expert", "adept"],
+    "antonyms": ["unskilled", "incompetent", "inept"]
+  },
+  {
+    "word": "prominent",
+    "meaning": "important, famous or easily noticeable",
+    "examples": ["He holds a prominent role in the community.", "The tower is a prominent feature of the skyline."],
+    "synonyms": ["notable", "famous", "leading", "conspicuous"],
+    "antonyms": ["obscure", "unknown", "insignificant"]
+  },
+  {
+    "word": "promote",
+    "meaning": "to support or actively encourage something, or advance in rank",
+    "examples": ["The ad promotes healthy snacks.", "She was promoted to manager last year."],
+    "synonyms": ["encourage", "support", "boost", "advance"],
+    "antonyms": ["discourage", "demote", "suppress"]
+  },
+  {
+    "word": "proportion",
+    "meaning": "a part, share or ratio of a whole",
+    "examples": ["A high proportion of students passed.", "The recipe balances the ingredients in equal proportion."],
+    "synonyms": ["ratio", "share", "percentage", "fraction"],
+    "antonyms": ["whole", "totality", "entirety"]
+  },
+  {
+    "word": "prospect",
+    "meaning": "the possibility or likelihood of a future event",
+    "examples": ["The prospect of snow thrilled the children.", "There is little prospect of an early resolution."],
+    "synonyms": ["possibility", "likelihood", "outlook", "chance"],
+    "antonyms": ["improbability", "hopelessness", "unlikelihood"]
+  },
+  {
+    "word": "prosper",
+    "meaning": "to succeed materially or flourish",
+    "examples": ["Small shops prospered along the new road.", "The region prospered after the dam was built."],
+    "synonyms": ["thrive", "flourish", "succeed", "bloom"],
+    "antonyms": ["decline", "fail", "wither"]
+  },
+  {
+    "word": "provoke",
+    "meaning": "to stimulate or cause a reaction, often a strong one",
+    "examples": ["The joke provoked laughter across the room.", "Do not provoke the guard dog."],
+    "synonyms": ["incite", "trigger", "induce", "stir up"],
+    "antonyms": ["calm", "soothe", "prevent"]
+  },
+  {
+    "word": "pursue",
+    "meaning": "to follow or chase, or to continue an activity to achieve a goal",
+    "examples": ["She decided to pursue a career in medicine.", "The police pursued the car for several miles."],
+    "synonyms": ["chase", "seek", "follow", "strive for"],
+    "antonyms": ["abandon", "give up", "flee"]
+  },
+  {
+    "word": "qualify",
+    "meaning": "to meet the necessary standard, or limit the meaning of something",
+    "examples": ["You must qualify for the exam first.", "She qualified her praise with a warning."],
+    "synonyms": ["earn", "merit", "condition", "moderate"],
+    "antonyms": ["disqualify", "fail", "reject"]
+  },
+  {
+    "word": "rapid",
+    "meaning": "happening in a short time or at great speed",
+    "examples": ["The city saw rapid growth in a decade.", "His breathing became shallow and rapid."],
+    "synonyms": ["fast", "swift", "quick", "speedy"],
+    "antonyms": ["slow", "gradual", "sluggish"]
+  },
+  {
+    "word": "rational",
+    "meaning": "based on reason or logic rather than emotion",
+    "examples": ["Try to make a rational decision under pressure.", "There is a rational explanation for the noise."],
+    "synonyms": ["logical", "reasonable", "sensible", "sound"],
+    "antonyms": ["irrational", "illogical", "emotional"]
+  },
+  {
+    "word": "react",
+    "meaning": "to act or behave in response to something",
+    "examples": ["She reacted calmly to the surprise news.", "Plants react to light by growing toward it."],
+    "synonyms": ["respond", "answer", "reply", "retaliate"],
+    "antonyms": ["ignore", "withstand", "withhold"]
+  },
+  {
+    "word": "recover",
+    "meaning": "to return to a normal state of health or operation",
+    "examples": ["She recovered fully after two weeks of rest.", "The market recovered quickly from the dip."],
+    "synonyms": ["heal", "recuperate", "rebound", "restore"],
+    "antonyms": ["worsen", "decline", "deteriorate"]
+  },
+  {
+    "word": "reduce",
+    "meaning": "to make something smaller in size, amount or degree",
+    "examples": ["The store reduced the price by half.", "Turning down the heat reduces energy use."],
+    "synonyms": ["decrease", "diminish", "lessen", "lower"],
+    "antonyms": ["increase", "raise", "expand"]
+  },
+  {
+    "word": "refund",
+    "meaning": "to pay back money received or spent",
+    "examples": ["The shop agreed to refund the faulty item.", "You can refund the ticket within 24 hours."],
+    "synonyms": ["reimburse", "repay", "return", "compensate"],
+    "antonyms": ["charge", "keep", "withhold"]
+  },
+  {
+    "word": "regulate",
+    "meaning": "to control or maintain a rate or standard",
+    "examples": ["A thermostat regulates the room's temperature.", "The agency regulates food labeling."],
+    "synonyms": ["control", "govern", "manage", "supervise"],
+    "antonyms": ["ignore", "deregulate", "loosen"]
+  },
+  {
+    "word": "reject",
+    "meaning": "to refuse to accept, consider or agree to something",
+    "examples": ["They rejected the offer without discussion.", "His body began to reject the transplant."],
+    "synonyms": ["refuse", "decline", "dismiss", "turn down"],
+    "antonyms": ["accept", "approve", "embrace"]
+  },
+  {
+    "word": "relevant",
+    "meaning": "closely connected to the matter at hand",
+    "examples": ["Please only submit relevant documents.", "Her experience is highly relevant to this role."],
+    "synonyms": ["pertinent", "applicable", "connected", "related"],
+    "antonyms": ["irrelevant", "unrelated", "off-topic"]
+  },
+  {
+    "word": "relieve",
+    "meaning": "to ease or reduce pain, distress or a burden",
+    "examples": ["The medicine relieves the headache quickly.", "A short break relieved the pressure on the team."],
+    "synonyms": ["ease", "soothe", "alleviate", "lighten"],
+    "antonyms": ["aggravate", "intensify", "worsen"]
+  },
+  {
+    "word": "reluctant",
+    "meaning": "unwilling and hesitant",
+    "examples": ["She was reluctant to leave the warm house.", "He gave a reluctant nod of agreement."],
+    "synonyms": ["unwilling", "hesitant", "disinclined", "averse"],
+    "antonyms": ["eager", "willing", "ready"]
+  },
+  {
+    "word": "remarkable",
+    "meaning": "worthy of attention; striking or unusual",
+    "examples": ["She made a remarkable recovery in weeks.", "It is remarkable how quickly he learned."],
+    "synonyms": ["notable", "extraordinary", "outstanding", "impressive"],
+    "antonyms": ["ordinary", "unremarkable", "commonplace"]
+  },
+  {
+    "word": "remedy",
+    "meaning": "a medicine or treatment that cures or relieves a condition",
+    "examples": ["Honey is a natural remedy for a sore throat.", "There is no quick remedy for the shortage."],
+    "synonyms": ["cure", "treatment", "solution", "medicine"],
+    "antonyms": ["cause", "aggravation", "problem"]
+  },
+  {
+    "word": "remote",
+    "meaning": "far away in distance or time; isolated",
+    "examples": ["They lived in a remote mountain village.", "The chances of rain seem remote."],
+    "synonyms": ["distant", "faraway", "isolated", "secluded"],
+    "antonyms": ["near", "close", "nearby"]
+  },
+  {
+    "word": "render",
+    "meaning": "to provide or give, or to cause to become",
+    "examples": ["The court rendered its final judgment.", "The crash rendered the car undrivable."],
+    "synonyms": ["provide", "deliver", "make", "produce"],
+    "antonyms": ["withhold", "remove", "undo"]
+  },
+  {
+    "word": "resilient",
+    "meaning": "able to recover quickly from difficulty or change",
+    "examples": ["Children are often more resilient than we expect.", "The resilient economy bounced back within a year."],
+    "synonyms": ["tough", "adaptable", "flexible", "robust"],
+    "antonyms": ["fragile", "vulnerable", "delicate"]
+  },
+  {
+    "word": "resolve",
+    "meaning": "to settle a problem or firmly decide something",
+    "examples": ["The teams resolved the dispute over coffee.", "She resolved to wake up earlier."],
+    "synonyms": ["settle", "solve", "decide", "determine"],
+    "antonyms": ["aggravate", "complicate", "dither"]
+  },
+  {
+    "word": "restrain",
+    "meaning": "to hold back or prevent from acting freely",
+    "examples": ["He could not restrain his excitement.", "The harness restrains the load in transit."],
+    "synonyms": ["hold back", "control", "curb", "suppress"],
+    "antonyms": ["release", "free", "encourage"]
+  },
+  {
+    "word": "retain",
+    "meaning": "to keep possession or control of something",
+    "examples": ["She retained her calm in the chaos.", "The cloth retains water for a long time."],
+    "synonyms": ["keep", "hold", "preserve", "maintain"],
+    "antonyms": ["lose", "release", "discard"]
+  },
+  {
+    "word": "reveal",
+    "meaning": "to make previously unknown or hidden information known",
+    "examples": ["The survey revealed surprising trends.", "She revealed the plan only at the meeting."],
+    "synonyms": ["disclose", "expose", "unveil", "show"],
+    "antonyms": ["conceal", "hide", "mask"]
+  },
+  {
+    "word": "revenge",
+    "meaning": "the action of inflicting harm in return for a wrong done",
+    "examples": ["He sought revenge for the insult.", "She ignored revenge and moved on with grace."],
+    "synonyms": ["retaliation", "retribution", "vengeance", "payback"],
+    "antonyms": ["forgiveness", "mercy", "pardon"]
+  },
+  {
+    "word": "revenue",
+    "meaning": "income received, especially by a company or government",
+    "examples": ["Tourism is a major source of local revenue.", "The app earns revenue through ads."],
+    "synonyms": ["income", "earnings", "takings", "gross"],
+    "antonyms": ["expense", "cost", "loss"]
+  },
+  {
+    "word": "settle",
+    "meaning": "to resolve a dispute, or to move to and stay in a place",
+    "examples": ["They settled the argument over dinner.", "The family settled in a quiet coastal town."],
+    "synonyms": ["resolve", "agree", "establish", "calm"],
+    "antonyms": ["agitate", "disagree", "wander"]
+  },
+  {
+    "word": "significant",
+    "meaning": "important or large enough to be noticed",
+    "examples": ["The change made a significant difference.", "There was a significant rise in visitors."],
+    "synonyms": ["important", "notable", "considerable", "meaningful"],
+    "antonyms": ["insignificant", "minor", "trivial"]
+  },
+  {
+    "word": "sincere",
+    "meaning": "genuine and honest in feeling or intention",
+    "examples": ["She gave a sincere apology for the delay.", "His thanks sounded sincere and warm."],
+    "synonyms": ["genuine", "honest", "heartfelt", "truthful"],
+    "antonyms": ["insincere", "fake", "dishonest"]
+  },
+  {
+    "word": "skeptical",
+    "meaning": "not easily convinced; doubting",
+    "examples": ["Doctors were skeptical of the new treatment.", "She remained skeptical about the forecast."],
+    "synonyms": ["doubtful", "incredulous", "suspicious", "uncertain"],
+    "antonyms": ["trusting", "credulous", "convinced"]
+  },
+  {
+    "word": "solemn",
+    "meaning": "formal and dignified, or serious and grave",
+    "examples": ["The ceremony had a solemn, quiet mood.", "He made a solemn promise to return."],
+    "synonyms": ["serious", "grave", "dignified", "somber"],
+    "antonyms": ["cheerful", "frivolous", "lighthearted"]
+  },
+  {
+    "word": "sophisticated",
+    "meaning": "developed to a high degree of complexity or refinement",
+    "examples": ["The lab uses sophisticated scanning equipment.", "She has a sophisticated taste in music."],
+    "synonyms": ["advanced", "complex", "refined", "polished"],
+    "antonyms": ["simple", "basic", "crude"]
+  },
+  {
+    "word": "stable",
+    "meaning": "not likely to change or fail; steady",
+    "examples": ["The patient is in a stable condition.", "They chose a stable currency to save in."],
+    "synonyms": ["steady", "secure", "constant", "reliable"],
+    "antonyms": ["unstable", "volatile", "shaky"]
+  },
+  {
+    "word": "strategy",
+    "meaning": "a plan of action designed to achieve a long-term aim",
+    "examples": ["The coach changed the team's strategy at halftime.", "A clear strategy beats random effort."],
+    "synonyms": ["plan", "approach", "tactic", "scheme"],
+    "antonyms": ["improvisation", "chaos", "randomness"]
+  },
+  {
+    "word": "strengthen",
+    "meaning": "to make or become stronger",
+    "examples": ["Daily walks strengthen the heart.", "The bond between them strengthened over time."],
+    "synonyms": ["fortify", "reinforce", "bolster", "harden"],
+    "antonyms": ["weaken", "undermine", "erode"]
+  },
+  {
+    "word": "strive",
+    "meaning": "to make great efforts to achieve something",
+    "examples": ["They strive to deliver quality on every order.", "She strives to improve a little each day."],
+    "synonyms": ["endeavor", "struggle", "labor", "aim"],
+    "antonyms": ["give up", "quit", "neglect"]
+  },
+  {
+    "word": "sturdy",
+    "meaning": "strongly built or made; robust",
+    "examples": ["The sturdy table survived the move.", "She is a sturdy and dependable climber."],
+    "synonyms": ["strong", "durable", "tough", "solid"],
+    "antonyms": ["fragile", "flimsy", "weak"]
+  },
+  {
+    "word": "submit",
+    "meaning": "to present for consideration, or give in to authority",
+    "examples": ["Please submit the form by Friday.", "He refused to submit to the unfair rule."],
+    "synonyms": ["present", "hand in", "yield", "surrender"],
+    "antonyms": ["retain", "withdraw", "resist"]
+  },
+  {
+    "word": "subsequent",
+    "meaning": "coming after something in time or order",
+    "examples": ["Subsequent meetings were held online.", "The injuries hampered her subsequent performances."],
+    "synonyms": ["later", "following", "ensuing", "next"],
+    "antonyms": ["previous", "prior", "earlier"]
+  },
+  {
+    "word": "substantial",
+    "meaning": "of considerable size, value or importance",
+    "examples": ["They invested a substantial sum in repairs.", "The plan requires substantial changes."],
+    "synonyms": ["considerable", "significant", "large", "weighty"],
+    "antonyms": ["small", "insubstantial", "minor"]
+  },
+  {
+    "word": "sufficient",
+    "meaning": "enough for a purpose",
+    "examples": ["There was sufficient food for everyone.", "Her explanation was sufficient for now."],
+    "synonyms": ["adequate", "enough", "ample", "acceptable"],
+    "antonyms": ["insufficient", "inadequate", "scarce"]
+  },
+  {
+    "word": "summarize",
+    "meaning": "to give a brief statement of the main points",
+    "examples": ["Could you summarize the meeting notes?", "The final paragraph summarizes the whole argument."],
+    "synonyms": ["outline", "condense", "recap", "abridge"],
+    "antonyms": ["expand", "elaborate", "detail"]
+  },
+  {
+    "word": "superb",
+    "meaning": "excellent in quality; magnificent",
+    "examples": ["The restaurant served a superb meal.", "Her performance was simply superb."],
+    "synonyms": ["excellent", "magnificent", "outstanding", "splendid"],
+    "antonyms": ["poor", "mediocre", "terrible"]
+  },
+  {
+    "word": "supplement",
+    "meaning": "something added to complete or enhance the rest",
+    "examples": ["She takes vitamin supplements in winter.", "The article is a supplement to the course."],
+    "synonyms": ["addition", "extra", "extension", "appendix"],
+    "antonyms": ["essential", "core", "base"]
+  },
+  {
+    "word": "suppress",
+    "meaning": "to forcibly put an end to, or keep from being expressed",
+    "examples": ["The army suppressed the uprising.", "She suppressed a laugh during the speech."],
+    "synonyms": ["quell", "crush", "restrain", "stifle"],
+    "antonyms": ["release", "encourage", "express"]
+  },
+  {
+    "word": "surplus",
+    "meaning": "an amount left over when needs have been met",
+    "examples": ["The farm sold its surplus at the market.", "The budget finished with a small surplus."],
+    "synonyms": ["excess", "extra", "remainder", "overflow"],
+    "antonyms": ["shortage", "deficit", "lack"]
+  },
+  {
+    "word": "sustain",
+    "meaning": "to support, maintain or endure over time",
+    "examples": ["The farm sustains three families.", "She sustained her pace for the full marathon."],
+    "synonyms": ["support", "maintain", "prolong", "uphold"],
+    "antonyms": ["abandon", "weaken", "halt"]
+  },
+  {
+    "word": "sympathy",
+    "meaning": "feelings of pity and sorrow for someone else's misfortune",
+    "examples": ["He offered his sympathy after the loss.", "She had little sympathy for the careless errors."],
+    "synonyms": ["compassion", "pity", "empathy", "understanding"],
+    "antonyms": ["indifference", "cruelty", "callousness"]
+  },
+  {
+    "word": "tactics",
+    "meaning": "the methods or actions used to achieve a short-term aim",
+    "examples": ["The team tried a more aggressive tactic.", "Negotiation tactics vary by culture."],
+    "synonyms": ["strategy", "methods", "maneuvers", "approach"],
+    "antonyms": ["strategy", "plan"]
+  },
+  {
+    "word": "temporary",
+    "meaning": "lasting for only a limited period",
+    "examples": ["She found temporary work for the summer.", "The road closure is temporary."],
+    "synonyms": ["provisional", "short-term", "transient", "interim"],
+    "antonyms": ["permanent", "lasting", "enduring"]
+  },
+  {
+    "word": "tension",
+    "meaning": "the state of being stretched tight, or strained relations",
+    "examples": ["There was tension in the room before the vote.", "Adjust the rope to remove the tension."],
+    "synonyms": ["strain", "stress", "pressure", "friction"],
+    "antonyms": ["ease", "relaxation", "calm"]
+  },
+  {
+    "word": "thorough",
+    "meaning": "complete with regard to every detail; careful",
+    "examples": ["The doctor did a thorough examination.", "Her report is thorough and well organized."],
+    "synonyms": ["detailed", "careful", "comprehensive", "complete"],
+    "antonyms": ["superficial", "careless", "sketchy"]
+  },
+  {
+    "word": "threaten",
+    "meaning": "to state an intention to harm, or to be a likely danger",
+    "examples": ["Rising floods threaten the low-lying towns.", "He threatened to report the leak."],
+    "synonyms": ["endanger", "menace", "warn", "intimidate"],
+    "antonyms": ["protect", "comfort", "reassure"]
+  },
+  {
+    "word": "tolerate",
+    "meaning": "to allow the existence of something objectionable, or endure it",
+    "examples": ["The plant cannot tolerate frost.", "She tolerates the noise from the busy street."],
+    "synonyms": ["endure", "accept", "bear", "stomach"],
+    "antonyms": ["reject", "oppose", "resist"]
+  },
+  {
+    "word": "tradition",
+    "meaning": "the transmission of customs or beliefs from generation to generation",
+    "examples": ["Lighting a candle is a family tradition.", "The town keeps many old traditions alive."],
+    "synonyms": ["custom", "convention", "practice", "heritage"],
+    "antonyms": ["innovation", "change", "novelty"]
+  },
+  {
+    "word": "transform",
+    "meaning": "to change into a different form or state",
+    "examples": ["Training transformed her from shy to confident.", "The area was transformed by new housing."],
+    "synonyms": ["change", "convert", "remodel", "alter"],
+    "antonyms": ["keep", "preserve", "maintain"]
+  },
+  {
+    "word": "transparent",
+    "meaning": "allowing light through; clear and open",
+    "examples": ["The glass is completely transparent.", "The company promised a transparent selection process."],
+    "synonyms": ["clear", "see-through", "open", "honest"],
+    "antonyms": ["opaque", "hidden", "unclear"]
+  },
+  {
+    "word": "tremendous",
+    "meaning": "very great in amount, scale or intensity",
+    "examples": ["The project required tremendous effort.", "They had a tremendous time at the festival."],
+    "synonyms": ["huge", "enormous", "massive", "immense"],
+    "antonyms": ["tiny", "small", "insignificant"]
+  },
+  {
+    "word": "trigger",
+    "meaning": "to cause an event or reaction to happen",
+    "examples": ["The alarm triggers when the door opens.", "Certain smells trigger old memories."],
+    "synonyms": ["cause", "start", "spark", "prompt"],
+    "antonyms": ["prevent", "stop", "block"]
+  },
+  {
+    "word": "ultimate",
+    "meaning": "being the best or most extreme of its kind; final",
+    "examples": ["The summit is the ultimate test of endurance.", "Her ultimate goal is to teach abroad."],
+    "synonyms": ["final", "greatest", "supreme", "paramount"],
+    "antonyms": ["first", "initial", "least"]
+  },
+  {
+    "word": "undermine",
+    "meaning": "to weaken or damage gradually or insidiously",
+    "examples": ["Gossip can undermine team trust.", "The flood undermined the bridge's foundations."],
+    "synonyms": ["weaken", "erode", "sap", "subvert"],
+    "antonyms": ["strengthen", "reinforce", "support"]
+  },
+  {
+    "word": "uniform",
+    "meaning": "not varying; the same in all cases",
+    "examples": ["The floors have a uniform gray tone.", "Rules are applied uniform across all branches."],
+    "synonyms": ["consistent", "identical", "even", "regular"],
+    "antonyms": ["varied", "uneven", "diverse"]
+  },
+  {
+    "word": "unique",
+    "meaning": "being the only one of its kind",
+    "examples": ["Each snowflake is unique.", "The region offers a unique blend of cultures."],
+    "synonyms": ["distinctive", "one-of-a-kind", "singular", "unmatched"],
+    "antonyms": ["common", "ordinary", "typical"]
+  },
+  {
+    "word": "vague",
+    "meaning": "of uncertain or indefinite meaning",
+    "examples": ["He gave only a vague answer about the timeline.", "A vague memory of the song came back to her."],
+    "synonyms": ["unclear", "indistinct", "ambiguous", "hazy"],
+    "antonyms": ["clear", "precise", "specific"]
+  },
+  {
+    "word": "vanish",
+    "meaning": "to disappear suddenly and completely",
+    "examples": ["The magician made the coin vanish.", "Her worries vanished once she heard the news."],
+    "synonyms": ["disappear", "evaporate", "fade", "disperse"],
+    "antonyms": ["appear", "materialize", "emerge"]
+  },
+  {
+    "word": "vast",
+    "meaning": "of very great extent or quantity",
+    "examples": ["The desert stretches over vast distances.", "They spent a vast sum on the stadium."],
+    "synonyms": ["huge", "enormous", "immense", "expansive"],
+    "antonyms": ["tiny", "narrow", "limited"]
+  },
+  {
+    "word": "verify",
+    "meaning": "to check or prove the truth or accuracy of something",
+    "examples": ["Please verify your email address.", "Engineers verified the bridge's stability."],
+    "synonyms": ["confirm", "validate", "check", "prove"],
+    "antonyms": ["disprove", "refute", "doubt"]
+  },
+  {
+    "word": "versatile",
+    "meaning": "able to adapt or be used for many different functions",
+    "examples": ["Eggs are a versatile ingredient.", "She is a versatile actor across genres."],
+    "synonyms": ["adaptable", "flexible", "multi-talented", "all-round"],
+    "antonyms": ["limited", "rigid", "specialized"]
+  },
+  {
+    "word": "viable",
+    "meaning": "capable of working successfully; feasible",
+    "examples": ["Is solar power viable in your region?", "The startup proposed a viable business model."],
+    "synonyms": ["feasible", "workable", "practical", "possible"],
+    "antonyms": ["impractical", "unworkable", "impossible"]
+  },
+  {
+    "word": "vigorous",
+    "meaning": "strong, healthy and full of energy",
+    "examples": ["He gave the floor a vigorous scrub.", "Vigorous debate sharpened the final plan."],
+    "synonyms": ["energetic", "lively", "robust", "forceful"],
+    "antonyms": ["weak", "feeble", "lazy"]
+  },
+  {
+    "word": "virtual",
+    "meaning": "almost or nearly the thing described; simulated by computer",
+    "examples": ["The meeting is virtual this week.", "She was a virtual stranger to the team."],
+    "synonyms": ["digital", "online", "simulated", "near"],
+    "antonyms": ["physical", "real", "actual"]
+  },
+  {
+    "word": "virtue",
+    "meaning": "behavior showing high moral standards; a good quality",
+    "examples": ["Patience is a virtue worth cultivating.", "She praised the virtue of honest work."],
+    "synonyms": ["goodness", "morality", "integrity", "excellence"],
+    "antonyms": ["vice", "immorality", "corruption"]
+  },
+  {
+    "word": "vital",
+    "meaning": "absolutely necessary; essential to life",
+    "examples": ["Water is vital for survival.", "Timing is vital in this negotiation."],
+    "synonyms": ["essential", "crucial", "critical", "fundamental"],
+    "antonyms": ["unnecessary", "dispensable", "minor"]
+  },
+  {
+    "word": "venture",
+    "meaning": "a risky or daring undertaking, or to dare to do something",
+    "examples": ["The bakery was an ambitious venture.", "She ventured out into the storm for supplies."],
+    "synonyms": ["enterprise", "project", "undertaking", "gamble"],
+    "antonyms": ["routine", "certainty", "safety"]
+  },
+  {
+    "word": "volume",
+    "meaning": "the amount of space occupied, or a large quantity",
+    "examples": ["The volume of traffic doubles in summer.", "Turn down the volume on the radio."],
+    "synonyms": ["amount", "quantity", "capacity", "loudness"],
+    "antonyms": ["silence", "emptiness", "minimum"]
+  },
+  {
+    "word": "widespread",
+    "meaning": "found or distributed over a large area or among many people",
+    "examples": ["The disease caused widespread concern.", "Smartphones now have widespread use in the region."],
+    "synonyms": ["extensive", "broad", "prevalent", "common"],
+    "antonyms": ["rare", "localized", "limited"]
+  },
+  {
+    "word": "wisdom",
+    "meaning": "the quality of having experience, knowledge and good judgment",
+    "examples": ["He shared his wisdom with young engineers.", "There is wisdom in waiting before deciding."],
+    "synonyms": ["judgment", "insight", "sagacity", "prudence"],
+    "antonyms": ["folly", "ignorance", "foolishness"]
+  },
+  {
+    "word": "worthwhile",
+    "meaning": "worth the time, money or effort spent",
+    "examples": ["The course was long but wholly worthwhile.", "Cleaning the garage turned out to be worthwhile."],
+    "synonyms": ["valuable", "useful", "rewarding", "beneficial"],
+    "antonyms": ["worthless", "pointless", "futile"]
+  }
+]

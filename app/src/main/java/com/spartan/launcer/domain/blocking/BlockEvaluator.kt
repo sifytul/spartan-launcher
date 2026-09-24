@@ -1,5 +1,6 @@
 package com.spartan.launcer.domain.blocking
 
+import com.spartan.launcer.data.ShortVideoPackages
 import com.spartan.launcer.data.model.BlockSchedule
 
 object BlockEvaluator {
@@ -13,6 +14,9 @@ object BlockEvaluator {
         ownPackageName: String,
         blockedPackages: Set<String>,
         blockShortVideos: Boolean = false,
+        shortVideoPackages: Set<String> = ShortVideoPackages.DEFAULT_DISTRACTOR_PACKAGES,
+        shortsOnlyPackage: String? = null,
+        shortsVisible: Boolean = false,
         usageMinutes: Int,
         timeLimits: Map<String, Int>,
         activeSchedule: BlockSchedule?,
@@ -26,8 +30,15 @@ object BlockEvaluator {
         // Temporary grace ("Use anyway") window.
         if (nowMs < tempAllowedUntil) return BlockDecision.ALLOW
 
+        // A package covered by the curated short-video list. When a single package
+        // (YouTube) is in "Shorts only" mode, it is only covered while the Shorts
+        // player is actually visible on screen; a plain manual block still wins.
+        val shortsPresetApplies = blockShortVideos &&
+            packageName in shortVideoPackages &&
+            !(packageName == shortsOnlyPackage && !shortsVisible)
+
         val manualBlocked =
-            if (blockShortVideos) blockedPackages + ShortVideoPackages.DISTRACTOR_PACKAGES
+            if (shortsPresetApplies) blockedPackages + packageName
             else blockedPackages
 
         val active = activeSchedule
@@ -42,7 +53,10 @@ object BlockEvaluator {
             return BlockDecision.block(BlockReason.LIMIT)
         }
         if (packageName in manualBlocked) {
-            return BlockDecision.block(BlockReason.MANUAL)
+            val blockedByShorts = shortsPresetApplies &&
+                packageName == shortsOnlyPackage &&
+                packageName !in blockedPackages
+            return BlockDecision.block(if (blockedByShorts) BlockReason.SHORTS else BlockReason.MANUAL)
         }
         return BlockDecision.ALLOW
     }

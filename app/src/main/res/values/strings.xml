@@ -8,7 +8,9 @@
     <string name="block_overlay_reason_limit">You have used up today\'s allowance for this app.</string>
     <string name="block_overlay_reason_schedule">This app is blocked by the current schedule.</string>
     <string name="block_overlay_reason_focus">A focus session is running.</string>
-    <string name="block_overlay_use_anyway">Use anyway (2 min)</string>
+    <string name="block_overlay_reason_shorts">YouTube Shorts are blocked.</string>
+    <string name="block_overlay_use_anyway_unlock">Use anyway (until lock)</string>
+    <string name="block_overlay_use_anyway_minutes">Use anyway (%1$d min)</string>
     <string name="block_overlay_home">Take me home</string>
     <string name="block_overlay_countdown">Auto-opening in %1$d</string>
 </resources>

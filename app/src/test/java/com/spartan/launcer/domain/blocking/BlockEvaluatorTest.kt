@@ -1,5 +1,6 @@
 package com.spartan.launcer.domain.blocking
 
+import com.spartan.launcer.data.ShortVideoPackages
 import com.spartan.launcer.data.model.BlockSchedule
 import java.time.DayOfWeek
 import org.junit.Assert.assertEquals
@@ -206,5 +207,85 @@ class BlockEvaluatorTest {
             tempAllowedUntil = 0, nowMs = now
         )
         assertEquals(BlockReason.SCHEDULE, decision.reason)
+    }
+
+    @Test
+    fun customShortVideoListHonorsAddedApps() {
+        val curated = ShortVideoPackages.DEFAULT_DISTRACTOR_PACKAGES + "com.custom.shorts"
+        val decision = BlockEvaluator.decide(
+            packageName = "com.custom.shorts", ownPackageName = own,
+            blockedPackages = emptySet(), blockShortVideos = true,
+            shortVideoPackages = curated,
+            usageMinutes = 0, timeLimits = emptyMap(), activeSchedule = null,
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = 0, nowMs = now
+        )
+        assertEquals(BlockReason.MANUAL, decision.reason)
+    }
+
+    @Test
+    fun customShortVideoListHonorsRemovedDefaults() {
+        val curated = ShortVideoPackages.DEFAULT_DISTRACTOR_PACKAGES - "com.instagram.android"
+        val decision = BlockEvaluator.decide(
+            packageName = "com.instagram.android", ownPackageName = own,
+            blockedPackages = emptySet(), blockShortVideos = true,
+            shortVideoPackages = curated,
+            usageMinutes = 0, timeLimits = emptyMap(), activeSchedule = null,
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = 0, nowMs = now
+        )
+        assertEquals(BlockDecision.ALLOW, decision)
+    }
+
+    @Test
+    fun shortsOnlyAllowsYouTubeWhenShortsNotVisible() {
+        val decision = BlockEvaluator.decide(
+            packageName = ShortVideoPackages.YOUTUBE, ownPackageName = own,
+            blockedPackages = emptySet(), blockShortVideos = true,
+            shortsOnlyPackage = ShortVideoPackages.YOUTUBE, shortsVisible = false,
+            usageMinutes = 0, timeLimits = emptyMap(), activeSchedule = null,
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = 0, nowMs = now
+        )
+        assertEquals(BlockDecision.ALLOW, decision)
+    }
+
+    @Test
+    fun shortsOnlyBlocksYouTubeWhenShortsVisible() {
+        val decision = BlockEvaluator.decide(
+            packageName = ShortVideoPackages.YOUTUBE, ownPackageName = own,
+            blockedPackages = emptySet(), blockShortVideos = true,
+            shortsOnlyPackage = ShortVideoPackages.YOUTUBE, shortsVisible = true,
+            usageMinutes = 0, timeLimits = emptyMap(), activeSchedule = null,
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = 0, nowMs = now
+        )
+        assertEquals(BlockReason.SHORTS, decision.reason)
+    }
+
+    @Test
+    fun explicitManualBlockOverridesShortsOnly() {
+        val decision = BlockEvaluator.decide(
+            packageName = ShortVideoPackages.YOUTUBE, ownPackageName = own,
+            blockedPackages = setOf(ShortVideoPackages.YOUTUBE), blockShortVideos = true,
+            shortsOnlyPackage = ShortVideoPackages.YOUTUBE, shortsVisible = false,
+            usageMinutes = 0, timeLimits = emptyMap(), activeSchedule = null,
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = 0, nowMs = now
+        )
+        assertEquals(BlockReason.MANUAL, decision.reason)
+    }
+
+    @Test
+    fun unlockGraceOverridesShortsBlock() {
+        val decision = BlockEvaluator.decide(
+            packageName = ShortVideoPackages.YOUTUBE, ownPackageName = own,
+            blockedPackages = emptySet(), blockShortVideos = true,
+            shortsOnlyPackage = ShortVideoPackages.YOUTUBE, shortsVisible = true,
+            usageMinutes = 0, timeLimits = emptyMap(), activeSchedule = null,
+            focusActive = false, focusAllowlist = emptySet(),
+            tempAllowedUntil = Long.MAX_VALUE, nowMs = now
+        )
+        assertEquals(BlockDecision.ALLOW, decision)
     }
 }

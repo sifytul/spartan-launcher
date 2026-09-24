@@ -1,8 +1,10 @@
 package com.spartan.launcer.data
 
 import com.spartan.launcer.data.model.BlockSchedule
+import com.spartan.launcer.data.model.WordEntry
 import java.time.DayOfWeek
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -72,5 +74,29 @@ class JsonCodecTest {
             "2026-09-22" to mapOf("c.pkg" to 5)
         )
         assertEquals(usage, JsonCodec.decodeUsage(JsonCodec.encodeUsage(usage)))
+    }
+
+    @Test
+    fun wordRoundTrip() {
+        val entry = WordEntry(
+            word = "ephemeral",
+            meaning = "lasting for a very short time",
+            examples = listOf("The moment was ephemeral.", "Fame proved ephemeral."),
+            synonyms = listOf("fleeting", "transient"),
+            antonyms = listOf("permanent", "eternal")
+        )
+        assertEquals(entry, JsonCodec.decodeWord(JsonCodec.encodeWord(entry)))
+    }
+
+    @Test
+    fun wordDecodeHandlesEmptyAndMissingFields() {
+        assertNull(JsonCodec.decodeWord(""))
+        assertNull(JsonCodec.decodeWord("null"))
+        assertNull(JsonCodec.decodeWord("   "))
+        val partial = JsonCodec.decodeWord("""{"word":"x","meaning":"y"}""")
+        assertTrue(partial != null)
+        assertTrue(partial!!.examples.isEmpty())
+        assertTrue(partial.synonyms.isEmpty())
+        assertTrue(partial.antonyms.isEmpty())
     }
 }

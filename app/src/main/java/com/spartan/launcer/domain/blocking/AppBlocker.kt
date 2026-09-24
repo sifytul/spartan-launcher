@@ -6,6 +6,8 @@ import android.provider.Settings
 import android.util.Log
 import com.spartan.launcer.data.ForegroundUsageTracker
 import com.spartan.launcer.data.SettingsDataStore
+import com.spartan.launcer.data.ShortVideoPackages
+import com.spartan.launcer.data.model.GraceMode
 import com.spartan.launcer.data.model.LauncherSettings
 import com.spartan.launcer.domain.focus.FocusController
 import com.spartan.launcer.service.SpartanAccessibilityService
@@ -36,12 +38,19 @@ class AppBlocker(
 
     private val ownPackageName = context.packageName
     private val tempAllow = mutableMapOf<String, Long>()
+    private val unlockGrace = mutableSetOf<String>()
     private val overlayVisible = AtomicBoolean(false)
 
     @Volatile
     private var accessibilityService: SpartanAccessibilityService? = null
 
     private val evaluationTick = MutableStateFlow(0L)
+
+    /** Whether the Shorts player is on screen (fed by the accessibility service). */
+    private val shortsVisible = MutableStateFlow(false)
+
+    @Volatile
+    private var shortsOnlyEnabled = false
 
     init {
         appScope.launch {
@@ -54,11 +63,12 @@ class AppBlocker(
             combine(
                 settingsDataStore.settings,
                 tracker.currentForeground,
-                evaluationTick
-            ) { settings, foreground, tick ->
-                Triple(settings, foreground, tick)
-            }.collect { (settings, foreground, _) ->
-                evaluate(settings, foreground)
+                evaluationTick,
+                shortsVisible
+            ) { settings, foreground, tick, shorts ->
+                Quads(settings, foreground, tick, shorts)
+            }.collect { (settings, foreground, _, shortsOnScreen) ->
+                evaluate(settings, foreground, shortsOnScreen)
             }
         }
     }
@@ -86,7 +96,30 @@ class AppBlocker(
         onOverlayClosed()
     }
 
-    private fun evaluate(settings: LauncherSettings, foreground: String?) {
+    fun grantTemporaryAccessUntilUnlock(packageName: String) {
+        unlockGrace += packageName
+        onOverlayClosed()
+    }
+
+    /** Fed by accessibility-driven Shorts detection. */
+    fun onShortsVisibility(visible: Boolean) {
+        shortsVisible.value = visible
+    }
+
+    fun updateShortsOnly(enabled: Boolean) {
+        shortsOnlyEnabled = enabled
+    }
+
+    fun isShortsOnlyEnabled(): Boolean = shortsOnlyEnabled
+
+    /** Clears every pending "Use anyway" grace window. Invoked on device unlock. */
+    fun clearGracePeriods() {
+        tempAllow.clear()
+        unlockGrace.clear()
+    }
+
+    private fun evaluate(settings: LauncherSettings, foreground: String?, shortsOnScreen: Boolean) {
+        shortsOnlyEnabled = settings.youtubeShortsOnly
         if (foreground == null || foreground == ownPackageName) return
         val nowMs = System.currentTimeMillis()
         val focusSession = focusController.session.value
@@ -95,12 +128,15 @@ class AppBlocker(
             ownPackageName = ownPackageName,
             blockedPackages = settings.blockedPackages,
             blockShortVideos = settings.blockShortVideos,
+            shortVideoPackages = settings.shortVideoPackages,
+            shortsOnlyPackage = if (settings.youtubeShortsOnly) ShortVideoPackages.YOUTUBE else null,
+            shortsVisible = shortsOnScreen,
             usageMinutes = tracker.minutesUsedToday(foreground),
             timeLimits = settings.timeLimits,
             activeSchedule = ScheduleEvaluator.findActive(LocalDateTime.now(), settings.schedules),
             focusActive = focusSession.blocking,
             focusAllowlist = settings.favoritePackages.toSet(),
-            tempAllowedUntil = tempAllow[foreground] ?: 0L,
+            tempAllowedUntil = if (foreground in unlockGrace) Long.MAX_VALUE else tempAllow[foreground] ?: 0L,
             nowMs = nowMs
         )
         if (!decision.shouldBlock) return
@@ -110,7 +146,14 @@ class AppBlocker(
             val label = settings.customLabels[foreground] ?: appLabel(foreground)
             overlayVisible.set(true)
             Log.d(TAG, "Blocking $foreground (${decision.reason})")
-            val intent = BlockOverlayActivity.newIntent(context, foreground, label, decision.reason!!)
+            val intent = BlockOverlayActivity.newIntent(
+                context = context,
+                packageName = foreground,
+                label = label,
+                reason = decision.reason!!,
+                graceUntilUnlock = settings.shortVideoGraceMode == GraceMode.UNLOCK,
+                graceMinutes = settings.shortVideoGraceMinutes
+            )
             runCatching { context.startActivity(intent) }
                 .onFailure { overlayVisible.set(false) }
         } else {
@@ -132,3 +175,10 @@ class AppBlocker(
         private const val FALLBACK_GRACE_MS = 30_000L
     }
 }
+
+private data class Quads(
+    val settings: LauncherSettings,
+    val foreground: String?,
+    val tick: Long,
+    val shortsVisible: Boolean
+)

@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.spartan.launcer.SpartanLauncherApp
 import com.spartan.launcer.data.model.AppInfo
+import com.spartan.launcer.data.model.WordEntry
 import com.spartan.launcer.domain.focus.FocusSession
 import com.spartan.launcer.service.SpartanAccessibilityService
 import kotlinx.coroutines.delay
@@ -20,6 +21,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -40,8 +43,21 @@ class HomeViewModel(private val app: SpartanLauncherApp) : ViewModel() {
     val focusSession: StateFlow<FocusSession> = container.focusController.session
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FocusSession())
 
+    val currentWord: StateFlow<WordEntry?> = combine(
+        container.settingsDataStore.settings,
+        container.wordOfTheDayRepository.currentWord()
+    ) { settings, word ->
+        if (settings.wordOfTheDayEnabled) word else null
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
+
     init {
         recheckDefaultHome()
+        viewModelScope.launch {
+            val enabled = container.settingsDataStore.settings.first().wordOfTheDayEnabled
+            if (enabled && container.wordOfTheDayRepository.currentStoredEntry() == null) {
+                container.wordOfTheDayRepository.advanceWord()
+            }
+        }
         viewModelScope.launch {
             while (isActive) {
                 _currentTime.value = System.currentTimeMillis()

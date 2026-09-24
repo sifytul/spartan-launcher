@@ -50,6 +50,8 @@ class BlockOverlayActivity : ComponentActivity() {
         val reason = intent.getStringExtra(EXTRA_REASON)
             ?.let { name -> runCatching { BlockReason.valueOf(name) }.getOrNull() }
             ?: BlockReason.MANUAL
+        val graceUntilUnlock = intent.getBooleanExtra(EXTRA_GRACE_UNLOCK, false)
+        val graceMinutes = intent.getIntExtra(EXTRA_GRACE_MINUTES, GRACE_MINUTES_DEFAULT)
         container.appBlocker.onOverlayShown()
 
         setContent {
@@ -61,15 +63,17 @@ class BlockOverlayActivity : ComponentActivity() {
                     countdown--
                 }
                 // Countdown ending is an implicit "use anyway".
-                container.appBlocker.grantTemporaryAccess(packageName, GRACE_MINUTES)
+                grant(packageName, graceUntilUnlock, graceMinutes)
                 finish()
             }
             BlockOverlayContent(
                 label = label,
                 reason = reason,
+                graceUntilUnlock = graceUntilUnlock,
+                graceMinutes = graceMinutes,
                 countdown = countdown,
                 onUseAnyway = {
-                    container.appBlocker.grantTemporaryAccess(packageName, GRACE_MINUTES)
+                    grant(packageName, graceUntilUnlock, graceMinutes)
                     finish()
                 },
                 onGoHome = {
@@ -83,6 +87,14 @@ class BlockOverlayActivity : ComponentActivity() {
         }
     }
 
+    private fun grant(packageName: String, untilUnlock: Boolean, minutes: Int) {
+        if (untilUnlock) {
+            container.appBlocker.grantTemporaryAccessUntilUnlock(packageName)
+        } else {
+            container.appBlocker.grantTemporaryAccess(packageName, minutes)
+        }
+    }
+
     override fun onDestroy() {
         container.appBlocker.onOverlayClosed()
         super.onDestroy()
@@ -92,18 +104,24 @@ class BlockOverlayActivity : ComponentActivity() {
         private const val EXTRA_PACKAGE = "package"
         private const val EXTRA_LABEL = "label"
         private const val EXTRA_REASON = "reason"
+        private const val EXTRA_GRACE_UNLOCK = "grace_unlock"
+        private const val EXTRA_GRACE_MINUTES = "grace_minutes"
         private const val COUNTDOWN_SECONDS = 30
-        private const val GRACE_MINUTES = 2
+        private const val GRACE_MINUTES_DEFAULT = 2
 
         fun newIntent(
             context: Context,
             packageName: String,
             label: String,
-            reason: BlockReason
+            reason: BlockReason,
+            graceUntilUnlock: Boolean,
+            graceMinutes: Int
         ): Intent = Intent(context, BlockOverlayActivity::class.java)
             .putExtra(EXTRA_PACKAGE, packageName)
             .putExtra(EXTRA_LABEL, label)
             .putExtra(EXTRA_REASON, reason.name)
+            .putExtra(EXTRA_GRACE_UNLOCK, graceUntilUnlock)
+            .putExtra(EXTRA_GRACE_MINUTES, graceMinutes)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
     }
 }
@@ -112,6 +130,8 @@ class BlockOverlayActivity : ComponentActivity() {
 private fun BlockOverlayContent(
     label: String,
     reason: BlockReason,
+    graceUntilUnlock: Boolean,
+    graceMinutes: Int,
     countdown: Int,
     onUseAnyway: () -> Unit,
     onGoHome: () -> Unit
@@ -156,7 +176,16 @@ private fun BlockOverlayContent(
             ),
             contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
         ) {
-            Text(stringResource(R.string.block_overlay_use_anyway))
+            Text(
+                stringResource(
+                    if (graceUntilUnlock) {
+                        R.string.block_overlay_use_anyway_unlock
+                    } else {
+                        R.string.block_overlay_use_anyway_minutes
+                    },
+                    graceMinutes
+                )
+            )
         }
         Spacer(Modifier.height(16.dp))
         Text(
@@ -180,4 +209,5 @@ private fun reasonResId(reason: BlockReason): Int = when (reason) {
     BlockReason.LIMIT -> R.string.block_overlay_reason_limit
     BlockReason.SCHEDULE -> R.string.block_overlay_reason_schedule
     BlockReason.FOCUS -> R.string.block_overlay_reason_focus
+    BlockReason.SHORTS -> R.string.block_overlay_reason_shorts
 }
