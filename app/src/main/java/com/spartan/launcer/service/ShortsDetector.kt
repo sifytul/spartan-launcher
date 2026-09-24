@@ -71,7 +71,6 @@ class ShortsDetector(private val appBlocker: AppBlocker) {
         visited = 0
         walk(root, texts, descriptions)
         val visible = ShortsHeuristics.matches(texts, descriptions)
-        root.recycle()
         appBlocker.onShortsVisibility(visible)
     }
 
@@ -87,7 +86,6 @@ class ShortsDetector(private val appBlocker: AppBlocker) {
         for (i in 0 until node.childCount) {
             val child = node.getChild(i) ?: continue
             walk(child, texts, descriptions)
-            child.recycle()
         }
     }
 
