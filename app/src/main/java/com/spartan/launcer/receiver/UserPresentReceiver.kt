@@ -22,7 +22,15 @@ class UserPresentReceiver : BroadcastReceiver() {
         container.appScope.launch {
             container.appBlocker.clearGracePeriods()
             val enabled = container.settingsDataStore.settings.first().wordOfTheDayEnabled
-            if (enabled) container.wordOfTheDayRepository.advanceWord()
+            if (enabled) {
+                container.wordOfTheDayRepository.advanceWord(skipIfAdvancedWithinMs = RECENT_ADVANCE_MS)
+            }
         }
+    }
+
+    companion object {
+        // Prevents a double advance when both this broadcast and the launcher
+        // resume detect the same unlock.
+        private const val RECENT_ADVANCE_MS = 10_000L
     }
 }

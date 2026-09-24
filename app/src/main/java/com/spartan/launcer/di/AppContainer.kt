@@ -25,6 +25,14 @@ class AppContainer(context: Context) {
 
     val appScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
+    /**
+     * Set while the screen is off (or was recently off). When the launcher
+     * re-shows afterwards the word-of-the-day advances — a fallback for OEMs
+     * that do not deliver ACTION_USER_PRESENT.
+     */
+    @Volatile
+    var screenOffDetected = false
+
     val settingsDataStore: SettingsDataStore = SettingsDataStore(appContext)
 
     val appRepository: AppRepository = AppRepository(appContext, settingsDataStore)

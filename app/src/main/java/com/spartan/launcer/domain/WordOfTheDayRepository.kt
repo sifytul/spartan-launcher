@@ -26,16 +26,29 @@ class WordOfTheDayRepository(
     suspend fun entryByWord(word: String): WordEntry? = dictionary.entryByWord(word)
 
     /**
-     * Picks a fresh word (never the previous one) and saves it. When the API
-     * succeeds, its richer data is stored; otherwise the bundled definition is
-     * used so the feature always works offline.
+     * Picks a fresh word (never the previous one) and saves it. The bundled
+     * definition is saved first so the change is visible immediately on every
+     * unlock even offline, then upgraded with richer API data when the network
+     * answers (only if the word was not replaced meanwhile).
+     *
+     * [skipIfAdvancedWithinMs] ignores the call when a word was already picked
+     * very recently (e.g. when both the unlock receiver and the home screen
+     * detect the same unlock), so a single unlock advances the word exactly
+     * once.
      */
-    suspend fun advanceWord() {
+    suspend fun advanceWord(skipIfAdvancedWithinMs: Long = 0) {
+        if (skipIfAdvancedWithinMs > 0) {
+            val current = store.current.first()
+            if (System.currentTimeMillis() - current.pickedAt < skipIfAdvancedWithinMs) return
+        }
         val previous = currentStoredEntry()
         val candidate = dictionary.randomEntry(excluding = previous?.word) ?: return
+        store.save(candidate)
         val enriched = runCatching { api.fetch(candidate.word) }
             .getOrNull()
             ?.takeIf { it.meaning.isNotBlank() }
-        store.save(enriched ?: candidate)
+        if (enriched != null && currentStoredEntry()?.word == candidate.word) {
+            store.save(enriched)
+        }
     }
 }
